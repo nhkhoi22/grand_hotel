@@ -1,0 +1,21 @@
+.login-logo, .register-logo {
+	padding-top: 15px;
+}
+
+body {
+	font-size: 1.25rem;
+}
+
+.login-card-body, .register-card-body {
+	padding-top: 0px;
+}
+
+.form-control {
+	font-size: 1.2rem;
+	text-align: center;
+    padding-left: 33px;
+}
+
+.btn {
+	font-size: 1.2rem;
+}

@@ -1,0 +1,72 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>G-Hotel Management</title>
+<script type="text/javascript" th:src="@{/js/jquery/jquery.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/js/bootstrap/bootstrap.bundle.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/adminlte/adminlte.min.js}"></script>
+
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/fontawesome-free/all.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/ionicons.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/icheck-bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/adminlte/adminlte.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/fonts/SourceSansPro.css}" />
+<link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+</head>
+
+<body
+	style="background-image: url(images/LoginBackground.jpg); background-position: bottom; background-repeat: no-repeat; background-size: cover;"
+	class="hold-transition login-page">
+	<div class="login-box">
+		<div>
+			<div class="card-body login-card-body">
+				<div class="login-logo">
+					<b>G Hotel</b>
+				</div>
+				<p class="login-box-msg">The best hotel management app</p>
+				<form class="card" th:action="@{/login}" method="POST">
+					<div align="center" th:if="${param.error}">
+						<p style="font-size: 20; color: #FF1C19; text-align: center">Email or Password
+							invalid, please verify</p>
+					</div>
+					<div class="input-group mb-3">
+						<input type="text" id="staffCode" name="staffCode"
+							placeholder="Staff Code" class="form-control" />
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-user"></span>
+							</div>
+						</div>
+					</div>
+					<div class="input-group mb-3">
+						<input type="password" th:placeholder="Password" id="password"
+							name="password" class="form-control" />
+						<div class="input-group-text">
+							<span class="fas fa-lock"></span>
+						</div>
+					</div>
+					<button class="btn btn-primary btn-block btn-flat" name="Submit"
+						value="Login" type="Submit" th:text="Login"></button>
+				</form>
+
+			</div>
+		</div>
+	</div>
+<?php 
+echo "Hello world";
+?>
+</body>
+</html>
