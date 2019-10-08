@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -38,7 +38,7 @@ public class Customer {
 	@Column(name = "address", columnDefinition = "VARCHAR(50)")
 	private String address;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id", nullable = true)
     @JsonIgnore
     private Room room;
