@@ -1,17 +1,20 @@
 package com.ptit.customer;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -25,13 +28,21 @@ public class Bill {
 	@Column(name = "bill_id", columnDefinition = "INT")
 	private int id;
 	
-	@Column(name = "bill_code", columnDefinition = "VARCHAR(50)")
-	private String code;
+	@Column(name = "payment_time", columnDefinition = "VARCHAR(50)")
+	private String time;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "bill_detail_connect", joinColumns = @JoinColumn(name = "bill_id"), inverseJoinColumns = @JoinColumn(name = "detail_id"))
-    private Set<BillDetail> details;
-
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "room_id", nullable = false)
+	private Room room;
+	
+	@OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "bill"
+    )
+    @JsonIgnore
+    private List<BillDetail> billDetails;
+	
 	public int getId() {
 		return id;
 	}
@@ -39,13 +50,4 @@ public class Bill {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-	
 }

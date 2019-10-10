@@ -29,6 +29,9 @@ public class User {
 	@NotEmpty(message = "*Please provide staff code")
 	private String staffCode;
 	
+	@Column(name = "gender", columnDefinition = "VARCHAR(50)")
+	private String gender;
+	
 	@Column(name = "full_name", columnDefinition = "VARCHAR(50)")
 	@NotEmpty(message = "*Please provide staff name")
 	private String name;
@@ -55,6 +58,9 @@ public class User {
 	
 	@Column(name = "contract_salary", columnDefinition = "BIGINT")
 	private Long contractSalary;
+	
+	@Column(name = "last_time_login", columnDefinition = "VARCHAR(50)")
+	private String lastlogin;
 
 	public int getId() {
 		return id;

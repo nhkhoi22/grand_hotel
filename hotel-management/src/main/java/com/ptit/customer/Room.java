@@ -41,7 +41,16 @@ public class Room {
             mappedBy = "room"
     )
     @JsonIgnore
-    private List<Customer> customers;
+    List<RoomReservation> reservations;
+	
+	@OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "room"
+    )
+    @JsonIgnore
+    List<Bill> bills;
+    
 
 	public int getId() {
 		return id;
@@ -67,12 +76,12 @@ public class Room {
 		this.roomType = roomType;
 	}
 
-	public List<Customer> getCustomers() {
-		return customers;
+	public List<RoomReservation> getReservations() {
+		return reservations;
 	}
 
-	public void setCustomers(List<Customer> customers) {
-		this.customers = customers;
+	public void setReservations(List<RoomReservation> reservations) {
+		this.reservations = reservations;
 	}
-	
+
 }

@@ -30,6 +30,10 @@ public class BillDetail {
     
 	@Column(name = "quantity", columnDefinition = "BIGINT")
 	private int quantity;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "bill_id", nullable = false)
+	private Bill bill;
 
 	public int getId() {
 		return id;

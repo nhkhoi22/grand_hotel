@@ -1,10 +1,15 @@
 package com.ptit.customer;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -24,4 +29,44 @@ public class Service {
 	
 	@Column(name = "price", columnDefinition = "DOUBLE")
 	private Double price;
+	
+	@OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "service"
+    )
+    private List<BillDetail> details;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public List<BillDetail> getDetails() {
+		return details;
+	}
+
+	public void setDetails(List<BillDetail> details) {
+		this.details = details;
+	}
+	
 }

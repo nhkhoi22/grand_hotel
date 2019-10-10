@@ -1,21 +1,15 @@
 package com.ptit.customer;
 
-import java.util.Set;
+import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -38,20 +32,8 @@ public class Customer {
 	@Column(name = "address", columnDefinition = "VARCHAR(50)")
 	private String address;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "room_id", nullable = true)
-    @JsonIgnore
-    private Room room;
-	
-	@Column(name = "check_in", columnDefinition = "VARCHAR(50)")
-	private String checkInDate;
-	
-	@Column(name = "check_out", columnDefinition = "VARCHAR(50)")
-	private String checkOutDate;
-	
-	@ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "customer_bill", joinColumns = @JoinColumn(name = "customer_id"), inverseJoinColumns = @JoinColumn(name = "bill_id"))
-	private Set<Bill> bills;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+    private List<RoomReservation> rooms;
 
 	public int getId() {
 		return id;
@@ -84,29 +66,4 @@ public class Customer {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
-	public Room getRoom() {
-		return room;
-	}
-
-	public void setRoom(Room room) {
-		this.room = room;
-	}
-
-	public String getCheckInDate() {
-		return checkInDate;
-	}
-
-	public void setCheckInDate(String checkInDate) {
-		this.checkInDate = checkInDate;
-	}
-
-	public String getCheckOutDate() {
-		return checkOutDate;
-	}
-
-	public void setCheckOutDate(String checkOutDate) {
-		this.checkOutDate = checkOutDate;
-	}
-	
 }

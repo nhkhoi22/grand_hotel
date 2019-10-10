@@ -1,5 +1,7 @@
 package com.ptit.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -51,6 +53,10 @@ public class UserService {
 	
 	public Department findDepartmentByName(String name) {
 		return departmentDAO.findByName(name);
+	}
+	
+	public List<User> findAllStaff() {
+		return userDAO.findAll();
 	}
 
 	public void saveUser(User user, Position position) {
