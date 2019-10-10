@@ -59,8 +59,7 @@ public class UserService {
 		return userDAO.findAll();
 	}
 
-	public void saveUser(User user, Position position) {
-		user.setPosition(position);
+	public void saveUser(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setActive(1);
         Role userRole = roleDAO.findByName("USER");

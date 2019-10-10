@@ -86,7 +86,7 @@ public class LoginController {
 			departmentExists.getPositions().add(positionExists);
 			userService.saveDepartment(departmentExists);
 
-			userService.saveUser(user, positionExists);
+			userService.saveUser(user);
 
 			positionExists.getUsers().add(user);
 			userService.savePosition(positionExists);
@@ -121,6 +121,19 @@ public class LoginController {
 			req.setAttribute("user", user);
 		}
 		return "";
+	}
+	
+	@PostMapping("/lock/{staffCode}")
+	@ResponseBody
+	public String lockUser(@PathVariable String staffCode) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByStaffCode(auth.getName());
+		if (user.getRole().getName() == "ADMIN") {
+			user = userService.findUserByStaffCode(staffCode);
+			user.setActive(0);
+			userService.saveUser(user);
+		}
+		return "lockUser";
 	}
 
 	@RequestMapping(value = "/admin/home", method = RequestMethod.GET)
