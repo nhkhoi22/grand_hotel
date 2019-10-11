@@ -69,23 +69,22 @@ public class LoginController {
 			if (departmentExists == null) {
 				departmentExists = new Department();
 				departmentExists.setName(dName);
+				userService.saveDepartment(departmentExists);
 			}
-			userService.saveDepartment(departmentExists);
-			departmentExists = userService.findDepartmentByName(dName);
 
 			if (positionExists == null) {
 				positionExists = new Position();
 				positionExists.setName(pName);
+				positionExists.setDepartment(departmentExists);
+				userService.savePosition(positionExists);
 			}
 
 			positionExists.setDepartment(departmentExists);
 
-			userService.savePosition(positionExists);
-			positionExists = userService.findPositionByName(pName);
-
 			departmentExists.getPositions().add(positionExists);
 			userService.saveDepartment(departmentExists);
-
+			
+			user.setPosition(positionExists);
 			userService.saveUser(user);
 
 			positionExists.getUsers().add(user);

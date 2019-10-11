@@ -39,8 +39,8 @@
 				<p class="login-box-msg">The best hotel management app</p>
 				<form class="card" th:action="@{/login}" method="POST">
 					<div align="center" th:if="${param.error}">
-						<p style="font-size: 20; color: #FF1C19; text-align: center">Email or Password
-							invalid, please verify</p>
+						<p style="font-size: 20; color: #FF1C19; text-align: center">Email
+							or Password invalid, please verify</p>
 					</div>
 					<div class="input-group mb-3">
 						<input type="text" id="staffCode" name="staffCode"
@@ -65,7 +65,7 @@
 			</div>
 		</div>
 	</div>
-<?php 
+	<?php 
 echo "Hello world";
 ?>
 </body>

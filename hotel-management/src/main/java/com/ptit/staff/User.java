@@ -133,5 +133,21 @@ public class User {
 	public void setContractSalary(Long contractSalary) {
 		this.contractSalary = contractSalary;
 	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getLastlogin() {
+		return lastlogin;
+	}
+
+	public void setLastlogin(String lastlogin) {
+		this.lastlogin = lastlogin;
+	}
 	
 }
