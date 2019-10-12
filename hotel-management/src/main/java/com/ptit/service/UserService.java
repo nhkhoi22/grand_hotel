@@ -67,9 +67,6 @@ public class UserService {
 	}
 	
 	public void saveUserNonEncrypt(User user) {
-		user.setActive(1);
-		Role userRole = roleDAO.findByName("USER");
-		user.setRole(userRole);
 		userDAO.save(user);
 	}
 

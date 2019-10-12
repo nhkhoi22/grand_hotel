@@ -9,6 +9,7 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
+  <link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
   <link rel="stylesheet" type="text/css" th:href="@{/css/fontawesome-free/all.min.css}">
   <!-- Ionicons -->
   <link rel="stylesheet" type="text/css"
@@ -58,7 +59,7 @@
       <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="info">
-            <a href="#" class="d-block" style="font-weight: 600;">Username go here</a>
+            <a href="#" class="d-block" style="font-weight: 600;" th:utext="${staff.name}">Username go here</a>
           </div>
         </div>
         <!-- Sidebar Menu -->

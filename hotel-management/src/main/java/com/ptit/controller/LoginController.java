@@ -140,7 +140,6 @@ public class LoginController {
 	public ModelAndView home() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByStaffCode(authentication.getName());
-        userService.saveUserNonEncrypt(user);
         
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("staff", user);
@@ -152,7 +151,6 @@ public class LoginController {
 	public ModelAndView userHome() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByStaffCode(authentication.getName());
-        userService.saveUserNonEncrypt(user);
         
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("staff", user);
