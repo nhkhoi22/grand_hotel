@@ -6,10 +6,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>G-Hotel Management</title>
-<script type="text/javascript" th:src="@{/js/jquery/jquery.min.js}"></script>
-<script type="text/javascript"
-	th:src="@{/js/bootstrap/bootstrap.bundle.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/adminlte/adminlte.min.js}"></script>
 
 <link rel="stylesheet" type="text/css"
 	th:href="@{/css/bootstrap.min.css}" />
@@ -31,18 +27,18 @@
 	style="background-image: url(images/LoginBackground.jpg); background-position: bottom; background-repeat: no-repeat; background-size: cover;"
 	class="hold-transition login-page">
 	<div class="login-box">
-		<div>
+		<div class="login-logo">
+			<h1>G Hotel</h1>
+		</div>
+		<div class="card">
 			<div class="card-body login-card-body">
-				<div class="login-logo">
-					<b>G Hotel</b>
-				</div>
-				<p class="login-box-msg">The best hotel management app</p>
-				<form class="card" th:action="@{/login}" method="POST">
-					<div align="center" th:if="${param.error}">
+				<p style="font-size: 15px; color: rgb(40, 112, 194);" class="login-box-msg">The best hotel management app</p>
+				<form th:action="@{/login}" method="POST" style="border-style: none;">
+					<div style="text-align: center; border-style: none" th:if="${param.error}">
 						<p style="font-size: 20; color: #FF1C19; text-align: center">Email
 							or Password invalid, please verify</p>
 					</div>
-					<div class="input-group mb-3">
+					<div class="input-group mb-3 input-group-lg">
 						<input type="text" id="staffCode" name="staffCode"
 							placeholder="Staff Code" class="form-control" />
 						<div class="input-group-append">
@@ -51,11 +47,13 @@
 							</div>
 						</div>
 					</div>
-					<div class="input-group mb-3">
-						<input type="password" th:placeholder="Password" id="password"
-							name="password" class="form-control" />
-						<div class="input-group-text">
-							<span class="fas fa-lock"></span>
+					<div class="input-group mb-3 input-group-lg">
+						<input type="password" id="password" name="password"
+							placeholder="Password" class="form-control" />
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-lock"></span>
+							</div>
 						</div>
 					</div>
 					<button class="btn btn-primary btn-block btn-flat" name="Submit"
@@ -65,8 +63,9 @@
 			</div>
 		</div>
 	</div>
-	<?php 
-echo "Hello world";
-?>
+<script type="text/javascript" th:src="@{/js/jquery/jquery.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/js/bootstrap/bootstrap.bundle.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/adminlte/adminlte.min.js}"></script>
 </body>
 </html>
