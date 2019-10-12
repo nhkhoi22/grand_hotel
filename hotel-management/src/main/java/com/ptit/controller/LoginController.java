@@ -40,7 +40,7 @@ public class LoginController {
 	}
 	
 
-	@RequestMapping(value = "/registration", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/registration", method = RequestMethod.GET)
 	public ModelAndView registration() {
 		ModelAndView modelAndView = new ModelAndView();
 		User user = new User();
@@ -49,11 +49,11 @@ public class LoginController {
 		modelAndView.addObject("user", user);
 		modelAndView.addObject("department", department);
 		modelAndView.addObject("position", position);
-		modelAndView.setViewName("registration");
+		modelAndView.setViewName("admin/registration");
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/registration", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/registration", method = RequestMethod.POST)
 	public ModelAndView createNewUser(@Valid User user, @RequestParam Map<String, String> reqPar,
 			BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -67,12 +67,12 @@ public class LoginController {
 					"There is already a user registered with the staff code provided");
 		}
 		if (bindingResult.hasErrors()) {
-			modelAndView.setViewName("registration");
+			modelAndView.setViewName("admin/registration");
 		} else {
 			if (departmentExists == null) {
 				departmentExists = new Department();
 				departmentExists.setName(dName);
-				userService.saveDepartment(departmentExists);
+				userService.saveDepartment(departmentExists); 
 			}
 
 			if (positionExists == null) {
