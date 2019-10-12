@@ -1,5 +1,6 @@
 package com.ptit.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ptit.common.DateUtil;
 import com.ptit.service.UserService;
 import com.ptit.staff.Department;
 import com.ptit.staff.Position;
@@ -36,6 +38,7 @@ public class LoginController {
 		modelAndView.setViewName("login");
 		return modelAndView;
 	}
+	
 
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public ModelAndView registration() {
@@ -135,13 +138,77 @@ public class LoginController {
 		return "lockUser";
 	}
 
+	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/admin/home", method = RequestMethod.GET)
 	public ModelAndView home() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByStaffCode(authentication.getName());
+        Date date = new Date();
+        DateUtil dateUtil = new DateUtil();
+        
+        String userLastLogin = user.getLastlogin();
+        Date lastDate = new Date();
+        boolean sameDay = true;
+        
+        if(userLastLogin != null && userLastLogin != "") {
+        	lastDate = dateUtil.convertStringToDate(userLastLogin);
+        	sameDay = (date.getYear() == lastDate.getYear()) && (date.getDate() == date.getDate())
+            		&& (date.getMonth() == date.getMonth()) ;
+        }
+        else {
+			sameDay = false;
+        }
+        
+        if(!sameDay) {
+        	int daysInWork = user.getDaysInWork();
+        	System.out.println(daysInWork);
+        	daysInWork++;
+        	user.setDaysInWork(daysInWork);
+        }
+        
+        user.setLastlogin(dateUtil.convertDateToString(date));
+        userService.saveUser(user);
+        
 		ModelAndView modelAndView = new ModelAndView();
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.findUserByStaffCode(auth.getName());
 		modelAndView.addObject("staff", user);
 		modelAndView.setViewName("admin/home");
+		return modelAndView;
+	}
+	
+	@SuppressWarnings("deprecation")
+	@RequestMapping(value = "/user/home", method = RequestMethod.GET)
+	public ModelAndView userHome() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByStaffCode(authentication.getName());
+        Date date = new Date();
+        DateUtil dateUtil = new DateUtil();
+        
+        String userLastLogin = user.getLastlogin();
+        Date lastDate = new Date();
+        boolean sameDay = true;
+        
+        if(userLastLogin != null && userLastLogin != "") {
+        	lastDate = dateUtil.convertStringToDate(userLastLogin);
+        	sameDay = (date.getYear() == lastDate.getYear()) && (date.getDate() == date.getDate())
+            		&& (date.getMonth() == date.getMonth()) ;
+        }
+        else {
+			sameDay = false;
+        }
+        
+        if(!sameDay) {
+        	int daysInWork = user.getDaysInWork();
+        	System.out.println(daysInWork);
+        	daysInWork++;
+        	user.setDaysInWork(daysInWork);
+        }
+        
+        user.setLastlogin(dateUtil.convertDateToString(date));
+        userService.saveUser(user);
+        
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("staff", user);
+		modelAndView.setViewName("user/home");
 		return modelAndView;
 	}
 

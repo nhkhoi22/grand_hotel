@@ -19,13 +19,13 @@ import com.ptit.staff.User;
 public class UserService {
 	@Autowired
 	private UserDAO userDAO;
-	
+
 	@Autowired
 	private RoleDAO roleDAO;
-	
+
 	@Autowired
 	PositionDAO positionDAO;
-	
+
 	@Autowired
 	DepartmentDAO departmentDAO;
 
@@ -33,8 +33,7 @@ public class UserService {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Autowired
-	public UserService(UserDAO userDAO, RoleDAO roleDAO,
-			PositionDAO positionDAO, DepartmentDAO departmentDAO,
+	public UserService(UserDAO userDAO, RoleDAO roleDAO, PositionDAO positionDAO, DepartmentDAO departmentDAO,
 			BCryptPasswordEncoder bCryptPasswordEncoder) {
 		this.userDAO = userDAO;
 		this.roleDAO = roleDAO;
@@ -46,15 +45,15 @@ public class UserService {
 	public User findUserByStaffCode(String staffCode) {
 		return userDAO.findByStaffCode(staffCode);
 	}
-	
+
 	public Position findPositionByName(String name) {
 		return positionDAO.findByName(name);
 	}
-	
+
 	public Department findDepartmentByName(String name) {
 		return departmentDAO.findByName(name);
 	}
-	
+
 	public List<User> findAllStaff() {
 		return userDAO.findAll();
 	}
@@ -62,15 +61,22 @@ public class UserService {
 	public void saveUser(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setActive(1);
-        Role userRole = roleDAO.findByName("USER");
-        user.setRole(userRole);
+		Role userRole = roleDAO.findByName("USER");
+		user.setRole(userRole);
 		userDAO.save(user);
 	}
 	
+	public void saveUserNonEncrypt(User user) {
+		user.setActive(1);
+		Role userRole = roleDAO.findByName("USER");
+		user.setRole(userRole);
+		userDAO.save(user);
+	}
+
 	public void savePosition(Position position) {
 		positionDAO.save(position);
 	}
-	
+
 	public void saveDepartment(Department department) {
 		departmentDAO.save(department);
 	}
