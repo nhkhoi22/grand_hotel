@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
@@ -28,9 +27,6 @@ public class LoginAuthenticationSuccessUrl implements AuthenticationSuccessHandl
 
 	@Autowired
 	private UserService userService;
-
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	private String password = "";
 	protected final Log logger = LogFactory.getLog(this.getClass());
@@ -111,9 +107,9 @@ public class LoginAuthenticationSuccessUrl implements AuthenticationSuccessHandl
 			}
 		}
 		if (isUser) {
-			return "/user/home.html";
+			return "/user/home";
 		} else if (isAdmin) {
-			return "/admin/home.html";
+			return "/admin/home";
 		} else {
 			throw new IllegalStateException();
 		}
