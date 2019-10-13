@@ -77,4 +77,16 @@ public class UserService {
 	public void saveDepartment(Department department) {
 		departmentDAO.save(department);
 	}
+	
+	public boolean checkIfValidOldPassword(User user, String oldPassword) {
+		if(bCryptPasswordEncoder.encode(oldPassword) == user.getPassword())
+			return true;
+		
+		return false;
+	}
+	
+	public void changeUserPassword(User user, String newPassword) {
+		user.setPassword(bCryptPasswordEncoder.encode(newPassword));
+		userDAO.save(user);
+	}
 }

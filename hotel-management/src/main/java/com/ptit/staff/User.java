@@ -1,5 +1,8 @@
 package com.ptit.staff;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,10 +11,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ptit.customer.Bill;
 
 import lombok.Data;
 
@@ -52,6 +57,14 @@ public class User {
     @JoinColumn(name = "role_id", nullable = false)
     @JsonIgnore
 	private Role role;
+	
+	@OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "user"
+    )
+    @JsonIgnore
+    private List<Bill> bills;
 	
 	@Column(name = "days_in_work", columnDefinition = "INT")
 	private int daysInWork;

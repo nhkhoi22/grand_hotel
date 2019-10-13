@@ -26,14 +26,14 @@ public class BillDetail {
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "service_id", nullable = false)
     @JsonIgnore
-	private Service service;
+	private Service service; //1 service có thể xuất hiện trong nhiều bill_detail
     
 	@Column(name = "quantity", columnDefinition = "BIGINT")
 	private int quantity;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "bill_id", nullable = false)
-	private Bill bill;
+	private Bill bill; //1 bill detail chỉ thuộc 1 hóa đơn
 
 	public int getId() {
 		return id;

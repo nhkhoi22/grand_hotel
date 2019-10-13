@@ -33,7 +33,7 @@ public class Customer {
 	private String address;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
-    private List<RoomReservation> rooms;
+    private List<RoomReservation> rooms; //1 khách hàng có thể quay lại nhiều lần, đặt nhiều phòng 1 lúc
 
 	public int getId() {
 		return id;

@@ -12,9 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ptit.staff.User;
 
 import lombok.Data;
 
@@ -31,9 +33,9 @@ public class Bill {
 	@Column(name = "payment_time", columnDefinition = "VARCHAR(50)")
 	private String time;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "room_id", nullable = false)
-	private Room room;
+	@ManyToOne
+	@JoinColumn(name = "staff_id", nullable = true)
+	private User user;
 	
 	@OneToMany(
             cascade = CascadeType.ALL,
@@ -41,7 +43,15 @@ public class Bill {
             mappedBy = "bill"
     )
     @JsonIgnore
-    private List<BillDetail> billDetails;
+    private List<BillDetail> billDetails;//1 hóa đơn có nhiều chi tiết hóa đơn
+	
+	@OneToOne(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "bill"
+    )
+    @JsonIgnore
+    private RoomReservation roomReservation;
 	
 	public int getId() {
 		return id;
@@ -49,5 +59,29 @@ public class Bill {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public List<BillDetail> getBillDetails() {
+		return billDetails;
+	}
+
+	public void setBillDetails(List<BillDetail> billDetails) {
+		this.billDetails = billDetails;
 	}
 }

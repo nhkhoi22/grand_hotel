@@ -9,8 +9,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.ptit.product.ProductType;
 
 import lombok.Data;
 
@@ -35,7 +39,11 @@ public class Service {
             fetch = FetchType.LAZY,
             mappedBy = "service"
     )
-    private List<BillDetail> details;
+    private List<BillDetail> details;//1 dịch vụ có thể xuất hiện nhiều lần trong bảng chi tiết hóa đơn
+	
+	@ManyToOne
+	@JoinColumn(name = "product_type_id", nullable = true)
+	private ProductType productType;
 
 	public int getId() {
 		return id;

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
@@ -134,6 +135,42 @@ public class LoginController {
 			userService.saveUserNonEncrypt(user);
 		}
 		return "lockUser";
+	}
+	
+	@RequestMapping(value = "/admin/updatePassword", method = RequestMethod.GET)
+	public ModelAndView updatePassword() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByStaffCode(auth.getName());
+		ModelAndView mav = new ModelAndView("admin/updatePassword");
+		mav.addObject("staff", user);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/admin/updatePassword", method = RequestMethod.POST)
+	@PreAuthorize("hasAnyRole()")
+	@ResponseBody
+	public ModelAndView changeUserPassword(BindingResult bindingResult, 
+	  @RequestParam("password") String password, 
+	  @RequestParam("oldpassword") String oldPassword) throws Exception {
+		
+		ModelAndView mav = new ModelAndView();
+	    User user = userService.findUserByStaffCode(
+	      SecurityContextHolder.getContext().getAuthentication().getName());
+	     
+	    if (!userService.checkIfValidOldPassword(user, oldPassword)) {
+	    	bindingResult.rejectValue("password", "error.user",
+					"incorrect password");
+	    }
+	    
+	    if(bindingResult.hasErrors()) {
+	    	mav.setViewName("admin/updatePassword");
+	    } else {
+	    	userService.changeUserPassword(user, password);
+		    mav.setViewName("admin/home");
+	    }
+	    
+	    return mav;
+	    
 	}
 
 	@RequestMapping(value = "/admin/home", method = RequestMethod.GET)

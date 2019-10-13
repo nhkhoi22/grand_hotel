@@ -35,5 +35,5 @@ public class RoomType {
             mappedBy = "roomType"
     )
     @JsonIgnore
-    private List<Room> rooms;
+    private List<Room> rooms; //1 loại phòng có thể có nhiều phòng
 }

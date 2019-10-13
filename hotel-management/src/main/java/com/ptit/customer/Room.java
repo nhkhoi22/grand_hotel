@@ -33,7 +33,7 @@ public class Room {
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_type", nullable = true)
     @JsonIgnore
-    private RoomType roomType;
+    private RoomType roomType; //Nhiều phòng cùng 1 loại phòng
 	
 	@OneToMany(
             cascade = CascadeType.ALL,
@@ -41,16 +41,8 @@ public class Room {
             mappedBy = "room"
     )
     @JsonIgnore
-    List<RoomReservation> reservations;
+    List<RoomReservation> reservations; //1 phòng có thể xuất hiện trong nhiều đơn đặt phòng
 	
-	@OneToMany(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
-            mappedBy = "room"
-    )
-    @JsonIgnore
-    List<Bill> bills;
-    
 
 	public int getId() {
 		return id;
