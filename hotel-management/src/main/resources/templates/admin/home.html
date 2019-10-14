@@ -2,10 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 xmlns:th="http://www.thymeleaf.org">
 <head>
-    <div th:insert="~{/head}"></div>
+    <div th:insert="~{/head :: head}"></div>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div th:insert="~{/admin/menu}"></div>
     <div th:insert="~{/footer}"></div>
+    <div th:insert="~{/head :: bottom}"></div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 
 <head>
   <title>Admin Menu</title>
-  <div th:insert="~{/head}"></div>
+  <div th:insert="~{/head :: head}"></div>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -65,8 +65,6 @@
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-            <li class="nav-item">
-            </li>
             <li class="nav-header">EMPLOYEES MANAGEMENT</li>
             <li class="nav-item">
               <a th:href="@{/admin/registration}" class="nav-link">
@@ -153,6 +151,7 @@
     <!-- /.control-sidebar -->
   </div>
   <!-- ./wrapper -->
+  <div th:insert="~{/head :: bottom}"></div>
 </body>
 
 </html>

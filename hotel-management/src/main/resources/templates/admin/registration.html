@@ -2,7 +2,7 @@
   <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>Registration</title>
-    <div th:insert="~{/head}"></div>
+    <div th:insert="~{/head :: head}"></div>
     <style>
       select:invalid {
         color: gray;
@@ -160,6 +160,7 @@
         <div th:insert="~{/footer}"></div>
         <!-- Bootstrap Switch -->
         <script th:src="@{js/bootstrap-switch/bootstrap-switch.min.js}"></script>
+        <div th:insert="~{/head :: bottom}"></div>
       </body>
 
   </html>
