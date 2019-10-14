@@ -2,13 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title>Admin Menu</title>
+  <title>Admin</title>
   <div th:insert="~{/head :: head}"></div>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-  <div class="wrapper">
-
+  <div class="wrapper" th:fragment="core">
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
       <!-- Left navbar links -->
@@ -49,7 +48,7 @@
       <!-- Brand Logo -->
       <a th:href="@{/admin/home}" class="brand-link">
         <img th:src="@{/images/Hotel.png}" alt="Hotel Logo" class="brand-image img-circle elevation-3"
-          style="opacity: .8">
+          style="opacity: .8; margin-left: 0%;">
         <span class="brand-text font-weight-medium">G Hotel Management</span>
       </a>
 

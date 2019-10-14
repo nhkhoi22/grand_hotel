@@ -12,7 +12,7 @@
 
   <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-      <div th:insert="~{/admin/menu}"></div>
+      <div th:insert="~{/admin/menu :: menu}"></div>
 
       <body class="hold-transition register-page">
         <!-- Content Wrapper. Contains page content -->
@@ -157,7 +157,7 @@
           <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        <div th:insert="~{/footer}"></div>
+        <div th:insert="~{/footer :: footer}"></div>
         <!-- Bootstrap Switch -->
         <script th:src="@{js/bootstrap-switch/bootstrap-switch.min.js}"></script>
         <div th:insert="~{/head :: bottom}"></div>
