@@ -4,12 +4,12 @@
 <head>
 
     <title>Registration</title>
-    <div th:insert="~{/head}"></div>
+    <div th:insert="~{/head :: top}"></div>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-        <div th:insert="~{/admin/menu}"></div>
+        <div th:replace="~{/admin/menu}"></div>
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
@@ -71,7 +71,8 @@
         <!-- /.content-wrapper -->
     </div>
     <!-- /.wrapper -->
-    <div th:insert="~{/footer}"></div>
+    <div th:replace="~{/footer}"></div>
+    <div th:insert="~{/head :: bottom}"></div>
 </body>
 
 </html>
