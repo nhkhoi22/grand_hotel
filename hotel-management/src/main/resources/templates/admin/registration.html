@@ -1,8 +1,8 @@
 <!DOCTYPE html>
   <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title>Registration</title>
-    <div th:insert="~{/head :: head}"></div>
+    <title>Add new user</title>
+    <div th:insert="~{/others/head :: head}"></div>
     <style>
       select:invalid {
         color: gray;
@@ -12,8 +12,7 @@
 
   <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-      <div th:replace="~{/admin/menu :: core}"></div>
-
+      <div th:insert="~{/admin/menu :: core}"></div>
       <body class="hold-transition register-page">
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -157,10 +156,10 @@
           <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        <div th:replace="~{/footer :: footer}"></div>
+        <div th:replace="~{/others/footer :: footer}"></div>
         <!-- Bootstrap Switch -->
         <script th:src="@{js/bootstrap-switch/bootstrap-switch.min.js}"></script>
-        <div th:insert="~{/head :: bottom}"></div>
+        <div th:insert="~{/others/head :: bottom}"></div>
       </body>
 
   </html>

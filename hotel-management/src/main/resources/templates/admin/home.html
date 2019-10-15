@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <div th:insert="~{/head :: top}"></div>
+    <div th:insert="~{/others/head :: top}"></div>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div th:replace="~{/admin/menu :: core}"></div>
-    <div th:replace="~{/footer :: footer}"></div>
-    <div th:insert="~{/head :: bottom}"></div>
+    <div th:replace="~{/others/footer :: footer}"></div>
+    <div th:insert="~{/others/head :: bottom}"></div>
 </body>
 
 </html>

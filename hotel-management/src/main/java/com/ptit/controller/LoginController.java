@@ -137,16 +137,16 @@ public class LoginController {
 		return "lockUser";
 	}
 	
-	@RequestMapping(value = "/admin/updatePassword", method = RequestMethod.GET)
+	@RequestMapping(value = "/others/updatePassword", method = RequestMethod.GET)
 	public ModelAndView updatePassword() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByStaffCode(auth.getName());
-		ModelAndView mav = new ModelAndView("admin/updatePassword");
+		ModelAndView mav = new ModelAndView("others/updatePassword");
 		mav.addObject("staff", user);
 		return mav;
 	}
 	
-	@RequestMapping(value = "/admin/updatePassword", method = RequestMethod.POST)
+	@RequestMapping(value = "/others/updatePassword", method = RequestMethod.POST)
 	@PreAuthorize("hasAnyRole()")
 	@ResponseBody
 	public ModelAndView changeUserPassword(BindingResult bindingResult, 
@@ -163,7 +163,7 @@ public class LoginController {
 	    }
 	    
 	    if(bindingResult.hasErrors()) {
-	    	mav.setViewName("admin/updatePassword");
+	    	mav.setViewName("errors/500");
 	    } else {
 	    	userService.changeUserPassword(user, password);
 		    mav.setViewName("admin/home");
@@ -195,7 +195,7 @@ public class LoginController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/information", method = RequestMethod.GET)
+	@RequestMapping(value = "/others/information", method = RequestMethod.GET)
 	public ModelAndView info() {
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -203,7 +203,7 @@ public class LoginController {
 		modelAndView.addObject("email", user.getStaffCode());
 		modelAndView.addObject("user", user.getName());
 		modelAndView.addObject("role", user.getActive());
-		modelAndView.setViewName("/information");
+		modelAndView.setViewName("others/information");
 		return modelAndView;
 	}
 
