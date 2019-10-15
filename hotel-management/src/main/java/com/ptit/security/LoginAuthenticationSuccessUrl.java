@@ -1,6 +1,7 @@
 package com.ptit.security;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
@@ -67,7 +68,7 @@ public class LoginAuthenticationSuccessUrl implements AuthenticationSuccessHandl
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByStaffCode(authentication.getName());
 		password = user.getPassword();
-		Date date = new Date();
+		Date date = Calendar.getInstance().getTime();
 		DateUtil dateUtil = new DateUtil();
 
 		String userLastLogin = user.getLastlogin();
@@ -76,8 +77,8 @@ public class LoginAuthenticationSuccessUrl implements AuthenticationSuccessHandl
 
 		if (userLastLogin != null && userLastLogin != "") {
 			lastDate = dateUtil.convertStringToDate(userLastLogin);
-			sameDay = (date.getYear() == lastDate.getYear()) && (date.getDate() == date.getDate())
-					&& (date.getMonth() == date.getMonth());
+			sameDay = (date.getYear() == lastDate.getYear()) && (date.getDate() == lastDate.getDate())
+					&& (date.getMonth() == lastDate.getMonth());
 		} else {
 			sameDay = false;
 		}
@@ -107,7 +108,7 @@ public class LoginAuthenticationSuccessUrl implements AuthenticationSuccessHandl
 			}
 		}
 		if (isUser) {
-			return "/user/home";
+			return "/user/common/home";
 		} else if (isAdmin) {
 			return "/admin/home";
 		} else {

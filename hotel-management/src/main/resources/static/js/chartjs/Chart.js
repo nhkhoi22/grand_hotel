@@ -10182,7 +10182,7 @@ core_defaults._set('scale', {
 		autoSkip: true,
 		autoSkipPadding: 0,
 		labelOffset: 0,
-		// We pass through arrays to be rendered as multiline labels, we convert Others to strings here.
+		// We pass through arrays to be rendered as multiline labels, we convert common to strings here.
 		callback: core_ticks.formatters.values,
 		minor: {},
 		major: {}
