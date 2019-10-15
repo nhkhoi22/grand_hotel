@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
     <title>Information</title>
     <div th:insert="~{/common/head :: top}"></div>
 </head>
@@ -41,34 +40,24 @@
                                             <label for="StaticUsername" class="col-sm-2 col-form-label"
                                                 style="text-align: center;">Name</label>
                                             <div class="col-sm-10">
-                                                <input type="text" readonly class="form-control" id="StaticUsername"
-                                                    th:value="${user}">
+                                                <input readonly class="form-control effect-underline"
+                                                    id="StaticUsername" th:value="${user}" style="cursor: default;">
                                             </div>
                                         </div>
                                         <div class="input-group row mb-3">
                                             <label for="StaticEmail" class="col-sm-2 col-form-label"
                                                 style="text-align: center;">Email</label>
                                             <div class="col-sm-10">
-                                                <input type="text" readonly class="form-control" id="StaticEmail"
-                                                    th:value="${email}">
+                                                <input type="text" readonly class="form-control effect-underline"
+                                                    id="StaticEmail" th:value="${email}" style="cursor: default;">
                                             </div>
                                         </div>
                                         <div class="input-group row mb-3">
                                             <label for="StaticRole" class="col-sm-2 col-form-label"
                                                 style="text-align: center;">Role ID</label>
                                             <div class="col-sm-10">
-                                                <input type="text" readonly class="form-control" id="StaticRole"
-                                                    th:value="${role}">
-                                            </div>
-                                        </div>
-                                        <div class="input-group row mb-3">
-                                            <label for="StaticUsername" class="col-sm-2 col-form-label"
-                                                style="text-align: center;">Password</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" readonly class="form-control" id="StaticUsername" value="**********">
-                                            </div>
-                                            <div class="col-sm-2">
-                                                    <a th:href="@{/common/updatePassword}" class="nav-link btn btn-primary">Edit</a>
+                                                <input type="text" readonly class="form-control effect-underline"
+                                                    id="StaticRole" th:value="${role}" style="cursor: default;">
                                             </div>
                                         </div>
                                     </form>

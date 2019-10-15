@@ -138,16 +138,16 @@ public class LoginController {
 		return "lockUser";
 	}
 	
-	@RequestMapping(value = "/common/updatePassword", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/updatePassword", method = RequestMethod.GET)
 	public ModelAndView updatePassword() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByStaffCode(auth.getName());
-		ModelAndView mav = new ModelAndView("common/updatePassword");
+		ModelAndView mav = new ModelAndView("admin/updatePassword");
 		mav.addObject("staff", user);
 		return mav;
 	}
 	
-	@RequestMapping(value = "/common/updatePassword", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/updatePassword", method = RequestMethod.POST)
 	@PreAuthorize("hasAnyRole()")
 	@ResponseBody
 	public ModelAndView changeUserPassword(@RequestParam Map<String, String> reqPar, HttpServletResponse response) throws Exception {
@@ -160,12 +160,12 @@ public class LoginController {
 	    String newPassword = reqPar.get("pass1");
 	    
 	    if(userService.checkIfValidOldPassword(user, oldPassword)) {
-	    	mav.setViewName("/common/updatePassword");
+	    	mav.setViewName("admin/updatePassword");
 	    	return mav;
 	    }
 	    
 	    userService.changeUserPassword(user, newPassword);
-	    mav.setViewName("/admin/home");
+	    mav.setViewName("admin/home");
 	    return mav;
 	}
 
