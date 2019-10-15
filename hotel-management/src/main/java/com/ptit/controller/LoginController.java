@@ -138,16 +138,16 @@ public class LoginController {
 		return "lockUser";
 	}
 	
-	@RequestMapping(value = "/others/updatePassword", method = RequestMethod.GET)
+	@RequestMapping(value = "/common/updatePassword", method = RequestMethod.GET)
 	public ModelAndView updatePassword() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByStaffCode(auth.getName());
-		ModelAndView mav = new ModelAndView("others/updatePassword");
+		ModelAndView mav = new ModelAndView("common/updatePassword");
 		mav.addObject("staff", user);
 		return mav;
 	}
 	
-	@RequestMapping(value = "/others/updatePassword", method = RequestMethod.POST)
+	@RequestMapping(value = "/common/updatePassword", method = RequestMethod.POST)
 	@PreAuthorize("hasAnyRole()")
 	@ResponseBody
 	public ModelAndView changeUserPassword(@RequestParam Map<String, String> reqPar, HttpServletResponse response) throws Exception {
@@ -160,7 +160,7 @@ public class LoginController {
 	    String newPassword = reqPar.get("pass1");
 	    
 	    if(userService.checkIfValidOldPassword(user, oldPassword)) {
-	    	mav.setViewName("/others/updatePassword");
+	    	mav.setViewName("/common/updatePassword");
 	    	return mav;
 	    }
 	    
@@ -191,7 +191,7 @@ public class LoginController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/others/information", method = RequestMethod.GET)
+	@RequestMapping(value = "/common/information", method = RequestMethod.GET)
 	public ModelAndView info() {
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -199,7 +199,7 @@ public class LoginController {
 		modelAndView.addObject("email", user.getStaffCode());
 		modelAndView.addObject("user", user.getName());
 		modelAndView.addObject("role", user.getActive());
-		modelAndView.setViewName("others/information");
+		modelAndView.setViewName("common/information");
 		return modelAndView;
 	}
 

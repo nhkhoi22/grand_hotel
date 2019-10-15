@@ -4,7 +4,7 @@
 <head>
 
     <title>Information</title>
-    <div th:insert="~{/others/head :: top}"></div>
+    <div th:insert="~{/common/head :: top}"></div>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -68,7 +68,7 @@
                                                 <input type="text" readonly class="form-control" id="StaticUsername" value="**********">
                                             </div>
                                             <div class="col-sm-2">
-                                                    <a th:href="@{/others/updatePassword}" class="nav-link btn btn-primary">Edit</a>
+                                                    <a th:href="@{/common/updatePassword}" class="nav-link btn btn-primary">Edit</a>
                                             </div>
                                         </div>
                                     </form>
@@ -111,8 +111,8 @@
         <!-- /.content-wrapper -->
     </div>
     <!-- /.wrapper -->
-    <div th:replace="~{/others/footer :: footer}"></div>
-    <div th:insert="~{/others/head :: bottom}"></div>
+    <div th:replace="~{/common/footer :: footer}"></div>
+    <div th:insert="~{/common/head :: bottom}"></div>
 </body>
 
 </html>

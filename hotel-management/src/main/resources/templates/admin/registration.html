@@ -2,7 +2,7 @@
   <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>Add new user</title>
-    <div th:insert="~{/others/head :: head}"></div>
+    <div th:insert="~{/common/head :: head}"></div>
     <style>
       select:invalid {
         color: gray;
@@ -73,7 +73,7 @@
                           <option value="">Employee Management</option>
                           <option value="">Room Management</option>
                           <option value="">Services</option>
-                          <option value="">Others</option>
+                          <option value="">common</option>
                         </select>
                         <div class="input-group-append">
                           <div class="input-group-text">
@@ -156,10 +156,10 @@
           <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        <div th:replace="~{/others/footer :: footer}"></div>
+        <div th:replace="~{/common/footer :: footer}"></div>
         <!-- Bootstrap Switch -->
         <script th:src="@{js/bootstrap-switch/bootstrap-switch.min.js}"></script>
-        <div th:insert="~{/others/head :: bottom}"></div>
+        <div th:insert="~{/common/head :: bottom}"></div>
       </body>
 
   </html>
