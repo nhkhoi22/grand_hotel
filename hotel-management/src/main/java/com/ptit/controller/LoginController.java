@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,28 +150,23 @@ public class LoginController {
 	@RequestMapping(value = "/others/updatePassword", method = RequestMethod.POST)
 	@PreAuthorize("hasAnyRole()")
 	@ResponseBody
-	public ModelAndView changeUserPassword(BindingResult bindingResult, 
-	  @RequestParam("password") String password, 
-	  @RequestParam("oldpassword") String oldPassword) throws Exception {
+	public ModelAndView changeUserPassword(@RequestParam Map<String, String> reqPar, HttpServletResponse response) throws Exception {
 		
 		ModelAndView mav = new ModelAndView();
 	    User user = userService.findUserByStaffCode(
 	      SecurityContextHolder.getContext().getAuthentication().getName());
 	     
-	    if (!userService.checkIfValidOldPassword(user, oldPassword)) {
-	    	bindingResult.rejectValue("password", "error.user",
-					"incorrect password");
+	    String oldPassword = reqPar.get("passOld");
+	    String newPassword = reqPar.get("pass1");
+	    
+	    if(userService.checkIfValidOldPassword(user, oldPassword)) {
+	    	mav.setViewName("/others/updatePassword");
+	    	return mav;
 	    }
 	    
-	    if(bindingResult.hasErrors()) {
-	    	mav.setViewName("errors/500");
-	    } else {
-	    	userService.changeUserPassword(user, password);
-		    mav.setViewName("admin/home");
-	    }
-	    
+	    userService.changeUserPassword(user, newPassword);
+	    mav.setViewName("/admin/home");
 	    return mav;
-	    
 	}
 
 	@RequestMapping(value = "/admin/home", method = RequestMethod.GET)
