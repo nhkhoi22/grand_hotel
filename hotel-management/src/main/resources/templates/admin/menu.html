@@ -31,7 +31,7 @@
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
             <div class="dropdown-divider"></div>
-            <a th:href="@{/common/information}" class="dropdown-item dropdown-footer">Information</a>
+            <a th:href="@{/admin/information}" class="dropdown-item dropdown-footer">Information</a>
             <div class="dropdown-divider"></div>
             <a th:href="@{/admin/updatePassword}" class="dropdown-item dropdown-footer">Change Password</a>
             <div class="dropdown-divider"></div>
@@ -63,7 +63,7 @@
       <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="info">
-            <a th:href="@{/admin/information}" class="d-block" style="font-weight: 600;">Username Go Here</a>
+            <a th:href="@{/admin/home}" th:utext="${user.name}" class="d-block " style="font-weight: 600; text-align: center">Username Go Here</a>
           </div>
         </div>
         <!-- Sidebar Menu -->

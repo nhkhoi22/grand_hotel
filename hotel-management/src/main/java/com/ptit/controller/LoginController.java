@@ -111,19 +111,6 @@ public class LoginController {
 		mav.addObject("users", users);
 		return mav;
 	}
-
-	@PostMapping("/informamtion/{staffCode}")
-	public String getStaffInfo(@PathVariable String staffCode, HttpServletRequest req) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.findUserByStaffCode(auth.getName());
-		if (user.getStaffCode() == staffCode) {
-			req.setAttribute("user", user);
-		} else if (user.getRole().getName() == "ADMIN") {
-			user = userService.findUserByStaffCode(staffCode);
-			req.setAttribute("user", user);
-		}
-		return "";
-	}
 	
 	@PostMapping("/lock/{staffCode}")
 	@ResponseBody
@@ -180,6 +167,17 @@ public class LoginController {
 		return modelAndView;
 	}
 	
+	@RequestMapping(value = "/admin/menu", method = RequestMethod.POST)
+	public ModelAndView menu() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByStaffCode(authentication.getName());
+        
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("user", user);
+		modelAndView.setViewName("admin/menu");
+		return modelAndView;
+	}
+	
 	@RequestMapping(value = "/user/home", method = RequestMethod.GET)
 	public ModelAndView userHome() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -191,13 +189,13 @@ public class LoginController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/common/information", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/information", method = RequestMethod.GET)
 	public ModelAndView info() {
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByStaffCode(auth.getName());
 		modelAndView.addObject("user", user);
-		modelAndView.setViewName("common/information");
+		modelAndView.setViewName("admin/information");
 		return modelAndView;
 	}
 
