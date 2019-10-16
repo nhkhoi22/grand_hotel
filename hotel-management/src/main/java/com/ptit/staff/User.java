@@ -17,6 +17,8 @@ import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ptit.customer.Bill;
+import com.ptit.outcome.ConfirmedRequest;
+import com.ptit.outcome.SpendingRequest;
 
 import lombok.Data;
 
@@ -66,6 +68,46 @@ public class User {
     @JsonIgnore
     private List<Bill> bills;
 	
+	@OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "user"
+    )
+    @JsonIgnore
+    private List<SpendingRequest> requests;
+	
+	@OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "user"
+    )
+    @JsonIgnore
+    private List<ConfirmedRequest> responses;
+	
+	public List<Bill> getBills() {
+		return bills;
+	}
+
+	public void setBills(List<Bill> bills) {
+		this.bills = bills;
+	}
+
+	public List<SpendingRequest> getRequests() {
+		return requests;
+	}
+
+	public void setRequests(List<SpendingRequest> requests) {
+		this.requests = requests;
+	}
+
+	public List<ConfirmedRequest> getResponses() {
+		return responses;
+	}
+
+	public void setResponses(List<ConfirmedRequest> responses) {
+		this.responses = responses;
+	}
+
 	@Column(name = "days_in_work", columnDefinition = "INT")
 	private int daysInWork;
 	

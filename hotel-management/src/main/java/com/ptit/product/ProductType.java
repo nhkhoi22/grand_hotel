@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.ptit.customer.Service;
+import com.ptit.outcome.SpendingRequest;
 
 import lombok.Data;
 
@@ -35,7 +36,22 @@ public class ProductType {
             mappedBy = "productType"
     )
 	private List<Service> services;
+	
+	@OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "productType"
+    )
+	private List<SpendingRequest> requests;
 
+	public List<SpendingRequest> getRequests() {
+		return requests;
+	}
+
+	public void setRequests(List<SpendingRequest> requests) {
+		this.requests = requests;
+	}
+	
 	public int getId() {
 		return id;
 	}
