@@ -50,6 +50,9 @@ public class User {
 	@Column(name = "active", columnDefinition = "INT")
     private int active;
 	
+	@Column(name = "email", columnDefinition = "VARCHAR(50)")
+    private String email;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "position_id", nullable = false)
     @JsonIgnore
@@ -204,5 +207,14 @@ public class User {
 	public void setLastlogin(String lastlogin) {
 		this.lastlogin = lastlogin;
 	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	
 }
