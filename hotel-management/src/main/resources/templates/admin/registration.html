@@ -40,10 +40,13 @@
                 <div class="card">
                   <div class="card-body register-card-body">
                     <h3 class="login-box-msg">Add a new user</h3>
-                    <form action="../../index.php" method="post"
+                    <form th:action="@{/admin/registration}" method="post" th:object="${newUser}"
                       oninput='pass2.setCustomValidity(pass2.value != pass1.value ? "Passwords do not match." : "")'>
                       <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Full name" required>
+                        <label th:if="${#fields.hasErrors('name')}"
+								th:errors="*{name}" class="validation-message"></label> <input
+								type="text" th:field="*{name}" placeholder="Full Name"
+								class="form-control" required/>
                         <div class="input-group-append">
                           <div class="input-group-text">
                             <span class="fas fa-user"></span>
@@ -59,7 +62,10 @@
                         </div>
                       </div>
                       <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Staff Code" required>
+                        <label th:if="${#fields.hasErrors('staffCode')}"
+								th:errors="*{staffCode}" class="validation-message"></label>
+							<input type="text" th:field="*{staffCode}"
+								placeholder="Staff Code" class="form-control" required/>
                         <div class="input-group-append">
                           <div class="input-group-text">
                             <span class="fas fa-id-card"></span>
@@ -67,14 +73,13 @@
                         </div>
                       </div>
                       <div class="input-group mb-3">
-                        <select required class="custom-select">
+                        <select id="dName" required class="custom-select">
                           <option value="" disabled selected hidden>Department</option>
-                          <option value="">Accounting</option>
-                          <option value="">Bussiness</option>
-                          <option value="">Employee Management</option>
-                          <option value="">Room Management</option>
-                          <option value="">Services</option>
-                          <option value="">common</option>
+                          <option value="accounting">Accounting</option>
+                          <option value="business">Bussiness</option>
+                          <option value="human resource">Employee Management</option>
+                          <option value="room management">Room Management</option>
+                          <option value="services">Services</option>
                         </select>
                         <div class="input-group-append">
                           <div class="input-group-text">
@@ -83,13 +88,13 @@
                         </div>
                       </div>
                       <div class="input-group mb-3">
-                        <select required class="custom-select">
+                        <select required class="custom-select" id ="pName">
                           <option value="" disabled selected hidden>Position</option>
-                          <option value="">option 1</option>
-                          <option value="">option 2</option>
-                          <option value="">option 3</option>
-                          <option value="">option 4</option>
-                          <option value="">option 5</option>
+                          <option value="option 1">option 1</option>
+                          <option value="option 2">option 2</option>
+                          <option value="option 3">option 3</option>
+                          <option value="option 4">option 4</option>
+                          <option value="option 5">option 5</option>
                         </select>
                         <div class="input-group-append">
                           <div class="input-group-text">
@@ -107,8 +112,10 @@
                         </div>
                       </div>
                       <div class="input-group mb-3">
-                        <input type="password" class="form-control" id="password1" name="pass1" placeholder="Password"
-                          required>
+                          <input type="password" th:field="*{password}" name="pass1" id="password1"
+								placeholder="Password" class="form-control" required/> <label
+								th:if="${#fields.hasErrors('password')}"
+								th:errors="*{password}" class="validation-message"></label>
                         <div class="input-group-append">
                           <div class="input-group-text">
                             <span class="fas fa-lock"></span>
@@ -141,7 +148,7 @@
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
-                          <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                          <button type="submit" onclick="submit()" class="btn btn-primary btn-block btn-flat">Register</button>
                         </div>
                         <!-- /.col -->
                       </div>
@@ -162,5 +169,4 @@
         <!-- Bootstrap Switch -->
         <script th:src="@{js/bootstrap-switch/bootstrap-switch.min.js}"></script>
       </body>
-
   </html>
