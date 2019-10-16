@@ -12,18 +12,19 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class GErrorController implements ErrorController {
 	
-	public ModelAndView errorNotFound() {
+	public ModelAndView errorPage(boolean miss) {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("errors/404");
+		if(miss == true)
+		{
+			modelAndView.setViewName("errors/404");
+		}
+		else
+		{
+			modelAndView.setViewName("errors/500");
+		}
 		return modelAndView;
 	}
 	
-	public ModelAndView errorNotAvailable() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("errors/500");
-		return modelAndView;
-	}
-
 	@RequestMapping("/error")
 	public ModelAndView handleError(HttpServletRequest request) {
 	    Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
@@ -31,10 +32,10 @@ public class GErrorController implements ErrorController {
 	        Integer statusCode = Integer.valueOf(status.toString());
 	     
 	        if(statusCode == HttpStatus.NOT_FOUND.value()) {
-	        	return errorNotFound();
+	        	return errorPage(true);
 	        }
 	        else if(statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
-	        	return errorNotAvailable();
+	        	return errorPage(false);
 	        }
 	    }
 		return null;
