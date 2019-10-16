@@ -1,46 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
+  <link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
   <title>500 Somthing went wrong</title>
   <div th:insert="~{/common/head :: top}"></div>
 </head>
-<body class="hold-transition sidebar-mini">
-<div class="wrapper">
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Main content -->
-    <section class="content">
-      <div class="error-page">
-        <h2 class="headline text-warning"> 500</h2>
 
-        <div class="error-content">
-          <h3><i class="fas fa-exclamation-triangle text-warning"></i> Oops! Somthing went wrong.</h3>
+<body>
+  <!-- Main content -->
+  <section class="content">
+    <div class="error-page">
+      <h2 class="headline text-success"> 500</h2>
 
-          <p>
-            We will work on fixing that right away. Tee hee....
-          </p>
-          <p>
-            Meanwhile, you may <a th:href="@{/login}">return to login page</a>
-          </p>
-        </div>
-        <!-- /.error-content -->
+      <div class="error-content">
+        <h3><i class="fas fa-exclamation-triangle text-success"></i> Oops! Somthing went wrong.</h3>
+
+        <p>
+          We will work on fixing that right away. Tee hee....
+        </p>
+        <p>
+          Meanwhile, you may <a th:href="@{/login}">return to login page</a>
+        </p>
       </div>
-      <!-- /.error-page -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  
-  <div th:replace="~{/common/footer :: footer}"></div>
+      <!-- /.error-content -->
+    </div>
+    <!-- /.error-page -->
+  </section>
+  <!-- /.content -->
   <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
-<div th:insert="~{/common/head :: bottom}"></div>
+  <div th:insert="~{/common/head :: bottom}"></div>
 
 </body>
+
 </html>
