@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
+  <link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
   <title>Admin</title>
   <div th:insert="~{/common/head :: head}"></div>
 </head>
@@ -20,12 +20,23 @@
           <a th:href="@{/admin/home}" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="#" class="nav-link">Contact</a>
+          <a th:href="@{/admin/testfor404error}" class="nav-link">Contact</a>
         </li>
       </ul>
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
+        <li class="nav-item d-none d-sm-inline-block">
+          <a th:href="@{/admin/information}" class="nav-link">Information</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+          <a th:href="@{/admin/updatePassword}" class="nav-link">Change Password</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+          <form th:action="@{/logout}" method="get" id="logout">
+            <a href="#" onclick="document.getElementById('logout').submit()" class="nav-link">Logout</a>
+          </form>
+        </li>
+        <!-- <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="fas fa-cog"></i>
           </a>
@@ -39,7 +50,7 @@
               <button class="dropdown-item dropdown-footer" name="registration" type="Submit">Log out</button>
             </form>
           </div>
-        </li>
+        </li> -->
       </ul>
     </nav>
     <!-- /.navbar -->
@@ -50,10 +61,9 @@
       <a th:href="@{/admin/home}" class="brand-link">
         <div class="row">
           <div class="col-sm-4">
-              <img th:src="@{/images/Hotel.png}" alt="Hotel Logo" class="brand-image img-circle elevation-3"
+            <img th:src="@{/images/Hotel.png}" alt="Hotel Logo" class="brand-image img-circle elevation-3"
               style="opacity: .8;">
           </div>
-          
           <span class="brand-text font-weight-medium">Grand Hotel</span>
         </div>
 
@@ -61,10 +71,16 @@
 
       <!-- Sidebar -->
       <div class="sidebar">
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <div class="info">
-            <a th:href="@{/admin/home}" th:utext="${user.name}" class="d-block " style="font-weight: 600; text-align: center">Username Go Here</a>
-          </div>
+        <div class="user-panel mt-3 pb-3 mb-3">
+            <div class="row">
+                <div class="col-sm-4">
+                  <img th:src="@{/images/hot_man.png}" alt="Avatar" class="brand-image img-circle elevation-3"
+                    style="opacity: .8; margin-left: 20%;">
+                </div>
+                <a th:href="@{/admin/information}" th:utext="${user.name}" class="brand-text"
+                  style="font-weight: 600; text-align: center"></a>
+              </div>
+            <!-- UserName -->
         </div>
         <!-- Sidebar Menu -->
         <nav class="mt-2">
