@@ -102,12 +102,13 @@ public class LoginController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/admin/searchStaff", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/search", method = RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView searchStaff() {
 		ModelAndView mav = new ModelAndView();
 		List<User> users = userService.findAllStaff();
 		mav.addObject("users", users);
+		mav.setViewName("admin/search");
 		return mav;
 	}
 	
