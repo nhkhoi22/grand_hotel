@@ -3,7 +3,6 @@ package com.ptit.controller;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -162,7 +161,7 @@ public class LoginController {
 		User user = userService.findUserByStaffCode(authentication.getName());
         
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("staff", user);
+		modelAndView.addObject("user", user);
 		modelAndView.setViewName("admin/home");
 		return modelAndView;
 	}
@@ -184,7 +183,7 @@ public class LoginController {
 		User user = userService.findUserByStaffCode(authentication.getName());
         
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("staff", user);
+		modelAndView.addObject("user", user);
 		modelAndView.setViewName("user/home");
 		return modelAndView;
 	}
