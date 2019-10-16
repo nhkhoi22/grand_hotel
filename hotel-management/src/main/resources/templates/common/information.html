@@ -39,26 +39,58 @@
                                     <form>
                                         <div class="input-group row mb-3">
                                             <label for="StaticUsername" class="col-sm-2 col-form-label"
-                                                style="text-align: center;">Name</label>
+                                                style="text-align: center;">Full Name</label>
                                             <div class="col-sm-10">
                                                 <input readonly class="form-control effect-underline"
-                                                    id="StaticUsername" th:value="${user}" style="cursor: default;">
+                                                    id="StaticUsername" th:value="${user.name}" style="cursor: default;">
                                             </div>
                                         </div>
                                         <div class="input-group row mb-3">
-                                            <label for="StaticEmail" class="col-sm-2 col-form-label"
-                                                style="text-align: center;">Email</label>
+                                            <label for="StaticStaffCode" class="col-sm-2 col-form-label"
+                                                style="text-align: center;">Staff Code</label>
                                             <div class="col-sm-10">
                                                 <input type="text" readonly class="form-control effect-underline"
-                                                    id="StaticEmail" th:value="${email}" style="cursor: default;">
+                                                    id="StaticStaffCode" th:value="${user.staffCode}" style="cursor: default;">
                                             </div>
                                         </div>
                                         <div class="input-group row mb-3">
                                             <label for="StaticRole" class="col-sm-2 col-form-label"
-                                                style="text-align: center;">Role ID</label>
+                                                style="text-align: center;">Role</label>
                                             <div class="col-sm-10">
                                                 <input type="text" readonly class="form-control effect-underline"
-                                                    id="StaticRole" th:value="${role}" style="cursor: default;">
+                                                    id="StaticRole" th:value="${user.role.name}" style="cursor: default;">
+                                            </div>
+                                        </div>
+                                        <div class="input-group row mb-3">
+                                            <label for="StaticDepartment" class="col-sm-2 col-form-label"
+                                                style="text-align: center;">Department</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" readonly class="form-control effect-underline"
+                                                    id="StaticDepartment" th:value="${user.position.department.name}" style="cursor: default;">
+                                            </div>
+                                        </div>
+                                         <div class="input-group row mb-3">
+                                            <label for="StaticPosition" class="col-sm-2 col-form-label"
+                                                style="text-align: center;">Position</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" readonly class="form-control effect-underline"
+                                                    id="StaticPosition" th:value="${user.position.name}" style="cursor: default;">
+                                            </div>
+                                        </div>
+                                          <div class="input-group row mb-3">
+                                            <label for="StaticDIW" class="col-sm-2 col-form-label"
+                                                style="text-align: center;">Work days</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" readonly class="form-control effect-underline"
+                                                    id="StaticDIW" th:value="${user.daysInWork}" style="cursor: default;">
+                                            </div>
+                                        </div>
+                                          <div class="input-group row mb-3">
+                                            <label for="StaticLastLogin" class="col-sm-2 col-form-label"
+                                                style="text-align: center;">Last Login</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" readonly class="form-control effect-underline"
+                                                    id="StaticLastLogin" th:value="${user.lastlogin}" style="cursor: default;">
                                             </div>
                                         </div>
                                     </form>
