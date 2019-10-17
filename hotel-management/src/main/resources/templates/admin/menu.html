@@ -86,35 +86,39 @@
                with font-awesome or any other icon font library -->
             <li class="nav-item">
             </li>
-            <li class="nav-header">SUPERVISOR</li>
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-list-alt"></i>
+            <li class="nav-header border-bottom border-light text-center">ADMIN</li>
+            <li class="nav-header">FINANCIAL AND ACCOUNTING</li>
+            <li class="nav-item">
+              <a th:href="@{/admin/registration}" class="nav-link">
+                <i class="nav-icon fas fa-clipboard-list"></i>
                 <p>
-                  List
-                  <i class="fas fa-angle-left right"></i>
+                  Suppliers Record
                 </p>
               </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a th:href="@{/admin/list_user}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Users</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Rooms</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Services</p>
-                  </a>
-                </li>
-              </ul>
+            </li>
+            <li class="nav-item">
+              <a th:href="@{/admin/registration}" class="nav-link">
+                <i class="nav-icon fas fa-tasks"></i>
+                <p>
+                  Payment Request Handle
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a th:href="@{/admin/registration}" class="nav-link">
+                <i class="nav-icon fas fa-cog"></i>
+                <p>
+                  Facilities Management
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a th:href="@{/admin/registration}" class="nav-link">
+                <i class="nav-icon fas fa-hand-holding-usd"></i>
+                <p>
+                  Financial Statement
+                </p>
+              </a>
             </li>
             <li class="nav-header">HUMAN RESOURCES</li>
             <li class="nav-item">
@@ -125,37 +129,62 @@
                 </p>
               </a>
             </li>
-            <li class="nav-header">PRODUCT MANAGEMENT</li>
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-list-alt"></i>
+            <li class="nav-item">
+              <a th:href="@{/admin/list_user}" class="nav-link">
+                <i class="fas fa-clipboard-list nav-icon"></i>
                 <p>
-                  List
-                  <i class="fas fa-angle-left right"></i>
+                  Users Record
                 </p>
               </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Inbox</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Compose</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Read</p>
-                  </a>
-                </li>
-              </ul>
             </li>
-
+            <li class="nav-header">ROOM MANAGEMENT</li>
+            <!-- Quan li viec dat phong -->
+            <li class="nav-item">
+              <a th:href="@{/admin/list_user}" class="nav-link">
+                <i class="nav-icon fas fa-bed"></i>
+                <p>
+                  Booking Handle
+                </p>
+              </a>
+            </li>
+            <!-- Thong tin khach hang, cac dich vu khach da dung -->
+            <li class="nav-item">
+              <a th:href="@{/admin/list_user}" class="nav-link">
+                <i class="nav-icon fas fa-clipboard-list"></i>
+                <p>
+                  Guests Record
+                </p>
+              </a>
+            </li>
+            <!-- In hoa don/ tra phong -->
+            <li class="nav-item">
+              <a th:href="@{/admin/list_user}" class="nav-link">
+                <i class="nav-icon fas fa-luggage-cart"></i>
+                <p>
+                  Checkout Handle
+                </p>
+              </a>
+            </li>
+            <li class="nav-header">SALE AND MARKETING</li>
+            <!-- Xem gia moi thu, thay doi gia -->
+            <li class="nav-item">
+              <a th:href="@{/admin/list_user}" class="nav-link">
+                <i class="nav-icon fas fa-hand-holding-usd"></i>
+                <p>
+                  Facilities Price Record
+                </p>
+              </a>
+            </li>
+            <li class="nav-header">SERVICES</li>
+            <!-- Thay doi dich vu-->
+            <li class="nav-item">
+              <a th:href="@{/admin/registration}" class="nav-link">
+                <i class="nav-icon fas fa-cocktail"></i>
+                <p>
+                  Services Management
+                </p>
+              </a>
+            </li>
           </ul>
         </nav>
         <!-- /.sidebar-menu -->
