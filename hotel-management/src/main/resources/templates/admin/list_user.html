@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
-<div th:insert="~{/common/head :: top}"></div>
-<title>User List</title>
+	<link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
+	<div th:insert="~{/common/head :: top}"></div>
+	<title>User List</title>
+	<style>
+		select:invalid {
+			color: gray;
+		}
+	</style>
 </head>
 <div th:replace="~{/admin/menu}"></div>
+
 <body class="hold-transition sidebar-mini">
 	<div class="wrapper">
 		<!-- Content Wrapper. Contains page content -->
@@ -21,7 +27,7 @@
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right">
 								<li class="breadcrumb-item"><a th:href="@{/admin/home}">Home</a></li>
-								<li class="breadcrumb-item active">DataTables</li>
+								<li class="breadcrumb-item active">UserList</li>
 							</ol>
 						</div>
 					</div>
@@ -35,11 +41,30 @@
 					<div class="col-12">
 						<div class="card">
 							<div class="card-header">
-								<h3 class="card-title">DataTable with default features</h3>
+								<div class="row">
+									<div class="col-sm-3">
+										<div class="md-form">
+											<input class="form-control" type="text" placeholder="Search" id="SearchInput"
+												onkeyup="SearchUser()">
+										</div>
+									</div>
+									<div class="col-sm-2">
+										<div class="input-group">
+											<select name="dName" class="custom-select" required>
+												<option value="" disabled selected hidden>Department</option>
+												<option value="accounting">Accounting</option>
+												<option value="business">Bussiness</option>
+												<option value="human_resource">Human Resources</option>
+												<option value="room_management">Room Management</option>
+												<option value="services">Services</option>
+											</select>
+										</div>
+									</div>
+								</div>
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body">
-								<table id="example1" class="table table-bordered table-striped">
+								<table class="table table-bordered table-striped" id="UserTable">
 									<thead>
 										<tr>
 											<th>Staff Code</th>
@@ -59,19 +84,12 @@
 											<td th:text="${user.position.name}"></td>
 											<td th:text="${user.position.department.name}"></td>
 											<td th:text="${user.role.name}"></td>
-											<td><a th:action="@{/lock/'${user.staffCode}'}" method="post" href="#"><i class="fas fa-lock"></i></a></td>
+											<td><a th:action="@{/lock/'${user.staffCode}'}" method="post" href="#">
+													<i class="fas fa-lock"></i>
+												</a>
+											</td>
 										</tr>
 									</tbody>
-									<!-- /.User list end here-->
-<!-- 									<tfoot> -->
-<!-- 										<tr> -->
-<!-- 											<th>Rendering engine</th> -->
-<!-- 											<th>Browser</th> -->
-<!-- 											<th>Platform(s)</th> -->
-<!-- 											<th>Engine version</th> -->
-<!-- 											<th>CSS grade</th> -->
-<!-- 										</tr> -->
-<!-- 									</tfoot> -->
 								</table>
 							</div>
 							<!-- /.card-body -->
@@ -96,22 +114,10 @@
 	<!-- DataTables -->
 	<script src="../../plugins/datatables/jquery.dataTables.js"></script>
 	<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
-	<!-- AdminLTE for demo purposes -->
-	<script src="../../dist/js/demo.js"></script>
+	<!-- Search -->
+	<script type="text/javascript" th:src="@{/js/StaffSearch.js}"></script>
 	<!-- page script -->
-	<script>
-		$(function() {
-			$("#example1").DataTable();
-			$('#example2').DataTable({
-				"paging" : true,
-				"lengthChange" : false,
-				"searching" : false,
-				"ordering" : true,
-				"info" : true,
-				"autoWidth" : false,
-			});
-		});
-	</script>
+	
 </body>
 
 </html>
