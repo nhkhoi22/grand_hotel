@@ -44,14 +44,16 @@
 								<div class="row">
 									<div class="col-sm-3">
 										<div class="md-form">
-											<input class="form-control" type="text" placeholder="Search" id="SearchInput"
-												onkeyup="SearchUser()">
+											<input class="form-control" type="text" placeholder="Search"
+												id="SearchInput" onkeyup="SearchUser()">
 										</div>
 									</div>
 									<div class="col-sm-2">
 										<div class="input-group">
-											<select name="dName" class="custom-select" required>
+											<select name="dName" class="custom-select" required id="DepartmentSearch"
+												onchange="FilterDepartment()">
 												<option value="" disabled selected hidden>Department</option>
+												<option value="all">All</option>
 												<option value="accounting">Accounting</option>
 												<option value="business">Bussiness</option>
 												<option value="human_resource">Human Resources</option>
@@ -112,12 +114,12 @@
 	<!-- ./wrapper -->
 	<div th:replace="~{/common/footer :: footer}"></div>
 	<!-- DataTables -->
-	<script src="../../plugins/datatables/jquery.dataTables.js"></script>
-	<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+	<!-- <script type="text/javascript" th:src="@{/js/jquery.dataTables.js}"></script>
+	<script type="text/javascript" th:src="@{/js/datatables-bs4/dataTables.bootstrap4.js}"></script> -->
 	<!-- Search -->
 	<script type="text/javascript" th:src="@{/js/StaffSearch.js}"></script>
 	<!-- page script -->
-	
+
 </body>
 
 </html>
