@@ -75,117 +75,19 @@
           </div>
           <span class="brand-text font-weight-medium">Grand Hotel</span>
         </div>
-
       </a>
-
       <!-- Sidebar -->
       <div class="sidebar">
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-            <li class="nav-item">
-            </li>
             <li class="nav-header border-bottom border-light text-center">ADMIN</li>
-            <li class="nav-header">FINANCIAL AND ACCOUNTING</li>
-            <li class="nav-item">
-              <a th:href="@{/admin/registration}" class="nav-link">
-                <i class="nav-icon fas fa-cog"></i>
-                <p>
-                  Facilities Management
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a th:href="@{/admin/registration}" class="nav-link">
-                <i class="nav-icon fas fa-hand-holding-usd"></i>
-                <p>
-                  Financial Statement
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a th:href="@{/admin/registration}" class="nav-link">
-                <i class="nav-icon fas fa-tasks"></i>
-                <p>
-                  Payment Request Handle
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a th:href="@{/admin/registration}" class="nav-link">
-                <i class="nav-icon fas fa-clipboard-list"></i>
-                <p>
-                  Suppliers Record
-                </p>
-              </a>
-            </li>
-
-            <li class="nav-header">HUMAN RESOURCES</li>
-            <li class="nav-item">
-              <a th:href="@{/admin/registration}" class="nav-link">
-                <i class="nav-icon fas fa-user-plus"></i>
-                <p>
-                  Add New User
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a th:href="@{/admin/list_user}" class="nav-link">
-                <i class="fas fa-clipboard-list nav-icon"></i>
-                <p>
-                  Users Record
-                </p>
-              </a>
-            </li>
-            <li class="nav-header">ROOM MANAGEMENT</li>
-            <!-- Quan li viec dat phong -->
-            <li class="nav-item">
-              <a th:href="@{/admin/list_user}" class="nav-link">
-                <i class="nav-icon fas fa-bed"></i>
-                <p>
-                  Booking Handle
-                </p>
-              </a>
-            </li>
-            <!-- In hoa don/ tra phong -->
-            <li class="nav-item">
-              <a th:href="@{/admin/list_user}" class="nav-link">
-                <i class="nav-icon fas fa-luggage-cart"></i>
-                <p>
-                  Checkout Handle
-                </p>
-              </a>
-            </li>
-            <!-- Thong tin khach hang, cac dich vu khach da dung -->
-            <li class="nav-item">
-              <a th:href="@{/admin/list_user}" class="nav-link">
-                <i class="nav-icon fas fa-clipboard-list"></i>
-                <p>
-                  Guests Record
-                </p>
-              </a>
-            </li>
-
-            <li class="nav-header">SALE AND MARKETING</li>
-            <!-- Xem gia moi thu, thay doi gia -->
-            <li class="nav-item">
-              <a th:href="@{/admin/list_user}" class="nav-link">
-                <i class="nav-icon fas fa-hand-holding-usd"></i>
-                <p>
-                  Facilities Price Record
-                </p>
-              </a>
-            </li>
-            <li class="nav-header">SERVICES</li>
-            <!-- Thay doi dich vu-->
-            <li class="nav-item">
-              <a th:href="@{/admin/registration}" class="nav-link">
-                <i class="nav-icon fas fa-cocktail"></i>
-                <p>
-                  Services Management
-                </p>
-              </a>
+            <div th:insert="~{/user/accounting/menu :: menu}"></div>
+            <div th:insert="~{/user/human_resources/menu :: menu}"></div>
+            <div th:insert="~{/user/marketing/menu :: menu}"></div>
+            <div th:insert="~{/user/room_management/menu :: menu}"></div>
+            <div th:insert="~{/user/services/menu :: menu}"></div>
             </li>
           </ul>
         </nav>
