@@ -1,57 +1,101 @@
 <!DOCTYPE html>
-  <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-  <head>
-  	<link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
-    <title>Add new user</title>
-    <div th:insert="~{/common/head :: top}"></div>
-    <style>
-      select:invalid {
-        color: gray;
-      }
-    </style>
-  </head>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-  <body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
-      <div th:insert="~{/admin/menu :: core}"></div>
-      <body class="hold-transition register-page">
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-          <!-- Content Header (Page header) -->
-          <div class="content-header">
-            <div class="container-fluid">
-              <div class="row mb-2">
-                <div class="col-sm-6">
-                </div><!-- /.col -->
-                <div class="col-sm-6">
-                  <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a th:href="@{/admin/home}">Home</a></li>
-                    <li class="breadcrumb-item active">Register</li>
-                  </ol>
-                </div><!-- /.col -->
-              </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
+<head>
+  <link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
+  <title>Add new user</title>
+  <div th:insert="~{/common/head :: top}"></div>
+  <style>
+    select:invalid {
+      color: gray;
+    }
+  </style>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+  <div class="container">
+    <!-- Modal -->
+    <div id="Success" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title text-info">Success</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
-          <!-- /.content-header -->
-          <!-- Main content -->
-          <section class="content">
-            <div class="container-fluid">
-              <div class="register-box" style="margin: auto;">
-                <div class="card">
-                  <div class="card-body register-card-body">
-                    <h3 class="login-box-msg">Add a new user</h3>
-                    <form th:action="@{/admin/registration}" method="post" th:object="${newUser}"
-                      oninput='pass2.setCustomValidity(pass2.value != pass1.value ? "Passwords do not match." : "")'>
-                      <div class="input-group mb-3">
-                        <label th:if="${#fields.hasErrors('name')}"
+          <div class="modal-body text-info">
+            <p>New User Registed</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapper">
+    <div th:insert="~{/admin/menu :: core}"></div>
+
+    <body class="hold-transition register-page">
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+              </div><!-- /.col -->
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a th:href="@{/admin/home}">Home</a></li>
+                  <li class="breadcrumb-item active">Register</li>
+                </ol>
+              </div><!-- /.col -->
+            </div><!-- /.row -->
+          </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+        <!-- Main content -->
+        <section class="content">
+          <div class="container-fluid">
+            <div class="register-box" style="margin: auto;">
+              <div class="card">
+                <div class="card-body register-card-body">
+                  <h3 class="login-box-msg">Add a new user</h3>
+                  <form th:action="@{/admin/registration}" method="post" th:object="${newUser}"
+                    oninput='pass2.setCustomValidity(pass2.value != pass1.value ? "Passwords do not match." : "")'>
+                    <div class="input-group mb-3">
+                      <label th:if="${#fields.hasErrors('name')}"
 								th:errors="*{name}" class="validation-message"></label> <input
 								type="text" th:field="*{name}" placeholder="Full Name"
-								class="form-control" required/>
+								class="form-control" required data-placement="right"/>
                         <div class="input-group-append">
                           <div class="input-group-text">
                             <span class="fas fa-user"></span>
                           </div>
                         </div>
+                      </div>
+                      <div class="input-group">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <p class="ml-2">Gender</p>
+                          </div>
+                          <div class="col-sm-4">
+                            <div class="icheck-primary d-inline">
+                              <input type="radio" id="male" name="gender">
+                              <label for="male">
+                                Male
+                              </label>
+                            </div>                      
+                          </div>
+                          <div class="col-sm-1">
+                            <div class="icheck-primary d-inline">
+                              <input type="radio" id="female" name="gender">
+                              <label for="female">
+                                Female
+                              </label>
+                            </div>
+                          </div>
+                        </div>                         
                       </div>
                       <div class="input-group mb-3">
                         <input
@@ -135,24 +179,12 @@
                       </div>
                       <div class="form-group">
                         <div class="custom-control custom-switch">
-                          <input type="checkbox" class="custom-control-input" name="isAdmin">
+                          <input type="checkbox" class="custom-control-input" id="isAdmin">
                           <label class="custom-control-label" for="isAdmin">This user is an admin</label>
                         </div>
                       </div>
                       <div class="row">
-                        <div class="col-8">
-                          <div class="icheck-primary">
-                            <input type="checkbox" id="agreeTerms" name="terms" value="agree" require>
-                            <label for="agreeTerms">
-                              I agree to the <a href="#">terms</a>
-                            </label>
-                          </div>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-4">
-                          <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
-                        </div>
-                        <!-- /.col -->
+                          <button type="submit" class="btn btn-primary btn-block btn-flat" data-toggle="modal" data-target="#Success">Register</button>
                       </div>
                       <!-- /.row -->
                     </form>
@@ -169,6 +201,6 @@
         <div th:replace="~{/common/footer :: footer}"></div>
         <div th:insert="~{/common/head :: bottom}"></div>
         <!-- Bootstrap Switch -->
-        <script th:src="@{js/bootstrap-switch/bootstrap-switch.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/bootstrap-switch/bootstrap-switch.min.js}"></script>
       </body>
   </html>
