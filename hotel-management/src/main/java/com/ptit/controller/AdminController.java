@@ -38,7 +38,7 @@ public class AdminController {
 		mav.addObject("user", user);
 	}
 	
-	@RequestMapping(value = "/admin/registration", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/human_resources/registration", method = RequestMethod.GET)
 	public ModelAndView registration() {
 		ModelAndView modelAndView = new ModelAndView();
 		User newUser = new User();
@@ -48,11 +48,11 @@ public class AdminController {
 		modelAndView.addObject("newUser", newUser);
 		modelAndView.addObject("department", department);
 		modelAndView.addObject("position", position);
-		modelAndView.setViewName("admin/registration");
+		modelAndView.setViewName("user/human_resources/registration");
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/admin/registration", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/human_resources/registration", method = RequestMethod.POST)
 	public ModelAndView createNewUser(@Valid User newUser, @RequestParam Map<String, String> reqPar,
 			BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -66,7 +66,7 @@ public class AdminController {
 					"There is already a user registered with the staff code provided");
 		}
 		if (bindingResult.hasErrors()) {
-			modelAndView.setViewName("admin/registration");
+			modelAndView.setViewName("user/human_resources/registration");
 		} else {
 			if (departmentExists == null) {
 				departmentExists = new Department();
@@ -96,21 +96,21 @@ public class AdminController {
 			modelAndView.addObject("newUser", new User());
 			modelAndView.addObject("position", new Position());
 			modelAndView.addObject("department", new Department());
-			modelAndView.setViewName("admin/registration");
+			modelAndView.setViewName("user/human_resources/registration");
 
 		}
 		return modelAndView;
 	}
 	
 
-	@RequestMapping(value = "/admin/list_user", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/human_resources/list_user", method = RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView searchStaff() {
 		ModelAndView mav = new ModelAndView();
 		addUserInModel(mav);
 		List<User> users = userService.findAllStaff();
 		mav.addObject("users", users);
-		mav.setViewName("admin/list_user");
+		mav.setViewName("user/human_resources/list_user");
 		return mav;
 	}
 	
