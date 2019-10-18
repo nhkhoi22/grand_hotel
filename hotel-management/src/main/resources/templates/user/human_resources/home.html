@@ -21,7 +21,7 @@ xmlns:th="http://www.thymeleaf.org">
 	th:href="@{/fonts/SourceSansPro.css}" />
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-  <div th:replace="~{/user/employee_management/menu}"></div>
+  <div th:replace="~{/user/employee_management/menu :: core}"></div>
   <div th:replace="~{/footer}"></div>
 <!-- jQuery -->
 <script type="text/javascript" th:src="@{/js/jquery/jquery.min.js}"></script>
