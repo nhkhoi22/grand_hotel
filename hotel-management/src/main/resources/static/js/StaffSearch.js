@@ -19,3 +19,32 @@ function SearchUser() {
         }
     }
 }
+function FilterDepartment() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("DepartmentSearch");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("UserTable");
+    tr = table.getElementsByTagName("tr");
+
+    //Display all
+    if (filter.localeCompare("ALL") == 0) {
+        for (i = 0; i < tr.length; i++) {
+            tr[i].style.display = "";
+        }
+    }
+    else {
+        //Filter by Department
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[3];
+
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+}
