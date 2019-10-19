@@ -57,7 +57,15 @@ public class UserService {
 	public List<User> findAllStaff() {
 		return userDAO.findAll();
 	}
-
+	
+	public List<Department> findAllDepartment(){
+		return departmentDAO.findAll();
+	}
+	
+	public List<Position> findAllPosition(){
+		return positionDAO.findAll();
+	}
+	
 	public void saveUser(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setActive(1);

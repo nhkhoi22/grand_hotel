@@ -43,11 +43,11 @@ public class AdminController {
 		ModelAndView modelAndView = new ModelAndView();
 		User newUser = new User();
 		addUserInModel(modelAndView);
-		Position position = new Position();
-		Department department = new Department();
+		List<Department> departments = userService.findAllDepartment();
+		List<Position> positions = userService.findAllPosition();
 		modelAndView.addObject("newUser", newUser);
-		modelAndView.addObject("department", department);
-		modelAndView.addObject("position", position);
+		modelAndView.addObject("departments", departments);
+		modelAndView.addObject("positions", positions);
 		modelAndView.setViewName("user/human_resources/registration");
 		return modelAndView;
 	}
