@@ -22,6 +22,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 import com.ptit.common.DateUtil;
 import com.ptit.service.UserService;
+import com.ptit.staff.Position;
 import com.ptit.staff.User;
 
 public class LoginAuthenticationSuccessUrl implements AuthenticationSuccessHandler {
@@ -107,8 +108,11 @@ public class LoginAuthenticationSuccessUrl implements AuthenticationSuccessHandl
 				break;
 			}
 		}
+		User user = userService.findUserByStaffCode(authentication.getName());
+		Position position = userService.findPositionById(user.getPosition().getId());
+		String department = position.getDepartment().getName();
 		if (isUser) {
-			return "/user/common/home";
+			return "/user/"+ department.toLowerCase() + "/home";
 		} else if (isAdmin) {
 			return "/admin/home";
 		} else {

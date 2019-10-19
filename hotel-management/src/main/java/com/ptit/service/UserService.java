@@ -86,6 +86,18 @@ public class UserService {
 		departmentDAO.save(department);
 	}
 	
+	public Department findDepartmentById(Long id) {
+		return departmentDAO.findDepartmentById(id);
+	}
+	
+	public Position findPositionById(Long id) {
+		return positionDAO.findPositionById(id);
+	}
+	
+	public List<Position> findPositionsByDepartment(Department department) {
+		return positionDAO.findPositionByDepartment(department);
+	}
+	
 	public boolean checkIfValidOldPassword(User user, String oldPassword) {
 		if(bCryptPasswordEncoder.encode(oldPassword) == user.getPassword())
 			return true;
