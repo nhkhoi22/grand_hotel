@@ -119,9 +119,9 @@
                         </div>
                       </div>
                       <div class="input-group mb-3">
-                        <select name="dName" required class="custom-select" th:each="department : ${departments}">
+                        <select name="dName" required class="custom-select">
                           <option value="" disabled selected hidden>Department</option>
-                          <option th:value="${department.id}" th:text="${department.name}"></option>
+                          <option th:each="department : ${departments}" th:value="${department.id}" th:text="${department.name}"></option>
                         </select>
                         <div class="input-group-append">
                           <div class="input-group-text">
@@ -130,9 +130,9 @@
                         </div>
                       </div>
                       <div class="input-group mb-3">
-                        <select required class="custom-select" name="pName" th:each="position : ${positions}">
+                        <select required class="custom-select" name="pName">
                           <option value="" disabled selected hidden>Position</option>
-                          <option th:value="${position.id}" th:text="${position.name}"></option>
+                          <option th:each="department : ${departments}" th:value="${position.id}" th:text="${position.name}"></option>
                         </select>
                         <div class="input-group-append">
                           <div class="input-group-text">
