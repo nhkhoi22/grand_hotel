@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-public class GErrorController implements ErrorController {
+public class ErrorPageController implements ErrorController {
 	
 	public ModelAndView errorPage(boolean miss) {
 		ModelAndView modelAndView = new ModelAndView();
