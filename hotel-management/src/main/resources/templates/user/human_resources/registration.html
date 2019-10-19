@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
@@ -15,12 +14,12 @@
 
 <body class="hold-transition sidebar-mini layout-fixed">
   <!-- <div class="container"> -->
-    <!-- Modal -->
-    <!-- <div id="Success" class="modal fade" role="dialog">
+  <!-- Modal -->
+  <!-- <div id="Success" class="modal fade" role="dialog">
       <div class="modal-dialog"> -->
 
-        <!-- Modal content-->
-        <!-- <div class="modal-content">
+  <!-- Modal content-->
+  <!-- <div class="modal-content">
           <div class="modal-header">
             <h4 class="modal-title text-info">Success</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -63,7 +62,7 @@
                 <div class="card-body register-card-body">
                   <h3 class="login-box-msg">Add a new user</h3>
                   <form th:action="@{/admin/registration}" method="post" th:object="${newUser}"
-                    oninput='pass2.setCustomValidity(pass2.value != pass1.value ? "Passwords do not match." : "")'>
+                    oninput="PasswordValidation()">
                     <div class="input-group mb-3">
                       <label th:if="${#fields.hasErrors('name')}"
 								th:errors="*{name}" class="validation-message"></label> <input
@@ -120,7 +119,7 @@
                         </div>
                       </div>
                       <div class="input-group mb-3">
-                        <select name="dName" required class="custom-select">
+                        <select name="dName" required class="custom-select" id="departmentID" onchange="PositionFilter()">
                           <option value="" disabled selected hidden>Department</option>
                           <option th:each="department : ${departments}" th:value="${department.id}" th:text="${department.name}"></option>
                         </select>
@@ -131,9 +130,9 @@
                         </div>
                       </div>
                       <div class="input-group mb-3">
-                        <select required class="custom-select" name="pName">
+                        <select required class="custom-select" name="pName" id="PosDepartment">
                           <option value="" disabled selected hidden>Position</option>
-                          <option th:each="position : ${positions}" th:value="${position.id}" th:text="${position.name}"></option>
+                          <option th:each="position : ${positions}" th:value="${position.id}" th:text="${position.name}" th:id="${position.department.id}"></option>
                         </select>
                         <div class="input-group-append">
                           <div class="input-group-text">
@@ -151,10 +150,10 @@
                         </div>
                       </div>
                       <div class="input-group mb-3">
-                          <input type="password" th:field="*{password}" name="pass1" id="password1"
-								placeholder="Password" class="form-control" required/> <label
-								th:if="${#fields.hasErrors('password')}"
-								th:errors="*{password}" class="validation-message"></label>
+                        <input type="password" th:field="*{password}" name="pass1" id="password1"
+                          placeholder="Password" class="form-control" required/> 
+                        <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" 
+                          class="validation-message"></label>
                         <div class="input-group-append">
                           <div class="input-group-text">
                             <span class="fas fa-lock"></span>
@@ -195,204 +194,7 @@
         <div th:insert="~{/common/head :: bottom}"></div>
         <!-- Bootstrap Switch -->
         <script type="text/javascript" th:src="@{/js/bootstrap-switch/bootstrap-switch.min.js}"></script>
+        <!-- Position Filter -->
+        <script type="text/javascript" th:src="@{/js/human-resources/Registration.js}"></script>
       </body>
-=======
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
-<head>
-  <link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
-  <title>Add new user</title>
-  <div th:insert="~{/common/head :: top}"></div>
-  <style>
-    select:invalid {
-      color: gray;
-    }
-  </style>
-</head>
-
-<body class="hold-transition sidebar-mini layout-fixed">
-  <!-- <div class="container"> -->
-    <!-- Modal -->
-    <!-- <div id="Success" class="modal fade" role="dialog">
-      <div class="modal-dialog"> -->
-
-        <!-- Modal content-->
-        <!-- <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title text-info">Success</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-          <div class="modal-body text-info">
-            <p>New User Registed</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-  <!-- Chưa xong!!! -->
-  <div class="wrapper">
-    <div th:insert="~{/admin/menu :: core}"></div>
-
-    <body class="hold-transition register-page">
-      <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-          <div class="container-fluid">
-            <div class="row mb-2">
-              <div class="col-sm-6">
-              </div><!-- /.col -->
-              <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a th:href="@{/admin/home}">Home</a></li>
-                  <li class="breadcrumb-item active">Register</li>
-                </ol>
-              </div><!-- /.col -->
-            </div><!-- /.row -->
-          </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content-header -->
-        <!-- Main content -->
-        <section class="content">
-          <div class="container-fluid">
-            <div class="register-box" style="margin: auto;">
-              <div class="card">
-                <div class="card-body register-card-body">
-                  <h3 class="login-box-msg">Add a new user</h3>
-                  <form th:action="@{/admin/registration}" method="post" th:object="${newUser}"
-                    oninput='pass2.setCustomValidity(pass2.value != pass1.value ? "Passwords do not match." : "")'>
-                    <div class="input-group mb-3">
-                      <label th:if="${#fields.hasErrors('name')}"
-								th:errors="*{name}" class="validation-message"></label> <input
-								type="text" th:field="*{name}" placeholder="Full Name"
-								class="form-control" required data-placement="right"/>
-                        <div class="input-group-append">
-                          <div class="input-group-text">
-                            <span class="fas fa-user"></span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="input-group">
-                        <div class="row">
-                          <div class="col-sm-6">
-                            <p class="ml-2">Gender</p>
-                          </div>
-                          <div class="col-sm-4">
-                            <div class="icheck-primary d-inline">
-                              <input type="radio" id="male" name="gender">
-                              <label for="male">
-                                Male
-                              </label>
-                            </div>                      
-                          </div>
-                          <div class="col-sm-1">
-                            <div class="icheck-primary d-inline">
-                              <input type="radio" id="female" name="gender">
-                              <label for="female">
-                                Female
-                              </label>
-                            </div>
-                          </div>
-                        </div>                         
-                      </div>
-                      <div class="input-group mb-3">
-                        <input
-								type="email" th:field="*{email}" placeholder="Email"
-								class="form-control" required/>
-                        <div class="input-group-append">
-                          <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="input-group mb-3">
-                        <label th:if="${#fields.hasErrors('staffCode')}"
-								th:errors="*{staffCode}" class="validation-message"></label>
-							<input type="text" th:field="*{staffCode}"
-								placeholder="Staff Code" class="form-control" required/>
-                        <div class="input-group-append">
-                          <div class="input-group-text">
-                            <span class="fas fa-id-card"></span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="input-group mb-3">
-                        <select name="dName" required class="custom-select">
-                          <option value="" disabled selected hidden>Department</option>
-                          <option th:each="department : ${departments}" th:value="${department.id}" th:text="${department.name}"></option>
-                        </select>
-                        <div class="input-group-append">
-                          <div class="input-group-text">
-                            <span class="fas fa-building"></span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="input-group mb-3">
-                        <select required class="custom-select" name="pName">
-                          <option value="" disabled selected hidden>Position</option>
-                          <option th:each="position : ${positions}" th:value="${position.id}" th:text="${position.name}"></option>
-                        </select>
-                        <div class="input-group-append">
-                          <div class="input-group-text">
-                            <span class="fas fa-file-contract"></span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Contract Salary" required>
-                        <div class="input-group-append">
-                          <span class="input-group-text">$/Month</span>
-                          <div class="input-group-text">
-                            <span class="fas fa-money-check-alt"></span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="input-group mb-3">
-                          <input type="password" th:field="*{password}" name="pass1" id="password1"
-								placeholder="Password" class="form-control" required/> <label
-								th:if="${#fields.hasErrors('password')}"
-								th:errors="*{password}" class="validation-message"></label>
-                        <div class="input-group-append">
-                          <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="input-group mb-3">
-                        <input type="password" class="form-control" id="password2" name="pass2"
-                          placeholder="Retype password">
-                        <div class="input-group-append">
-                          <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="custom-control custom-switch">
-                          <input type="checkbox" class="custom-control-input" id="isAdmin">
-                          <label class="custom-control-label" for="isAdmin">This user is an admin</label>
-                        </div>
-                      </div>
-                      <div class="row">
-                          <button type="submit" class="btn btn-primary btn-block btn-flat" data-toggle="modal" data-target="#Success">Register</button>
-                      </div>
-                      <!-- /.row -->
-                    </form>
-                  </div>
-                  <!-- /.form-box -->
-                </div><!-- /.card -->
-              </div>
-              <!-- /.register-box -->
-            </div><!-- /.container-fluid -->
-          </section>
-          <!-- /.content -->
-        </div>
-        <!-- /.content-wrapper -->
-        <div th:replace="~{/common/footer :: footer}"></div>
-        <div th:insert="~{/common/head :: bottom}"></div>
-        <!-- Bootstrap Switch -->
-        <script type="text/javascript" th:src="@{/js/bootstrap-switch/bootstrap-switch.min.js}"></script>
-      </body>
->>>>>>> 81c3bc77d45a3339f4d4060dba5881c075a6702b
   </html>
