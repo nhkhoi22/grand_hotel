@@ -132,7 +132,7 @@
                       <div class="input-group mb-3">
                         <select required class="custom-select" name="pName">
                           <option value="" disabled selected hidden>Position</option>
-                          <option th:each="department : ${departments}" th:value="${position.id}" th:text="${position.name}"></option>
+                          <option th:each="position : ${positions}" th:value="${position.id}" th:text="${position.name}"></option>
                         </select>
                         <div class="input-group-append">
                           <div class="input-group-text">
