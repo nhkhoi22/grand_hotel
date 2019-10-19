@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
+    <link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
     <title>Information</title>
     <div th:insert="~{/common/head :: top}"></div>
 </head>
@@ -32,17 +32,29 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
+                        <div class="col-md-3"></div>
                         <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h3 class="login-box-msg">Information</h3>
-                                    <form>
+                            <div class="card card-widget widget-user">
+                                <!-- Add the bg color to the header using any of the bg-* classes -->
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="login-box-msg" th:text="${user.name}"></h3>
+                                        <div class="widget-user-image">
+                                            <img class="img-circle" th:src="@{/images/hot_man.png}" alt="User Avatar">
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+
+                                    </div>
+                                    <!-- /card body -->
+                                    <div class="card-footer">
                                         <div class="input-group row mb-3">
                                             <label for="StaticUsername" class="col-sm-2 col-form-label"
                                                 style="text-align: center;">Full Name</label>
                                             <div class="col-sm-10">
                                                 <input readonly class="form-control effect-underline"
-                                                    id="StaticUsername" th:value="${user.name}" style="cursor: default;">
+                                                    id="StaticUsername" th:value="${user.name}"
+                                                    style="cursor: default;">
                                             </div>
                                         </div>
                                         <div class="input-group row mb-3">
@@ -50,7 +62,8 @@
                                                 style="text-align: center;">Staff Code</label>
                                             <div class="col-sm-10">
                                                 <input type="text" readonly class="form-control effect-underline"
-                                                    id="StaticStaffCode" th:value="${user.staffCode}" style="cursor: default;">
+                                                    id="StaticStaffCode" th:value="${user.staffCode}"
+                                                    style="cursor: default;">
                                             </div>
                                         </div>
                                         <div class="input-group row mb-3">
@@ -58,7 +71,8 @@
                                                 style="text-align: center;">Role</label>
                                             <div class="col-sm-10">
                                                 <input type="text" readonly class="form-control effect-underline"
-                                                    id="StaticRole" th:value="${user.role.name}" style="cursor: default;">
+                                                    id="StaticRole" th:value="${user.role.name}"
+                                                    style="cursor: default;">
                                             </div>
                                         </div>
                                         <div class="input-group row mb-3">
@@ -66,62 +80,44 @@
                                                 style="text-align: center;">Department</label>
                                             <div class="col-sm-10">
                                                 <input type="text" readonly class="form-control effect-underline"
-                                                    id="StaticDepartment" th:value="${user.position.department.name}" style="cursor: default;">
+                                                    id="StaticDepartment" th:value="${user.position.department.name}"
+                                                    style="cursor: default;">
                                             </div>
                                         </div>
-                                         <div class="input-group row mb-3">
+                                        <div class="input-group row mb-3">
                                             <label for="StaticPosition" class="col-sm-2 col-form-label"
                                                 style="text-align: center;">Position</label>
                                             <div class="col-sm-10">
                                                 <input type="text" readonly class="form-control effect-underline"
-                                                    id="StaticPosition" th:value="${user.position.name}" style="cursor: default;">
+                                                    id="StaticPosition" th:value="${user.position.name}"
+                                                    style="cursor: default;">
                                             </div>
                                         </div>
-                                          <div class="input-group row mb-3">
+                                        <div class="input-group row mb-3">
                                             <label for="StaticDIW" class="col-sm-2 col-form-label"
                                                 style="text-align: center;">Work days</label>
                                             <div class="col-sm-10">
                                                 <input type="text" readonly class="form-control effect-underline"
-                                                    id="StaticDIW" th:value="${user.daysInWork}" style="cursor: default;">
+                                                    id="StaticDIW" th:value="${user.daysInWork}"
+                                                    style="cursor: default;">
                                             </div>
                                         </div>
-                                          <div class="input-group row mb-3">
+                                        <div class="input-group row mb-3">
                                             <label for="StaticLastLogin" class="col-sm-2 col-form-label"
                                                 style="text-align: center;">Last Login</label>
                                             <div class="col-sm-10">
                                                 <input type="text" readonly class="form-control effect-underline"
-                                                    id="StaticLastLogin" th:value="${user.lastlogin}" style="cursor: default;">
+                                                    id="StaticLastLogin" th:value="${user.lastlogin}"
+                                                    style="cursor: default;">
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
-                                <!-- /.form-box -->
-                            </div><!-- /.card -->
+                                    </div>
+                                </div><!-- /.card -->
+                            </div>
+                            <!-- /.widget-user -->
                         </div>
                         <!-- /.col (LEFT) -->
-                        <div class="col-md-6">
-
-                            <!-- BAR CHART -->
-                            <div class="card card-success">
-                                <div class="card-header">
-                                    <h3 class="card-title">Something</h3>
-
-                                    <!-- <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
-                                                class="fas fa-minus"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i
-                                                class="fas fa-times"></i></button>
-                                    </div> -->
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart">
-                                        <canvas id="barChart" style="height:230px; min-height:230px"></canvas>
-                                    </div>
-                                </div>
-                                <!-- /.card-body -->
-                            </div>
-                            <!-- /.card -->
+                        <div class="col-md-3">
                         </div>
                         <!-- /.col (RIGHT) -->
                     </div>
