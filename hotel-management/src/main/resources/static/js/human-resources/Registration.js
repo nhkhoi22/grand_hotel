@@ -4,8 +4,6 @@ function PositionFilter() {
     var pos = document.getElementById("PosDepartment");
     for(var i = 1; i < pos.options.length; i++)
     {
-        console.log(pos.options[i].id);
-        
         if(pos.options[i].id.toUpperCase().localeCompare(value.toUpperCase()) == 0)
         {
             pos.options[i].style.display = "";
