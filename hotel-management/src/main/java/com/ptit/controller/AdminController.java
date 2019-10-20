@@ -56,11 +56,11 @@ public class AdminController {
 	public ModelAndView createNewUser(@Valid User newUser, @RequestParam Map<String, String> reqPar,
 			BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
-		String pName = reqPar.get("pName");
-		String dName = reqPar.get("dName");
+		Long pName = Long.parseLong(reqPar.get("pName"));
+		Long dName = Long.parseLong(reqPar.get("dName"));
 		User userExists = userService.findUserByStaffCode(newUser.getStaffCode());
-		Position positionExists = userService.findPositionByName(pName);
-		Department departmentExists = userService.findDepartmentByName(dName);
+		Position positionExists = userService.findPositionById(pName);
+		Department departmentExists = userService.findDepartmentById(dName);
 		if (userExists != null) {
 			bindingResult.rejectValue("staffCode", "error.user",
 					"There is already a user registered with the staff code provided");
@@ -68,19 +68,6 @@ public class AdminController {
 		if (bindingResult.hasErrors()) {
 			modelAndView.setViewName("user/human_resources/registration");
 		} else {
-			if (departmentExists == null) {
-				departmentExists = new Department();
-				departmentExists.setName(dName);
-				userService.saveDepartment(departmentExists); 
-			}
-
-			if (positionExists == null) {
-				positionExists = new Position();
-				positionExists.setName(pName);
-				positionExists.setDepartment(departmentExists);
-				userService.savePosition(positionExists);
-			}
-
 			positionExists.setDepartment(departmentExists);
 
 			departmentExists.getPositions().add(positionExists);
