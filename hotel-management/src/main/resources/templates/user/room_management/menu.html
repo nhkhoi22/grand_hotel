@@ -3,7 +3,7 @@
 
 <head>
   <link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
-  <title>Admin</title>
+  <title>Room Management</title>
   <div th:insert="~{/common/head :: head}"></div>
 </head>
 
@@ -26,7 +26,7 @@
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
         <li class="nav-item avatar border-right">
-          <a class="nav-link p-0" th:href="@{/admin/information}">
+          <a class="nav-link p-0" th:href="@{/room_management/information}">
             <div class="row">
               <div class="col-sm-2">
                 <img th:src="@{/images/hot_man.png}" class="rounded-circle z-depth-0" alt="avatar image" height="35">
@@ -45,21 +45,6 @@
             <a href="#" onclick="document.getElementById('logout').submit()" class="nav-link">Logout</a>
           </form>
         </li>
-        <!-- <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#">
-            <i class="fas fa-cog"></i>
-          </a>
-          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <div class="dropdown-divider"></div>
-            <a th:href="@{/admin/information}" class="dropdown-item dropdown-footer">Information</a>
-            <div class="dropdown-divider"></div>
-            <a th:href="@{/admin/updatePassword}" class="dropdown-item dropdown-footer">Change Password</a>
-            <div class="dropdown-divider"></div>
-            <form th:action="@{/logout}" method="get">
-              <button class="dropdown-item dropdown-footer" name="registration" type="Submit">Log out</button>
-            </form>
-          </div>
-        </li> -->
       </ul>
     </nav>
     <!-- /.navbar -->
@@ -86,7 +71,7 @@
             <li class="nav-header">ROOM MANAGEMENT</li>
             <!-- Quan li viec dat phong -->
             <li class="nav-item">
-              <a th:href="@{/teehee}" class="nav-link">
+              <a th:href="@{/user/room_management/room_reservation}" class="nav-link">
                 <i class="nav-icon fas fa-bed"></i>
                 <p>
                   Booking Handle
