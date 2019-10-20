@@ -1,17 +1,17 @@
-function Arrange() {
-    var depart = document.getElementById("departmentID");
-    $("#departmentID").append($("#departmentID option").remove().sort(function (a, b) {
-        var at = $(a).text(), bt = $(b).text();
-        return (at > bt) ? 1 : ((at < bt) ? -1 : 0);
-    }));
+// function Arrange() {
+//     var depart = document.getElementById("departmentID");
+//     $("#departmentID").append($("#departmentID option").remove().sort(function (a, b) {
+//         var at = $(a).text(), bt = $(b).text();
+//         return (at > bt) ? 1 : ((at < bt) ? -1 : 0);
+//     }));
 
-    var option = document.createElement("option");
-    option.text = "Department";
-    option.style.visibility = "hidden";
-    option.selected = "selected";
-    option.setAttribute("disabled", "");
-    depart.add(option);
-}
+//     var option = document.createElement("option");
+//     option.text = "Department";
+//     option.style.visibility = "hidden";
+//     option.selected = "selected";
+//     option.setAttribute("disabled", "");
+//     depart.add(option);
+// } FU Who make that stupid no alphabetic order db
 function PositionFilter() {
     var depart = document.getElementById("departmentID");
     var value = depart.options[depart.selectedIndex].value;
