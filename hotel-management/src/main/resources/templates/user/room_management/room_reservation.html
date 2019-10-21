@@ -97,12 +97,11 @@
                                                             <span class="fas fa-key"></span>
                                                         </div>
                                                     </div>
-                                                    <select required class="custom-select" name="pName"
-                                                        id="PosDepartment">
-                                                        <option value="" disabled selected hidden>Position</option>
-                                                        <option th:each="position : ${positions}"
-                                                            th:value="${position.id}" th:text="${position.name}"
-                                                            th:id="${position.department.id}"></option>
+                                                    <select required class="custom-select" name="roomType"
+                                                        id="roomtype">
+                                                        <option value="" disabled selected hidden>Room Type</option>
+                                                        <option th:each="roomType : ${roomTypes}"
+                                                            th:value="${roomType.id}" th:text="${roomType.name}"></option>
                                                     </select>
                                                 </div>
                                             </div>

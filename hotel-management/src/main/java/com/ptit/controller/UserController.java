@@ -1,5 +1,7 @@
 package com.ptit.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ptit.customer.RoomType;
+import com.ptit.service.RoomService;
 import com.ptit.service.UserService;
 import com.ptit.staff.User;
 
@@ -17,6 +21,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private RoomService roomService;
 	
 	private void addUserInModel(ModelAndView mav) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -53,6 +60,8 @@ public class UserController {
 	public ModelAndView roomReservation() {
 		ModelAndView modelAndView = new ModelAndView();
 		addUserInModel(modelAndView);
+		List<RoomType> roomTypes = roomService.findAllRoomType();
+		modelAndView.addObject("roomTypes", roomTypes);
 		modelAndView.setViewName("user/room_management/room_reservation");
 		return modelAndView;
 	}
