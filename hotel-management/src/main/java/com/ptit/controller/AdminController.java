@@ -1,5 +1,6 @@
 package com.ptit.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -179,10 +180,21 @@ public class AdminController {
 	public ModelAndView executeSql(@RequestParam String sqlEditor) {
 		ModelAndView modelAndView = new ModelAndView();
 		addUserInModel(modelAndView);
-		List<Map<String, Object>> results = sqlDao.queryForList(sqlEditor);
-		Set<String> keys = results.get(0).keySet();
-		modelAndView.addObject("keys", keys);
-		modelAndView.addObject("results", results);
+		List<Map<String, Object>> results = new ArrayList<Map<String,Object>>();
+		if(sqlEditor.toLowerCase().indexOf("select") == 0) {
+			results = sqlDao.queryForList(sqlEditor);
+			Set<String> keys = results.get(0).keySet();
+			modelAndView.addObject("keys", keys);
+			modelAndView.addObject("results", results);
+		} else {
+			if(sqlDao.insert(sqlEditor)) {
+				modelAndView.addObject("isValid", 1);
+			} else {
+				modelAndView.addObject("isValid", 0);
+			}
+			modelAndView.addObject("keys", new ArrayList<String>());
+			modelAndView.addObject("results", new ArrayList<Map<String,Object>>());
+		}
 		modelAndView.setViewName("admin/sql_test");
 		return modelAndView;
 	}
