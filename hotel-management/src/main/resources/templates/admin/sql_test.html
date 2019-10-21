@@ -5,7 +5,8 @@
     <link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
     <title>Change Password</title>
     <div th:insert="~{/common/head :: top}"></div>
-    <link rel="stylesheet" href="lib/codemirror.css">
+    <!--Code mirror-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/codemirror/codemirror.css}">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -37,7 +38,7 @@
                         <form>
                             <div class="form-group">
                                 <label for="comment">Sql Querry:</label>
-                                <textarea class="form-control" rows="15" id="comment"></textarea>
+                                <textarea class="form-control" rows="15" id="SqlEditor"></textarea>
                                 <div class="row">
                                     <div class="col-8">
                                     </div>
@@ -62,11 +63,12 @@
             <!-- /.content-wrapper -->
             <div th:replace="~{/common/footer :: footer}"></div>
             <div th:insert="~{/common/head :: bottom}"></div>
-            <script src="lib/codemirror.js"></script>
+            <!--Code mirror-->
+            <script type="text/javascript" th:src="@{/js/codemirror/codemirror.js}"></script>
             <script>
+                var myTextarea = document.getElementById("SqlEditor")
                 var editor = CodeMirror.fromTextArea(myTextarea, {
-                    lineNumbers: true,
-                    mode:  "sql"
+                    lineNumbers: true
                 });
             </script>
         </body>

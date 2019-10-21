@@ -48,17 +48,18 @@
 												id="SearchInput" onkeyup="SearchUser()">
 										</div>
 									</div>
-									<div class="col-sm-2">
+									<div class="col-sm-3">
 										<div class="input-group">
 											<select name="dName" class="custom-select" required id="DepartmentSearch"
 												onchange="FilterDepartment()" >
 												<option value="" disabled selected hidden>Department</option>
 												<option value="all">All</option>
-												<option value="accounting">Accounting</option>
-												<option value="business">Bussiness</option>
-												<option value="human_resource">Human Resources</option>
-												<option value="room_management">Room Management</option>
+												<option value="accounting">Financial and Accounting</option>
+												<option value="business">Bussiness and Marketing</option>
+												<option value="human">Human Resources</option>
+												<option value="room">Room Division</option>
 												<option value="services">Services</option>
+												<option value="maintance">Services</option>
 											</select>
 										</div>
 									</div>
@@ -118,10 +119,7 @@
 	<!-- <script type="text/javascript" th:src="@{/js/jquery.dataTables.js}"></script>
 	<script type="text/javascript" th:src="@{/js/datatables-bs4/dataTables.bootstrap4.js}"></script> -->
 	<!-- Search -->
-	<script type="text/javascript" th:src="@{/js/StaffSearch.js}"></script>
-	<!-- page script -->
-	<script type="text/javascript" th:src="@{/js/user_management/user_management.js}"></script>
-
+	<script type="text/javascript" th:src="@{/js/human-resources/Users-record.js}"></script>
 </body>
 
 </html>
