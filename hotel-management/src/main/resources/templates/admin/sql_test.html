@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
-<title>SQL Query</title>
-<div th:insert="~{/common/head :: top}"></div>
-<!--Code mirror-->
-<link rel="stylesheet" type="text/css"
-	th:href="@{/css/codemirror/codemirror.css}">
+	<link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
+	<title>SQL Query</title>
+	<div th:insert="~{/common/head :: top}"></div>
+	<!--Code mirror-->
+	<link rel="stylesheet" type="text/css" th:href="@{/codemirror/lib/codemirror.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/codemirror/theme/bespin.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/codemirror/theme/eclipse.css}">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -40,20 +40,29 @@
 				<!-- Main content -->
 				<section class="content">
 					<div class="container-fluid">
-						<form autocomplete="off" action="#" th:action="@{/admin/sql_test}"
-							method="post" role="form">
+						<form autocomplete="off" action="#" th:action="@{/admin/sql_test}" method="post" role="form">
 							<div class="form-group">
 								<label for="comment">Sql Query: </label>
-								<div th:if="${isValid == 1}" th:text="Success"></div>
-								<div th:if="${isValid == 0}" th:text="Failure"></div>
-								<textarea class="form-control" rows="15" id="SqlEditor"
-									name="sqlEditor"></textarea>
+								<textarea class="form-control" rows="15" id="SqlEditor" name="sqlEditor"></textarea>
+								<div class="row">
+									<div class="col-md-6">
+										<div th:if="${isValid == 1}" class="valid-feedback">Success</div>
+										<div th:if="${isValid == 1}" class="valid-feedback">Failure</div>
+									</div>
+									<div class="col-md-6">
+										<select class="custom-select" id="ThemeOption" onchange="ThemeChange()">
+											<option value="" disabled selected hidden>Theme</option>
+											<option value="bespin">Dark</option>
+											<option value="eclipse">Light</option>
+										</select>
+									</div>
+								</div>
+
 								<div class="row">
 									<div class="col-8"></div>
 									<!-- /.col -->
 									<div class="col-2">
-										<button type="submit"
-											class="btn btn-default btn-block btn-flat">Apply</button>
+										<button type="submit" class="btn btn-default btn-block btn-flat">Apply</button>
 									</div>
 									<!-- /.col -->
 									<div class="col-2">
@@ -69,8 +78,7 @@
 							<table class="table table-bordered table-striped" id="UserTable">
 								<thead>
 									<tr>
-										<th th:each="key : ${keys}" th:if="${key != 'password'}"
-											th:text="${key}"></th>
+										<th th:each="key : ${keys}" th:if="${key != 'password'}" th:text="${key}"></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -91,16 +99,26 @@
 			<div th:replace="~{/common/footer :: footer}"></div>
 			<div th:insert="~{/common/head :: bottom}"></div>
 			<!--Code mirror-->
-			<script type="text/javascript"
-				th:src="@{/codemirror/lib/codemirror.js}"></script>
-			<script type="text/javascript"
-				th:src="@{/codemirror/mode/sql/sql.js}"></script>
+			<script type="text/javascript" th:src="@{/codemirror/lib/codemirror.js}"></script>
+			<script type="text/javascript" th:src="@{/codemirror/mode/sql/sql.js}"></script>
 			<script>
-				var myTextarea = document.getElementById("SqlEditor")
+				var myTextarea = document.getElementById("SqlEditor");
 				var editor = CodeMirror.fromTextArea(myTextarea, {
-					lineNumbers : true,
-					mode : "sql"
+					lineNumbers: true,
+					mode: "sql",
+					theme: "eclipse",
 				});
+				function ThemeChange() {
+					var theme = document.getElementById("ThemeOption");
+					var value = theme.value.toLowerCase();
+					if (value.localeCompare("bespin") == 0) {
+						editor.setOption("theme", "bespin");
+					}
+					else {
+						editor.setOption("theme", "eclipse");
+					}
+				}
 			</script>
 		</body>
+
 </html>
