@@ -6,7 +6,7 @@
     <title>Change Password</title>
     <div th:insert="~{/common/head :: top}"></div>
     <!--Code mirror-->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/codemirror/codemirror.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/codemirror/lib/codemirror.css}">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -56,6 +56,27 @@
                                 <!-- /.row -->
                             </div>
                         </form>
+                        <div class="card-body">
+                            <table class="table table-bordered table-striped" id="UserTable">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
                     </div><!-- /.container-fluid -->
                 </section>
                 <!-- /.content -->
@@ -64,7 +85,7 @@
             <div th:replace="~{/common/footer :: footer}"></div>
             <div th:insert="~{/common/head :: bottom}"></div>
             <!--Code mirror-->
-            <script type="text/javascript" th:src="@{/js/codemirror/codemirror.js}"></script>
+            <script type="text/javascript" th:src="@{/codemirror/lib/codemirror.js}"></script>
             <script>
                 var myTextarea = document.getElementById("SqlEditor")
                 var editor = CodeMirror.fromTextArea(myTextarea, {
