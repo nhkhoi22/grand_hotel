@@ -2,6 +2,7 @@ package com.ptit.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ptit.dao.SqlDAO;
 import com.ptit.service.UserService;
 import com.ptit.staff.Department;
 import com.ptit.staff.Position;
@@ -31,6 +33,9 @@ public class AdminController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private SqlDAO sqlDao;
 	
 	private void addUserInModel(ModelAndView mav) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -166,6 +171,18 @@ public class AdminController {
 	public ModelAndView sqlTest() {
 		ModelAndView modelAndView = new ModelAndView();
 		addUserInModel(modelAndView);
+		modelAndView.setViewName("admin/sql_test");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/admin/sql_test", method = RequestMethod.POST)
+	public ModelAndView executeSql(@RequestParam String sqlEditor) {
+		ModelAndView modelAndView = new ModelAndView();
+		addUserInModel(modelAndView);
+		List<Map<String, Object>> results = sqlDao.queryForList(sqlEditor);
+		Set<String> keys = results.get(0).keySet();
+		modelAndView.addObject("keys", keys);
+		modelAndView.addObject("results", results);
 		modelAndView.setViewName("admin/sql_test");
 		return modelAndView;
 	}

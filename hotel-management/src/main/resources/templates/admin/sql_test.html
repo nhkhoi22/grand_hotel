@@ -35,10 +35,11 @@
                 <!-- Main content -->
                 <section class="content">
                     <div class="container-fluid">
-                        <form>
+                        <form autocomplete="off" action="#" th:action="@{/admin/sql_test}"
+                                        method="post" role="form">
                             <div class="form-group">
-                                <label for="comment">Sql Querry:</label>
-                                <textarea class="form-control" rows="15" id="SqlEditor"></textarea>
+                                <label for="comment">Sql Query:</label>
+                                <textarea class="form-control" rows="15" id="SqlEditor" name="sqlEditor"></textarea>
                                 <div class="row">
                                     <div class="col-8">
                                     </div>
@@ -56,6 +57,21 @@
                                 <!-- /.row -->
                             </div>
                         </form>
+                     <div class="card-body">
+                            <table class="table table-bordered table-striped" id="UserTable">
+                                <thead>
+                                    <tr>
+                                        <th th:each="key : ${keys}" th:if="${key != 'password'}" th:text="${key}"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="result : ${results}">
+                                        <td th:each="key : ${keys}" th:if="${key != 'password'}" th:text="${result.get(key)}"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
                     </div><!-- /.container-fluid -->
                 </section>
                 <!-- /.content -->
@@ -64,7 +80,7 @@
             <div th:replace="~{/common/footer :: footer}"></div>
             <div th:insert="~{/common/head :: bottom}"></div>
             <!--Code mirror-->
-            <script type="text/javascript" th:src="@{/js/codemirror/codemirror.js}"></script>
+            <script type="text/javascript" th:src="@{/codemirror/lib/codemirror.js}"></script>
             <script>
                 var myTextarea = document.getElementById("SqlEditor")
                 var editor = CodeMirror.fromTextArea(myTextarea, {
