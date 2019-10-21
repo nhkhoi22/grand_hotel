@@ -101,14 +101,18 @@ public class AdminController {
 		return mav;
 	}
 	
-	@PostMapping("/lock/{staffCode}")
+	@PostMapping("/admin/lock/{staffCode}")
 	@ResponseBody
 	public String lockUser(@PathVariable String staffCode) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByStaffCode(auth.getName());
-		if (user.getRole().getName() == "ADMIN") {
+		if (user.getRole().getId() == 1L) {
 			user = userService.findUserByStaffCode(staffCode);
-			user.setActive(0);
+			if(user.getActive() == 1L) {
+				user.setActive(0);
+			} else {
+				user.setActive(1);
+			}
 			userService.saveUserNonEncrypt(user);
 		}
 		return "lockUser";

@@ -86,8 +86,9 @@
 											<td th:text="${user.position.name}"></td>
 											<td th:text="${user.position.department.name}"></td>
 											<td th:text="${user.role.name}"></td>
-											<td><a th:action="@{/lock/'${user.staffCode}'}" method="post" href="#">
-													<i class="fas fa-lock"></i>
+											<td><a th:onclick="lockUser(/*[[${user.staffCode}]]*/)" href="./list_user">
+													<i th:if="${user.active == 1}" class="fas fa-lock"></i>
+													<i th:if="${user.active == 0}" class="fas fa-unlock"></i>
 												</a>
 											</td>
 										</tr>
@@ -119,6 +120,7 @@
 	<!-- Search -->
 	<script type="text/javascript" th:src="@{/js/StaffSearch.js}"></script>
 	<!-- page script -->
+	<script type="text/javascript" th:src="@{/js/user_management/user_management.js}"></script>
 
 </body>
 
