@@ -21,7 +21,7 @@ function Calendar() {
             $(this).draggable({
                 zIndex: 1070,
                 revert: true, // will cause the event to go back to its
-                revertDuration: 0  //  original position after the drag
+                revertDuration: 500  //  original position after the drag
             })
 
         })
@@ -47,25 +47,25 @@ function Calendar() {
     // initialize the external events
     // -----------------------------------------------------------------
 
-    new Draggable(containerEl, {
-        itemSelector: '.external-event',
-        eventData: function (eventEl) {
-            console.log(eventEl);
-            return {
-                title: eventEl.innerText,
-                backgroundColor: window.getComputedStyle(eventEl, null).getPropertyValue('background-color'),
-                borderColor: window.getComputedStyle(eventEl, null).getPropertyValue('background-color'),
-                textColor: window.getComputedStyle(eventEl, null).getPropertyValue('color'),
-            };
-        }
-    });
+    // new Draggable(containerEl, {
+    //     itemSelector: '.external-event',
+    //     eventData: function (eventEl) {
+    //         console.log(eventEl);
+    //         return {
+    //             title: eventEl.innerText,
+    //             backgroundColor: window.getComputedStyle(eventEl, null).getPropertyValue('background-color'),
+    //             borderColor: window.getComputedStyle(eventEl, null).getPropertyValue('background-color'),
+    //             textColor: window.getComputedStyle(eventEl, null).getPropertyValue('color'),
+    //         };
+    //     }
+    // });
 
     var calendar = new Calendar(calendarEl, {
         plugins: ['bootstrap', 'interaction', 'dayGrid', 'timeGrid'],
         header: {
             left: 'prev,next today',
             center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            right: ''
         },
         //Random default events
         events: [
