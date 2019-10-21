@@ -82,7 +82,15 @@
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-            <li class="nav-header border-bottom border-light text-center">ADMIN</li>
+            <li class="nav-header text-center">ADMIN</li>
+            <li class="nav-item border-bottom border-light">
+              <a th:href="@{/admin/sql_test}" class="nav-link">
+                <i class="nav-icon fas fa-file-code"></i>
+                <p>
+                  SQL Querry
+                </p>
+              </a>
+            </li>
             <div th:insert="~{/user/accounting/menu :: menu}"></div>
             <div th:insert="~{/user/human_resources/menu :: menu}"></div>
             <div th:insert="~{/user/marketing/menu :: menu}"></div>
