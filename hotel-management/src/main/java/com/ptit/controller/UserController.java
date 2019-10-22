@@ -32,9 +32,9 @@ public class UserController {
 		mav.addObject("user", user);
 	}
 	
-	@GetMapping(path = "/user/accounting/home")
+	@GetMapping(path = "/user/financial_and_accounting/home")
 	public ModelAndView accountingHome() {
-		return new ModelAndView("user/accounting/home");
+		return new ModelAndView("user/financial_and_accounting/home");
 	}
 	
 	@GetMapping(path = "/user/human_resources/home")
@@ -42,14 +42,19 @@ public class UserController {
 		return new ModelAndView("user/human_resources/home");
 	}
 
-	@GetMapping(path = "/user/marketing/home")
-	public ModelAndView marketingHome() {
-		return new ModelAndView("user/marketing/home");
+	@GetMapping(path = "/user/maintenance_and_security/home")
+	public ModelAndView msHome() {
+		return new ModelAndView("user/maintenance_and_security/home");
 	}
 	
-	@GetMapping(path = "/user/room_management/home")
-	public ModelAndView roomManagementHome() {
-		return new ModelAndView("user/room_management/home");
+	@GetMapping(path = "/user/sale_and_marketing/home")
+	public ModelAndView marketingHome() {
+		return new ModelAndView("user/sale_and_marketing/home");
+	}
+	
+	@GetMapping(path = "/user/room_division/home")
+	public ModelAndView roomDivisionHome() {
+		return new ModelAndView("user/room_division/home");
 	}
 	
 	@GetMapping(path = "/user/services/home")
@@ -57,23 +62,31 @@ public class UserController {
 		return new ModelAndView("user/services/home");
 	}
 	
-	@RequestMapping(value = "/user/room_management/room_reservation", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/room_division/room_reservation", method = RequestMethod.GET)
 	public ModelAndView roomReservation() {
 		ModelAndView modelAndView = new ModelAndView();
 		addUserInModel(modelAndView);
 		List<RoomType> roomTypes = roomService.findAllRoomType();
 		modelAndView.addObject("roomTypes", roomTypes);
-		modelAndView.setViewName("user/room_management/room_reservation");
+		modelAndView.setViewName("user/room_division/room_reservation");
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/user/room_management/guest_record", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/room_division/guest_record", method = RequestMethod.GET)
 	public ModelAndView guestRecord() {
 		ModelAndView modelAndView = new ModelAndView();
 		List<Customer> customer = roomService.findAllCustomer();
 		modelAndView.addObject("customers",customer);
 		addUserInModel(modelAndView);
-		modelAndView.setViewName("user/room_management/guest_record");
+		modelAndView.setViewName("user/room_division/guest_record");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/user/financial_and_accounting/request_handle", method = RequestMethod.GET)
+	public ModelAndView requestHandle() {
+		ModelAndView modelAndView = new ModelAndView();
+		addUserInModel(modelAndView);
+		modelAndView.setViewName("user/financial_and_accounting/request_handle");
 		return modelAndView;
 	}
 }

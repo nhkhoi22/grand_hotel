@@ -26,7 +26,7 @@
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
         <li class="nav-item avatar border-right">
-          <a class="nav-link p-0" th:href="@{/room_management/information}">
+          <a class="nav-link p-0" th:href="@{/room_division/information}">
             <div class="row">
               <div class="col-sm-2">
                 <img th:src="@{/images/hot_man.png}" class="rounded-circle z-depth-0" alt="avatar image" height="35">
@@ -71,7 +71,7 @@
             <li class="nav-header">ROOM MANAGEMENT</li>
             <!-- Quan li viec dat phong -->
             <li class="nav-item">
-              <a th:href="@{/user/room_management/room_reservation}" class="nav-link">
+              <a th:href="@{/user/room_division/room_reservation}" class="nav-link">
                 <i class="nav-icon fas fa-bed"></i>
                 <p>
                   Booking Handle
@@ -80,7 +80,7 @@
             </li>
             <!-- In hoa don/ tra phong -->
             <li class="nav-item">
-              <a th:href="@{/teehee}" class="nav-link">
+              <a th:href="@{/user/room_division/checkout_handle}" class="nav-link">
                 <i class="nav-icon fas fa-luggage-cart"></i>
                 <p>
                   Checkout Handle
@@ -89,7 +89,7 @@
             </li>
             <!-- Thong tin khach hang, cac dich vu khach da dung -->
             <li class="nav-item">
-              <a th:href="@{/user/room_management/guest_record}" class="nav-link">
+              <a th:href="@{/user/room_division/guest_record}" class="nav-link">
                 <i class="nav-icon fas fa-clipboard-list"></i>
                 <p>
                   Guests Record
