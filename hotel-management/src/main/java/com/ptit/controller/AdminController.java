@@ -198,4 +198,12 @@ public class AdminController {
 		modelAndView.setViewName("admin/sql_test");
 		return modelAndView;
 	}
+	
+	@RequestMapping(value = "/common/contacts", method = RequestMethod.GET)
+	public ModelAndView contacts() {
+		ModelAndView modelAndView = new ModelAndView();
+		addUserInModel(modelAndView);
+		modelAndView.setViewName("common/contacts");
+		return modelAndView;
+	}
 }

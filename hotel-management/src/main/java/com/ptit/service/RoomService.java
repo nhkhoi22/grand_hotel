@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ptit.customer.Customer;
 import com.ptit.customer.RoomType;
 import com.ptit.dao.CustomerDAO;
 import com.ptit.dao.RoomTypeDAO;
@@ -20,5 +21,9 @@ public class RoomService {
 	
 	public List<RoomType> findAllRoomType() {
 		return roomTypeDao.findAll();
+	}
+	
+	public List<Customer> findAllCustomer() {
+		return customerDao.findAll();
 	}
 }

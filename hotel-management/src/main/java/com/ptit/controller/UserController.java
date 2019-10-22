@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ptit.customer.Customer;
 import com.ptit.customer.RoomType;
 import com.ptit.service.RoomService;
 import com.ptit.service.UserService;
@@ -63,6 +64,16 @@ public class UserController {
 		List<RoomType> roomTypes = roomService.findAllRoomType();
 		modelAndView.addObject("roomTypes", roomTypes);
 		modelAndView.setViewName("user/room_management/room_reservation");
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/user/room_management/guest_record", method = RequestMethod.GET)
+	public ModelAndView guestRecord() {
+		ModelAndView modelAndView = new ModelAndView();
+		List<Customer> customer = roomService.findAllCustomer();
+		modelAndView.addObject("customers",customer);
+		addUserInModel(modelAndView);
+		modelAndView.setViewName("user/room_management/guest_record");
 		return modelAndView;
 	}
 }
