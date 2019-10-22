@@ -37,78 +37,78 @@
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
-                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <div class="card bg-light mx-5 card-info">
-                                        <div class="card-header">
-                                            <h3 class="card-title">Supply name</h3>
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-type="multi"
+                        data-interval="false">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="card bg-light mx-5 card-info">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Supply name</h3>
+                                    </div>
+                                    <div class="card-body pt-6 mt-3">
+                                        <div class="row">
+                                            <div class="col-1"></div>
+                                            <div class="col-10">
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <label for="guestname">Product Name</label>
+                                                        <input type="text" class="form-control" id="guestname"
+                                                            placeholder="Product Name">
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <label for="guestname">Product Type</label>
+                                                        <input type="text" class="form-control" id="guestname"
+                                                            placeholder="Product Type">
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <label for="guestname">Quanity</label>
+                                                        <input type="text" class="form-control" id="guestname"
+                                                            placeholder="Quanity">
+                                                    </div>
+                                                </div>
+                                                <div class="row py-5">
+                                                    <div class="col-4">
+                                                        <label for="guestname">Supplier</label>
+                                                        <input type="text" class="form-control" id="guestname"
+                                                            placeholder="Supplier">
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <label for="guestname">Request Staff</label>
+                                                        <input type="text" class="form-control" id="guestname"
+                                                            placeholder="Request Staff">
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <label for="guestname">Request Time</label>
+                                                        <input type="text" class="form-control" id="guestname"
+                                                            placeholder="Request Time">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-1"></div>
                                         </div>
-                                        <div class="card-body pt-6 mt-3">
-                                            <div class="row">
-                                                <div class="col-1"></div>
-                                                <div class="col-10">
-                                                    <div class="row">
-                                                        <div class="col-4">
-                                                            <label for="guestname">Product Name</label>
-                                                            <input type="text" class="form-control" id="guestname"
-                                                                placeholder="Product Name">
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <label for="guestname">Product Type</label>
-                                                            <input type="text" class="form-control" id="guestname"
-                                                                placeholder="Product Type">
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <label for="guestname">Quanity</label>
-                                                            <input type="text" class="form-control" id="guestname"
-                                                                placeholder="Quanity">
-                                                        </div>
-                                                    </div>
-                                                    <div class="row py-5">
-                                                        <div class="col-4">
-                                                            <label for="guestname">Supplier</label>
-                                                            <input type="text" class="form-control" id="guestname"
-                                                                placeholder="Supplier">
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <label for="guestname">Request Staff</label>
-                                                            <input type="text" class="form-control" id="guestname"
-                                                                placeholder="Request Staff">
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <label for="guestname">Request Time</label>
-                                                            <input type="text" class="form-control" id="guestname"
-                                                                placeholder="Request Time">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-1"></div>
+                                        <div class="row">
+                                            <div class="col-1"></div>
+                                            <div class="col-10">
+                                                <label for="content">Content</label>
+                                                <textarea class="form-control" rows="15" id="content"></textarea>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-1"></div>
-                                                <div class="col-10">
-                                                    <label for="content">Content</label>
-                                                    <textarea class="form-control" rows="15" id="content"></textarea>
-                                                </div>
-                                                <div class="col-1"></div>
+                                            <div class="col-1"></div>
+                                        </div>
+                                        <div class="row pt-3">
+                                            <div class="col-9"></div>
+                                            <div class="col-1">
+                                                <button type="button" class="btn btn-success btn-block"
+                                                    data-slide="next">Approve</button>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-9"></div>
-                                                <div class="col-1">
-                                                    <button type="button"
-                                                        class="btn btn-info btn-block">Approve</button>
-                                                </div>
-                                                <div class="col-1">
-                                                    <button type="button"
-                                                        class="btn btn-danger btn-block">Reject</button>
-                                                </div>
+                                            <div class="col-1">
+                                                <button type="button" class="btn btn-danger btn-block"
+                                                    data-slide="next">Reject</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- /.Carousel Item -->
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
                             data-slide="prev">
@@ -122,9 +122,10 @@
                         </a>
                     </div>
                 </div>
-        </div><!-- /.container-fluid -->
-        </section>
-        <!-- /.content -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.container-fluid -->
     </div>
     <!-- /.content-wrapper -->
     </div>
