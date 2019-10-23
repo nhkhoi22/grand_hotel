@@ -37,6 +37,9 @@ public class Bill {
 	@JoinColumn(name = "staff_id", nullable = true)
 	private User user;
 	
+	@Column(name = "price", columnDefinition = "BIGINT")
+	private Long price;
+	
 	@OneToMany(
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
@@ -71,6 +74,22 @@ public class Bill {
 
 	public User getUser() {
 		return user;
+	}
+
+	public Long getPrice() {
+		return price;
+	}
+
+	public void setPrice(Long price) {
+		this.price = price;
+	}
+
+	public RoomReservation getRoomReservation() {
+		return roomReservation;
+	}
+
+	public void setRoomReservation(RoomReservation roomReservation) {
+		this.roomReservation = roomReservation;
 	}
 
 	public void setUser(User user) {

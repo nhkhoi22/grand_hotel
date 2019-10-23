@@ -1,22 +1,27 @@
 package com.ptit.outcome;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.ptit.product.ProductType;
+import com.ptit.product.Service;
 import com.ptit.staff.User;
 
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "spending_request")
+@Table(name = "product_request")
 public class SpendingRequest {
 	
 	@Id
@@ -24,12 +29,9 @@ public class SpendingRequest {
 	@Column(name = "request_id", columnDefinition = "BIGINT")
 	private Long id;
 	
-	@Column(name = "product_name", columnDefinition = "VARCHAR(100)")
-	private String productName;
-	
-	@ManyToOne
-	@JoinColumn(name = "product_type_id", nullable = true)
-	private ProductType productType;
+	@ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "request_details", joinColumns = @JoinColumn(name = "request_id"), inverseJoinColumns = @JoinColumn(name = "product_service_id"))
+	private List<Service> Services;
 	
 	@ManyToOne
 	@JoinColumn(name = "request_staff_id", nullable = true)
@@ -40,9 +42,6 @@ public class SpendingRequest {
 	
 	@Column(name = "content", columnDefinition = "LONGBLOB")
 	private String content;
-	
-	@Column(name = "supplier", columnDefinition = "VARCHAR(100)")
-	private String supplier;
 	
 	@Column(name = "quantity", columnDefinition = "INT")
 	private Long quantity;
@@ -55,20 +54,28 @@ public class SpendingRequest {
 		this.id = id;
 	}
 
-	public String getProductName() {
-		return productName;
+	public User getUser() {
+		return user;
 	}
 
-	public void setProductName(String productName) {
-		this.productName = productName;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public ProductType getProductType() {
-		return productType;
+	public Long getQuantity() {
+		return quantity;
 	}
 
-	public void setProductType(ProductType productType) {
-		this.productType = productType;
+	public void setQuantity(Long quantity) {
+		this.quantity = quantity;
+	}
+
+	public List<Service> getServices() {
+		return Services;
+	}
+
+	public void setServices(List<Service> services) {
+		Services = services;
 	}
 
 	public String getTime() {
