@@ -89,4 +89,12 @@ public class UserController {
 		modelAndView.setViewName("user/financial_and_accounting/request_handle");
 		return modelAndView;
 	}
+	
+	@RequestMapping(value = "/user/common/request_form", method = RequestMethod.GET)
+	public ModelAndView requestForm() {
+		ModelAndView modelAndView = new ModelAndView();
+		addUserInModel(modelAndView);
+		modelAndView.setViewName("user/common/request_form");
+		return modelAndView;
+	}
 }
