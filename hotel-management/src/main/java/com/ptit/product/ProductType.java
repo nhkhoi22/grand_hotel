@@ -12,21 +12,19 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.ptit.outcome.SpendingRequest;
-
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "product_type")
+@Table(name = "service_product_type")
 public class ProductType {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "product_type_id", columnDefinition = "INT")
+	@Column(name = "service_product_type_id", columnDefinition = "INT")
 	private int id;
 	
-	@Column(name = "product_type_name", columnDefinition = "VARCHAR(100)")
+	@Column(name = "service_product_type_name", columnDefinition = "VARCHAR(100)")
 	private String name;
 	
 	@OneToMany(
@@ -35,21 +33,6 @@ public class ProductType {
             mappedBy = "productType"
     )
 	private List<Service> services;
-	
-	@OneToMany(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
-            mappedBy = "productType"
-    )
-	private List<SpendingRequest> requests;
-
-	public List<SpendingRequest> getRequests() {
-		return requests;
-	}
-
-	public void setRequests(List<SpendingRequest> requests) {
-		this.requests = requests;
-	}
 	
 	public int getId() {
 		return id;

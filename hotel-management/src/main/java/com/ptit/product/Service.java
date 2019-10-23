@@ -15,22 +15,26 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.ptit.customer.BillDetail;
-import com.ptit.product.ProductType;
+import com.ptit.suppiler.Supplier;
 
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "service")
+@Table(name = "product_service")
 public class Service {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "service_id", columnDefinition = "INT")
+	@Column(name = "product_service_id", columnDefinition = "INT")
 	private int id;
 	
-	@Column(name = "service_name", columnDefinition = "VARCHAR(50)")
+	@Column(name = "product_service_name", columnDefinition = "VARCHAR(50)")
 	private String name;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "supplier_id", columnDefinition = "VARCHAR(100)")
+	private Supplier supplier;
 	
 	@Column(name = "price", columnDefinition = "DOUBLE")
 	private Double price;
@@ -43,7 +47,7 @@ public class Service {
     private List<BillDetail> details;//1 dịch vụ có thể xuất hiện nhiều lần trong bảng chi tiết hóa đơn
 	
 	@ManyToOne
-	@JoinColumn(name = "product_type_id", nullable = true)
+	@JoinColumn(name = "product_service_type_id", nullable = true)
 	private ProductType productType;
 
 	public int getId() {
