@@ -42,14 +42,11 @@
 					<div class="container-fluid">
 						<form autocomplete="off" action="#" th:action="@{/admin/sql_test}" method="post" role="form">
 							<div class="form-group">
-								<label for="comment">Sql Query: </label>
-								<textarea class="form-control" rows="15" id="SqlEditor" name="sqlEditor"></textarea>
 								<div class="row">
-									<div class="col-md-6">
-										<div th:if="${isValid == 1}" class="valid-feedback">Success</div>
-										<div th:if="${isValid == 1}" class="valid-feedback">Failure</div>
+									<div class="col-md-9">
+										<label for="comment">Sql Query: </label>
 									</div>
-									<div class="col-md-6">
+									<div class="col-md-3">
 										<select class="custom-select" id="ThemeOption" onchange="ThemeChange()">
 											<option value="" disabled selected hidden>Theme</option>
 											<option value="bespin">Dark</option>
@@ -57,15 +54,26 @@
 										</select>
 									</div>
 								</div>
+								<textarea class="form-control" rows="15" id="SqlEditor" name="sqlEditor"></textarea>
+								<div class="row">
+									<div class="col-md-6">
+										<div th:if="${isValid == 1}" class="valid-feedback">Success</div>
+										<div th:if="${isValid == 1}" class="valid-feedback">Failure</div>
+									</div>
+									<div class="col-md-6">
+									</div>
+								</div>
 
 								<div class="row">
-									<div class="col-8"></div>
+									<div class="col-md-8">
+
+									</div>
 									<!-- /.col -->
-									<div class="col-2">
+									<div class="col-md-2">
 										<button type="submit" class="btn btn-default btn-block btn-flat">Apply</button>
 									</div>
 									<!-- /.col -->
-									<div class="col-2">
+									<div class="col-md-2">
 										<a th:href="@{/admin/sql_test}"
 											class="btn btn-default btn-block btn-flat">Back</a>
 									</div>
