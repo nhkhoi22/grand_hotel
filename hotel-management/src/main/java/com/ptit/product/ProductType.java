@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.ptit.customer.Service;
 import com.ptit.outcome.SpendingRequest;
 
 import lombok.Data;

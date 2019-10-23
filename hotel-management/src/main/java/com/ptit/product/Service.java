@@ -1,4 +1,4 @@
-package com.ptit.customer;
+package com.ptit.product;
 
 import java.util.List;
 
@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.ptit.customer.BillDetail;
 import com.ptit.product.ProductType;
 
 import lombok.Data;
