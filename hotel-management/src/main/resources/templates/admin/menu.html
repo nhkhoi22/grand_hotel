@@ -29,7 +29,7 @@
           <a class="nav-link p-0" th:href="@{/admin/information}">
             <div class="row">
               <div class="col-sm-2">
-                <img th:src="@{/images/hot_man.png}" class="rounded-circle z-depth-0" alt="avatar image" height="35">
+                <img th:src="${user.gender == 'male'}? @{/images/hot_man.png} : @{/images/sexy_lady.png}" class="rounded-circle z-depth-0" alt="avatar image" height="35">
               </div>
               <div class="col-sm-10">
                 <p th:utext="${user.name}" class="nav-link" style="text-align: center;"></p>
@@ -83,7 +83,7 @@
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-header text-center">ADMIN</li>
-            <li class="nav-item border-bottom border-light">
+            <li class="nav-item">
               <a th:href="@{/admin/sql_test}" class="nav-link">
                 <i class="nav-icon fas fa-file-code"></i>
                 <p>
@@ -91,11 +91,19 @@
                 </p>
               </a>
             </li>
-            <div th:insert="~{/user/financial_and_accounting/menu :: menu}"></div>
-            <div th:insert="~{/user/human_resources/menu :: menu}"></div>
-            <div th:insert="~{/user/sale_and_marketing/menu :: menu}"></div>
-            <div th:insert="~{/user/room_division/menu :: menu}"></div>
-            <div th:insert="~{/user/services/menu :: menu}"></div>
+            <li class="nav-item">
+              <a th:href="@{/user/common/request_form}" class="nav-link">
+                <i class="nav-icon fas fa-file-code"></i>
+                <p>
+                  Request Form
+                </p>
+              </a>
+            </li>
+            <div th:replace="~{/user/financial_and_accounting/menu :: menu}"></div>
+            <div th:replace="~{/user/human_resources/menu :: menu}"></div>
+            <div th:replace="~{/user/sale_and_marketing/menu :: menu}"></div>
+            <div th:replace="~{/user/room_division/menu :: menu}"></div>
+            <div th:replace="~{/user/services/menu :: menu}"></div>
             </li>
           </ul>
         </nav>
