@@ -33,7 +33,7 @@ public class Service {
 	private String name;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "supplier_id", columnDefinition = "INT")
+	@JoinColumn(name = "product_supplier_id", columnDefinition = "INT")
 	private Supplier supplier;
 	
 	@Column(name = "price", columnDefinition = "DOUBLE")

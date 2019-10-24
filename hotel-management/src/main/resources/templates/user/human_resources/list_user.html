@@ -51,15 +51,24 @@
 									<div class="col-sm-3">
 										<div class="input-group">
 											<select name="dName" class="custom-select" required id="DepartmentSearch"
-												onchange="FilterDepartment()" >
+												onchange="FilterDepartment()">
 												<option value="" disabled selected hidden>Department</option>
 												<option value="all">All</option>
-												<option value="accounting">Financial and Accounting</option>
-												<option value="business">Bussiness and Marketing</option>
-												<option value="human">Human Resources</option>
-												<option value="room">Room Division</option>
-												<option value="services">Services</option>
-												<option value="maintance">Services</option>
+												<option th:each="department : ${departments}" th:id="${department.id}"
+													th:value="${department.name}" th:text="${department.name}">
+												</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-sm-3">
+										<div class="input-group">
+											<select name="dName" class="custom-select" required id="PositionSearch"
+												onchange="FilterPosition()">
+												<option value="" disabled selected hidden>Position</option>
+												<option value="all">All</option>
+												<option th:each="position : ${positions}" th:value="${position.name}"
+													th:text="${position.name}" th:id="${position.department.id}">
+												</option>
 											</select>
 										</div>
 									</div>
@@ -67,7 +76,7 @@
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body">
-								<table class="table table-bordered table-striped" id="UserTable">
+								<table class="table table-bordered table-striped table-hover" id="UserTable">
 									<thead>
 										<tr>
 											<th>Staff Code</th>

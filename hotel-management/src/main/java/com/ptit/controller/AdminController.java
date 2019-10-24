@@ -103,6 +103,10 @@ public class AdminController {
 		addUserInModel(mav);
 		List<User> users = userService.findAllStaff();
 		mav.addObject("users", users);
+		List<Position> positions = userService.findAllPosition();
+		mav.addObject("positions", positions);
+		List<Department> departments = userService.findAllDepartment();
+		mav.addObject("departments", departments);
 		mav.setViewName("user/human_resources/list_user");
 		return mav;
 	}
