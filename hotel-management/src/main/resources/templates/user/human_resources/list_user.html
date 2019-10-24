@@ -96,10 +96,19 @@
 											<td th:text="${user.position.name}"></td>
 											<td th:text="${user.position.department.name}"></td>
 											<td th:text="${user.role.name}"></td>
-											<td><a th:onclick="lockUser(/*[[${user.staffCode}]]*/)" href="./list_user">
-													<i th:if="${user.active == 1}" class="fas fa-lock"></i>
-													<i th:if="${user.active == 0}" class="fas fa-unlock"></i>
-												</a>
+											<td>
+												<div class="row">
+													<div class="col-sm-6">
+														<a th:onclick="lockUser(/*[[${user.staffCode}]]*/)"
+															href="./list_user">
+															<i th:if="${user.active == 1}" class="fas fa-lock"></i>
+															<i th:if="${user.active == 0}" class="fas fa-unlock"></i>
+														</a>
+													</div>
+													<div class="col-sm-6">
+														<a class="fas fa-cog"></a>
+													</div>
+												</div>
 											</td>
 										</tr>
 									</tbody>
