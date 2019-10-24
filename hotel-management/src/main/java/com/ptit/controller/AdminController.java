@@ -13,6 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -209,5 +210,24 @@ public class AdminController {
 		addUserInModel(modelAndView);
 		modelAndView.setViewName("common/contacts");
 		return modelAndView;
+	}
+	
+	@GetMapping("/human_resources/update/{staffCode}")
+	public ModelAndView updateUser(@PathVariable String staffCode) {
+		ModelAndView mav = new ModelAndView("human_resources/update");
+		addUserInModel(mav);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByStaffCode(auth.getName());
+		if (user.getRole().getId() == 1L || user.getPosition().getDepartment().getId() == 3) {
+			user = userService.findUserByStaffCode(staffCode);
+			mav.addObject("userNeedsUpdate", user);
+		}
+		return mav;
+	}
+	
+	@PostMapping("/human_resources/update/{staffCode}")
+	@ResponseBody
+	public String saveUpdateUser(@PathVariable String staffCode, @RequestParam Map<String, String> reqPar) {
+		return "saveUpdateUser";
 	}
 }
