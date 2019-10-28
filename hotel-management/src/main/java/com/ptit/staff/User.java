@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ptit.customer.Bill;
@@ -29,6 +30,7 @@ public class User {
 	private int id;
 	
 	@Column(name = "staff_code", columnDefinition = "VARCHAR(10)")
+	@NotEmpty(message = "*Please provide staff code")
 	private String staffCode;
 	
 	@Column(name = "gender", columnDefinition = "VARCHAR(50)")

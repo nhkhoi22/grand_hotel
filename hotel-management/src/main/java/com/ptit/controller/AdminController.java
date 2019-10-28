@@ -50,11 +50,10 @@ public class AdminController {
 	@RequestMapping(value = "/user/human_resources/registration", method = RequestMethod.GET)
 	public ModelAndView registration() {
 		ModelAndView modelAndView = new ModelAndView();
-		User newUser = new User();
 		addUserInModel(modelAndView);
 		List<Department> departments = userService.findAllDepartment();
 		List<Position> positions = userService.findAllPosition();
-		modelAndView.addObject("newUser", newUser);
+		modelAndView.addObject("newUser", new User());
 		modelAndView.addObject("departments", departments);
 		modelAndView.addObject("positions", positions);
 		modelAndView.setViewName("user/human_resources/registration");
@@ -62,7 +61,7 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/user/human_resources/registration", method = RequestMethod.POST)
-	public ModelAndView createNewUser(@Valid User newUser, @RequestParam Map<String, String> reqPar,
+	public ModelAndView createNewUser(@Valid  User newUser, @RequestParam Map<String, String> reqPar,
 			BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		Long pName = Long.parseLong(reqPar.get("pName"));
@@ -71,11 +70,12 @@ public class AdminController {
 		Position positionExists = userService.findPositionById(pName);
 		Department departmentExists = userService.findDepartmentById(dName);
 		if (userExists != null) {
-			bindingResult.rejectValue("staffCode", "error.user",
+			bindingResult.rejectValue("staffCode", "error.newUser",
 					"There is already a user registered with the staff code provided");
 		}
 		if (bindingResult.hasErrors()) {
-			modelAndView.setViewName("user/human_resources/registration");
+			modelAndView.addObject("newUser", new User());
+			return registration().addObject("duplicateMessage", "*This staff code has been used");
 		} else {
 			newUser.setId(Integer.parseInt(newUser.getStaffCode()));
 			positionExists.setDepartment(departmentExists);
@@ -91,8 +91,7 @@ public class AdminController {
 
 			modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("newUser", new User());
-			modelAndView.addObject("position", new Position());
-			modelAndView.addObject("department", new Department());
+			
 			modelAndView.setViewName("user/human_resources/registration");
 
 		}

@@ -12,7 +12,7 @@
   </style>
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed" onload="Arrange()">
+<body class="hold-transition sidebar-mini layout-fixed">
   <!-- <div class="container"> -->
   <!-- Modal -->
   <!-- <div id="Success" class="modal fade" role="dialog">
@@ -63,9 +63,9 @@
                   <h3 class="login-box-msg">Add a new user</h3>
                   <form th:action="@{/user/human_resources/registration}" method="post" th:object="${newUser}"
                     oninput="PasswordValidation()">
+                    <span th:utext="${duplicateMessage}" style="color: red"></span>
                     <div class="input-group mb-3">
-                      <label th:if="${#fields.hasErrors('name')}"
-								th:errors="*{name}" class="validation-message"></label> <input
+                      <input
 								type="text" th:field="*{name}" placeholder="Full Name"
 								class="form-control" required data-placement="right"/>
                         <div class="input-group-append">
@@ -108,10 +108,10 @@
                         </div>
                       </div>
                       <div class="input-group mb-3">
-                        <label th:if="${#fields.hasErrors('staffCode')}"
-								th:errors="*{staffCode}" class="validation-message"></label>
-							<input type="text" th:field="*{staffCode}"
+							<input type="text" th:field="*{staffCode}" name="staffCode"
 								placeholder="Staff Code" class="form-control" required/>
+							 <label th:if="${#fields.hasErrors('staffCode')}"
+								th:errors="*{staffCode}" class="validation-message"></label>
                         <div class="input-group-append">
                           <div class="input-group-text">
                             <span class="fas fa-id-card"></span>
@@ -152,8 +152,6 @@
                       <div class="input-group mb-3">
                         <input type="password" th:field="*{password}" name="pass1" id="password1"
                           placeholder="Password" class="form-control" required/> 
-                        <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" 
-                          class="validation-message"></label>
                         <div class="input-group-append">
                           <div class="input-group-text">
                             <span class="fas fa-lock"></span>
@@ -175,8 +173,9 @@
                           <label class="custom-control-label" for="isAdmin">This user is an admin</label>
                         </div>
                       </div>
+                      <span th:utext="${successMessage}"></span>
                       <div class="row">
-                          <button type="submit" class="btn btn-primary btn-block btn-flat" data-toggle="modal" data-target="#Success">Register</button>
+                          <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
                       </div>
                       <!-- /.row -->
                     </form>
