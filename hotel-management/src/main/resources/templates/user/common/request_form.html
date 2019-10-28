@@ -38,47 +38,58 @@
                         <div class="card-body pt-6 mt-3">
                             <div class="row">
                                 <div class="col-1"></div>
-                                <div class="col-10">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <label for="guestname">Product Name</label>
-                                            <input type="text" class="form-control" id="guestname"
-                                                placeholder="Product Name">
-                                        </div>
-                                        <div class="col-6">
-                                            <label for="guestname">Product Type</label>
-                                            <input type="text" class="form-control" id="guestname"
-                                                placeholder="Product Type">
-                                        </div>
+                                <div class="col-4">
+                                    <div class="input-group pb-3">
+                                        <select name="dName" class="custom-select" required id="product"
+                                            onchange="FilterPosition()">
+                                            <option value="" disabled selected hidden>Product Name</option>
+                                            <option th:each="position : ${positions}" th:value="${position.name}"
+                                                th:text="${position.name}" th:id="${position.department.id}">
+                                            </option>
+                                        </select>
                                     </div>
-                                    <div class="row py-5">
-                                        <div class="col-6">
-                                            <label for="guestname">Quanity</label>
-                                            <input type="text" class="form-control" id="guestname"
-                                                placeholder="Quanity">
-                                        </div>
-                                        <div class="col-6">
-                                            <label for="guestname">Supplier</label>
-                                            <input type="text" class="form-control" id="guestname"
-                                                placeholder="Supplier">
-                                        </div>
-                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <input type="text" class="form-control pb-3" id="quanity" placeholder="Quanity">
+                                </div>
+                                <div class="col-2">
+                                    <button class="btn btn-info btn-block" type="button"
+                                        onclick="AddToTable()">Add</button>
                                 </div>
                                 <div class="col-1"></div>
                             </div>
-                            <div class="row">
+                            <div class="row pt-6">
+                                <div class="col-1"></div>
+                                <div class="col-10">
+                                    <table class="table table-hover table-fixed">
+                                        <thead>
+                                            <tr class="row">
+                                                <th class="col-sm-5">Product Name</th>
+                                                <th class="col-sm-5">Quanity</th>
+                                                <th class="col-sm-2">Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="requestTable">
+                                            <!-- /.User list start here-->
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-1"></div>
+                            </div>
+                            <div class="row pt-6">
                                 <div class="col-1"></div>
                                 <div class="col-10">
                                     <label for="content">Content</label>
-                                    <textarea class="form-control" rows="15" id="content"></textarea>
+                                    <textarea class="form-control" rows="5" id="content" readonly
+                                        style="cursor: default;"></textarea>
                                 </div>
                                 <div class="col-1"></div>
                             </div>
                             <div class="row pt-3">
                                 <div class="col-md-9"></div>
                                 <div class="col-md-2">
-                                    <button type="button" class="btn btn-success btn-block"
-                                        data-slide="next">Send</button>
+                                    <button type="submit" class="btn btn-success btn-block">Send</button>
                                 </div>
                             </div>
                         </div>
@@ -93,8 +104,32 @@
     </div>
     <!-- /.wrapper -->
     <div th:replace="~{/common/footer :: footer}"></div>
-
     <div th:insert="~{/common/head :: bottom}"></div>
+    <script>
+        function AddToTable() {
+            var product = document.getElementById("product").value;
+            var quanity = document.getElementById("quanity").value;
+            var table = document.getElementById("requestTable");
+            var row = table.insertRow(0);
+            row.classList.add("row");
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            cell1.classList.add("col-sm-5");
+            cell2.classList.add("col-sm-5");
+            cell3.classList.add("col-sm-2");
+            cell1.setAttribute("value", product);
+            cell1.setAttribute("value", quanity);
+            cell1.innerHTML = product;
+            cell2.innerHTML = quanity;
+            cell3.innerHTML = '<input class="btn btn-block btn-info" type="button" value="Delete" onclick="deleteRow(this)"/>';
+            document.getElementById("quanity").value = "";
+        }
+        function deleteRow(btn) {
+            var row = btn.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+    </script>
 </body>
 
 </html>
