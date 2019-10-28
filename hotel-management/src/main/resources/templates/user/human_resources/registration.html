@@ -61,7 +61,7 @@
               <div class="card">
                 <div class="card-body register-card-body">
                   <h3 class="login-box-msg">Add a new user</h3>
-                  <form th:action="@{/admin/registration}" method="post" th:object="${newUser}"
+                  <form th:action="@{/user/human_resources/registration}" method="post" th:object="${newUser}"
                     oninput="PasswordValidation()">
                     <div class="input-group mb-3">
                       <label th:if="${#fields.hasErrors('name')}"
@@ -171,7 +171,7 @@
                       </div>
                       <div class="form-group">
                         <div class="custom-control custom-switch">
-                          <input type="checkbox" class="custom-control-input" id="isAdmin">
+                          <input type="checkbox" class="custom-control-input" id="isAdmin" name="isAdmin">
                           <label class="custom-control-label" for="isAdmin">This user is an admin</label>
                         </div>
                       </div>

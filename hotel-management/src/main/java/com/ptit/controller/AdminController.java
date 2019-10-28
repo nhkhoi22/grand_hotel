@@ -77,6 +77,7 @@ public class AdminController {
 		if (bindingResult.hasErrors()) {
 			modelAndView.setViewName("user/human_resources/registration");
 		} else {
+			newUser.setId(Integer.parseInt(newUser.getStaffCode()));
 			positionExists.setDepartment(departmentExists);
 
 			departmentExists.getPositions().add(positionExists);
