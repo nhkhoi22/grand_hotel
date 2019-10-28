@@ -1,6 +1,7 @@
 package com.ptit.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -43,6 +44,10 @@ public class UserService {
 	}
 
 	public User findUserByStaffCode(String staffCode) {
+		return userDAO.findByStaffCode(staffCode);
+	}
+	
+	public User findUserByStaffCode(Optional<String> staffCode) {
 		return userDAO.findByStaffCode(staffCode);
 	}
 
@@ -103,6 +108,10 @@ public class UserService {
 			return true;
 		
 		return false;
+	}
+	
+	public Role findRoleByName(String name) {
+		return roleDAO.findByName(name);
 	}
 	
 	public void changeUserPassword(User user, String newPassword) {

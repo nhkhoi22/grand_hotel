@@ -3,17 +3,19 @@ package com.ptit.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -212,22 +214,28 @@ public class AdminController {
 		return modelAndView;
 	}
 	
-	@GetMapping("/human_resources/update/{staffCode}")
-	public ModelAndView updateUser(@PathVariable String staffCode) {
-		ModelAndView mav = new ModelAndView("human_resources/update");
+	@RequestMapping(value = {"/user/human_resources/update/{staffCode}", "/user/human_resources/update"}, method = RequestMethod.GET)
+	public ModelAndView updateUser(@PathVariable("staffCode") Optional<String> staffCode) {
+		ModelAndView mav = new ModelAndView("/user/human_resources/update");
 		addUserInModel(mav);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByStaffCode(auth.getName());
 		if (user.getRole().getId() == 1L || user.getPosition().getDepartment().getId() == 3) {
-			user = userService.findUserByStaffCode(staffCode);
-			mav.addObject("userNeedsUpdate", user);
+			if(staffCode.isPresent()) {
+				user = userService.findUserByStaffCode(staffCode);
+				mav.addObject("userNeedsUpdate", user);
+			}
 		}
 		return mav;
 	}
 	
-	@PostMapping("/human_resources/update/{staffCode}")
-	@ResponseBody
-	public String saveUpdateUser(@PathVariable String staffCode, @RequestParam Map<String, String> reqPar) {
-		return "saveUpdateUser";
+	@PostMapping("/user/human_resources/update/{staffCode}")
+	public ResponseEntity<String> saveUpdateUser(@PathVariable String staffCode, @RequestParam Map<String, String> reqPar) {
+		User userNeedsUpdate = userService.findUserByStaffCode(staffCode);
+		userNeedsUpdate.setName(reqPar.get("fullName"));
+		userNeedsUpdate.setRole(userService.findRoleByName(reqPar.get("role")));
+		userNeedsUpdate.setPosition(userService.findPositionByName(reqPar.get("position")));
+		userService.saveUserNonEncrypt(userNeedsUpdate);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

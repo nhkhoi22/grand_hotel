@@ -20,7 +20,7 @@
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a th:href="@{/admin/home}">Home</a></li>
+                                <li class="breadcrumb-item"><a th:href="@{/human_resources/list_user}">Home</a></li>
                                 <li class="breadcrumb-item active">Information</li>
                             </ol>
                         </div>
@@ -36,9 +36,9 @@
                         <div class="col-md-6">
                             <div class="card card-widget widget-user">
                                 <!-- Add the bg color to the header using any of the bg-* classes -->
-                                <div class="card">
+                                <div class="card" >
                                     <div class="card-header">
-                                        <h3 class="login-box-msg" th:text="${user.name}"></h3>
+                                        <h3 class="login-box-msg" th:text="${userNeedsUpdate.name}"></h3>
                                         <div class="widget-user-image">
                                             <img class="img-circle" th:src="@{/images/hot_man.png}" alt="User Avatar">
                                         </div>
@@ -48,28 +48,29 @@
                                     </div>
                                     <!-- /card body -->
                                     <div class="card-footer">
+                                    	<form th:action="@{/user/human_resources/update/{staffCode}(staffCode = ${userNeedsUpdate.staffCode})}" th:method="post" th:object="${userNeedsUpdate}">
                                         <div class="input-group row mb-3">
                                             <label for="StaticUsername" class="col-sm-3 col-form-label"
                                                 style="text-align: center;">Full Name</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control effect-underline"
-                                                    id="StaticUsername" th:value="${user.name}">
+                                                <input class="form-control effect-underline" name="fullName"
+                                                    id="StaticUsername" th:value="*{name}">
                                             </div>
                                         </div>
                                         <div class="input-group row mb-3">
                                             <label for="StaticStaffCode" class="col-sm-3 col-form-label"
                                                 style="text-align: center;">Staff Code</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control effect-underline"
-                                                    id="StaticStaffCode" th:value="${user.staffCode}">
+                                                <input type="text" class="form-control effect-underline" name="staffCode"
+                                                    id="StaticStaffCode" th:value="*{staffCode}">
                                             </div>
                                         </div>
                                         <div class="input-group row mb-3">
                                             <label for="StaticRole" class="col-sm-3 col-form-label"
                                                 style="text-align: center;">Role</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control effect-underline"
-                                                    id="StaticRole" th:value="${user.role.name}">
+                                                <input type="text" class="form-control effect-underline" name="role"
+                                                    id="StaticRole" th:value="*{role.name}">
                                             </div>
                                         </div>
                                         <div class="input-group row mb-3">
@@ -77,23 +78,23 @@
                                                 style="text-align: center;">Department</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control effect-underline"
-                                                    id="StaticDepartment" th:value="${user.position.department.name}">
+                                                    id="StaticDepartment" th:value="*{position.department.name}">
                                             </div>
                                         </div>
                                         <div class="input-group row mb-3">
                                             <label for="StaticPosition" class="col-sm-3 col-form-label"
                                                 style="text-align: center;">Position</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control effect-underline"
-                                                    id="StaticPosition" th:value="${user.position.name}">
+                                                <input type="text" class="form-control effect-underline" name="position"
+                                                    id="StaticPosition" th:value="*{position.name}">
                                             </div>
                                         </div>
                                         <div class="input-group row mb-3">
                                             <label for="StaticDIW" class="col-sm-3 col-form-label"
                                                 style="text-align: center;">Work days</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control effect-underline"
-                                                    id="StaticDIW" th:value="${user.daysInWork}">
+                                                <input type="text" class="form-control effect-underline" name="daysInWork"
+                                                    id="StaticDIW" th:value="*{daysInWork}">
                                             </div>
                                         </div>
                                         <div class="input-group row mb-3">
@@ -101,12 +102,13 @@
                                                 style="text-align: center;">Last Login</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control effect-underline"
-                                                    id="StaticLastLogin" th:value="${user.lastlogin}">
+                                                    id="StaticLastLogin" th:value="${userNeedsUpdate.lastlogin}">
                                             </div>
                                         </div>
                                         <div class="input-group row mb-3">
                                             <button type="submit" class="btn btn-info btn-block btn-flat">Apply</button>
                                         </div>
+                                        </form>
                                     </div>
                                 </div><!-- /.card -->
                             </div>
