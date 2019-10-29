@@ -40,6 +40,9 @@ public class Service {
 	@Column(name = "price", columnDefinition = "DOUBLE")
 	private Double price;
 	
+	@Column(name = "income_price", columnDefinition = "DOUBLE")
+	private Double incomePrice;
+	
 	@OneToMany(
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
@@ -112,6 +115,14 @@ public class Service {
 
 	public void setProductType(ProductType productType) {
 		this.productType = productType;
+	}
+
+	public Double getIncomePrice() {
+		return incomePrice;
+	}
+
+	public void setIncomePrice(Double incomePrice) {
+		this.incomePrice = incomePrice;
 	}
 	
 }
