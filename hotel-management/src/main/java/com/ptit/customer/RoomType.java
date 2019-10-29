@@ -36,4 +36,40 @@ public class RoomType {
     )
     @JsonIgnore
     private List<Room> rooms; //1 loại phòng có thể có nhiều phòng
+	
+	@Column(name = "price", columnDefinition = "BIGINT")
+	private Long price;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<Room> getRooms() {
+		return rooms;
+	}
+
+	public void setRooms(List<Room> rooms) {
+		this.rooms = rooms;
+	}
+
+	public Long getPrice() {
+		return price;
+	}
+
+	public void setPrice(Long price) {
+		this.price = price;
+	}
+	
 }
