@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ptit.customer.Customer;
 import com.ptit.customer.RoomType;
+import com.ptit.outcome.SpendingRequest;
 import com.ptit.service.RoomService;
 import com.ptit.service.UserService;
 import com.ptit.staff.User;
@@ -94,6 +95,8 @@ public class UserController {
 	public ModelAndView requestForm() {
 		ModelAndView modelAndView = new ModelAndView();
 		addUserInModel(modelAndView);
+		SpendingRequest request = new SpendingRequest();
+		modelAndView.addObject("request", request);
 		modelAndView.setViewName("user/common/request_form");
 		return modelAndView;
 	}

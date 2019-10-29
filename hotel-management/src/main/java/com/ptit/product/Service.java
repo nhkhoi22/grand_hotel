@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.ptit.customer.BillDetail;
+import com.ptit.outcome.RequestDetail;
 import com.ptit.suppiler.Supplier;
 
 import lombok.Data;
@@ -45,6 +46,13 @@ public class Service {
             mappedBy = "service"
     )
     private List<BillDetail> details;//1 dịch vụ có thể xuất hiện nhiều lần trong bảng chi tiết hóa đơn
+	
+	@OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "service"
+    )
+    private List<RequestDetail> requestDetails;
 	
 	@ManyToOne
 	@JoinColumn(name = "product_service_type_id", nullable = true)
@@ -80,6 +88,30 @@ public class Service {
 
 	public void setDetails(List<BillDetail> details) {
 		this.details = details;
+	}
+
+	public Supplier getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
+	}
+
+	public List<RequestDetail> getRequestDetails() {
+		return requestDetails;
+	}
+
+	public void setRequestDetails(List<RequestDetail> requestDetails) {
+		this.requestDetails = requestDetails;
+	}
+
+	public ProductType getProductType() {
+		return productType;
+	}
+
+	public void setProductType(ProductType productType) {
+		this.productType = productType;
 	}
 	
 }
