@@ -26,8 +26,14 @@ public class Customer {
 	@Column(name = "full_name", columnDefinition = "VARCHAR(50)")
 	private String name;
 	
+	@Column(name = "customer_identity", columnDefinition = "VARCHAR(15)")
+	private String identity;
+	
 	@Column(name = "phone_number", columnDefinition = "VARCHAR(50)")
 	private String phoneNumber;
+	
+	@Column(name = "customer_email", columnDefinition = "VARCHAR(15)")
+	private String email;
 	
 	@Column(name = "address", columnDefinition = "VARCHAR(50)")
 	private String address;
@@ -35,6 +41,22 @@ public class Customer {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
     private List<RoomReservation> rooms; //1 khách hàng có thể quay lại nhiều lần, đặt nhiều phòng 1 lúc
 
+	public String getIdentity() {
+		return identity;
+	}
+
+	public void setIdentity(String identity) {
+		this.identity = identity;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 	public int getId() {
 		return id;
 	}
