@@ -20,7 +20,7 @@ function AddToTable() {
     cell2.innerHTML = quanity;
     cell3.innerHTML = '<input class="btn btn-block btn-danger" type="button" value="Delete" onclick="deleteRow(this)"/>';
     for (let i = 0; i < rows.length; i++) {
-        row.name = "product" + table.rows[i];
+        row.name = "product" + i;
     }
     document.getElementById("quanity").value = "";
 }
