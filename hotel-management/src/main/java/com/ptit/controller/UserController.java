@@ -14,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ptit.customer.Customer;
 import com.ptit.customer.RoomType;
 import com.ptit.outcome.SpendingRequest;
+import com.ptit.product.Service;
+import com.ptit.service.ProductService;
 import com.ptit.service.RoomService;
 import com.ptit.service.UserService;
 import com.ptit.staff.User;
@@ -26,6 +28,9 @@ public class UserController {
 	
 	@Autowired
 	private RoomService roomService;
+	
+	@Autowired
+	private ProductService service;
 	
 	private void addUserInModel(ModelAndView mav) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -87,6 +92,8 @@ public class UserController {
 	public ModelAndView requestHandle() {
 		ModelAndView modelAndView = new ModelAndView();
 		addUserInModel(modelAndView);
+		SpendingRequest request = new SpendingRequest();
+		modelAndView.addObject("request", request);
 		modelAndView.setViewName("user/financial_and_accounting/request_handle");
 		return modelAndView;
 	}
@@ -95,8 +102,8 @@ public class UserController {
 	public ModelAndView requestForm() {
 		ModelAndView modelAndView = new ModelAndView();
 		addUserInModel(modelAndView);
-		SpendingRequest request = new SpendingRequest();
-		modelAndView.addObject("request", request);
+		List<Service> product = service.findAllService();
+		modelAndView.addObject("products", product);
 		modelAndView.setViewName("user/common/request_form");
 		return modelAndView;
 	}
