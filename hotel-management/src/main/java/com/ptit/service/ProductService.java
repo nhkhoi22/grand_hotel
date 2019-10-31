@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ptit.dao.ProductDAO;
 
-@Service("requestService")
+@Service("productService")
 public class ProductService {
 	
 	@Autowired
