@@ -38,9 +38,6 @@ public class Service {
 	@JoinColumn(name = "product_supplier_id", columnDefinition = "INT")
 	private Supplier supplier;
 	
-	@Column(name = "price", columnDefinition = "DOUBLE")
-	private Double price;
-	
 	@Column(name = "income_price", columnDefinition = "DOUBLE")
 	private Double incomePrice;
 	
@@ -83,14 +80,6 @@ public class Service {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Double getPrice() {
-		return price;
-	}
-
-	public void setPrice(Double price) {
-		this.price = price;
 	}
 
 	public List<BillDetail> getDetails() {
