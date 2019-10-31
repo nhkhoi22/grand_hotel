@@ -17,7 +17,6 @@ import javax.persistence.Table;
 import com.ptit.customer.BillDetail;
 import com.ptit.outcome.RequestDetail;
 import com.ptit.suppiler.ContractSupplyDetail;
-import com.ptit.suppiler.Supplier;
 
 import lombok.Data;
 
@@ -33,10 +32,6 @@ public class Service {
 	
 	@Column(name = "product_service_name", columnDefinition = "VARCHAR(50)")
 	private String name;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "product_supplier_id", columnDefinition = "INT")
-	private Supplier supplier;
 	
 	@Column(name = "income_price", columnDefinition = "DOUBLE")
 	private Double incomePrice;
@@ -88,14 +83,6 @@ public class Service {
 
 	public void setDetails(List<BillDetail> details) {
 		this.details = details;
-	}
-
-	public Supplier getSupplier() {
-		return supplier;
-	}
-
-	public void setSupplier(Supplier supplier) {
-		this.supplier = supplier;
 	}
 
 	public List<RequestDetail> getRequestDetails() {

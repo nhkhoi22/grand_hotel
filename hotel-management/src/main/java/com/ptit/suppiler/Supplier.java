@@ -1,10 +1,15 @@
 package com.ptit.suppiler;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -24,6 +29,12 @@ public class Supplier {
 	
 	@Column(name = "contact", columnDefinition = "VARCHAR(100)")
 	private String contact;
+	
+	@OneToMany(
+			cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "supplier")
+	private List<Contract> contracts;
 
 	public int getId() {
 		return id;
@@ -47,5 +58,13 @@ public class Supplier {
 
 	public void setContact(String contact) {
 		this.contact = contact;
+	}
+
+	public List<Contract> getContracts() {
+		return contracts;
+	}
+
+	public void setContracts(List<Contract> contracts) {
+		this.contracts = contracts;
 	}
 }
