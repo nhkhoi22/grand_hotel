@@ -16,7 +16,6 @@ import javax.persistence.Table;
 
 import com.ptit.customer.BillDetail;
 import com.ptit.outcome.RequestDetail;
-import com.ptit.suppiler.ContractSupplyDetail;
 
 import lombok.Data;
 
@@ -42,13 +41,6 @@ public class Service {
             mappedBy = "service"
     )
     private List<BillDetail> details;//1 dịch vụ có thể xuất hiện nhiều lần trong bảng chi tiết hóa đơn
-	
-	@OneToMany(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
-            mappedBy = "service"
-    )
-	private List<ContractSupplyDetail> contractDetails;
 	
 	@OneToMany(
             cascade = CascadeType.ALL,
@@ -107,14 +99,6 @@ public class Service {
 
 	public void setIncomePrice(Double incomePrice) {
 		this.incomePrice = incomePrice;
-	}
-
-	public List<ContractSupplyDetail> getContractDetails() {
-		return contractDetails;
-	}
-
-	public void setContractDetails(List<ContractSupplyDetail> contractDetails) {
-		this.contractDetails = contractDetails;
 	}
 	
 }

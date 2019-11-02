@@ -20,7 +20,6 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import com.ptit.common.DateUtil;
 import com.ptit.service.UserService;
 import com.ptit.staff.Position;
 import com.ptit.staff.User;
@@ -70,14 +69,12 @@ public class LoginAuthenticationSuccessUrl implements AuthenticationSuccessHandl
 		User user = userService.findUserByStaffCode(authentication.getName());
 		password = user.getPassword();
 		Date date = Calendar.getInstance().getTime();
-		DateUtil dateUtil = new DateUtil();
 
-		String userLastLogin = user.getLastlogin();
+		Date userLastLogin = user.getLastlogin();
 		Date lastDate = new Date();
 		boolean sameDay = true;
 
-		if (userLastLogin != null && userLastLogin != "") {
-			lastDate = dateUtil.convertStringToDate(userLastLogin);
+		if (userLastLogin != null) {
 			sameDay = (date.getYear() == lastDate.getYear()) && (date.getDate() == lastDate.getDate())
 					&& (date.getMonth() == lastDate.getMonth());
 		} else {
@@ -91,7 +88,7 @@ public class LoginAuthenticationSuccessUrl implements AuthenticationSuccessHandl
 			user.setDaysInWork(daysInWork);
 		}
 
-		user.setLastlogin(dateUtil.convertDateToString(date));
+		user.setLastLogin(date);
 		userService.saveUserNonEncrypt(user);
 	}
 

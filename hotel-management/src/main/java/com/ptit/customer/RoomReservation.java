@@ -1,5 +1,8 @@
 package com.ptit.customer;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,10 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import lombok.Data;
 
@@ -26,27 +29,21 @@ public class RoomReservation {
 	@Column(name = "reservation_id", columnDefinition = "BIGINT")
 	private Long id;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "customer_id", nullable = false)
-	private Customer customer;
+	@OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+	private List<Bill> bills;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "room_id", nullable = false)
 	private Room room;
 	
-	@Column(name = "check_in_date", columnDefinition = "VARCHAR(50)")
-	private String checkInDate;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "check_in_date", nullable = true)
+	private Date checkInDate;
 	
-	@Column(name = "check_out_date", columnDefinition = "VARCHAR(50)")
-	private String checkOutDate;
-	
-	@OneToOne(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
-	@JoinColumn(name = "bill_id")
-    @JsonIgnore
-    private Bill bill;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "check_out_date", nullable = true)
+	private Date checkOutDate;
 
 	public Long getId() {
 		return id;
@@ -56,27 +53,35 @@ public class RoomReservation {
 		this.id = id;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public List<Bill> getBills() {
+		return bills;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setBills(List<Bill> bills) {
+		this.bills = bills;
 	}
 
-	public String getCheckInDate() {
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
+	}
+
+	public Date getCheckInDate() {
 		return checkInDate;
 	}
 
-	public void setCheckInDate(String checkInDate) {
+	public void setCheckInDate(Date checkInDate) {
 		this.checkInDate = checkInDate;
 	}
 
-	public String getCheckOutDate() {
+	public Date getCheckOutDate() {
 		return checkOutDate;
 	}
 
-	public void setCheckOutDate(String checkOutDate) {
+	public void setCheckOutDate(Date checkOutDate) {
 		this.checkOutDate = checkOutDate;
 	}
 	

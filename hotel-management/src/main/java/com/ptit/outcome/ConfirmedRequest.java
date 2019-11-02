@@ -1,5 +1,7 @@
 package com.ptit.outcome;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.ptit.staff.User;
 
@@ -32,8 +36,9 @@ public class ConfirmedRequest {
 	@JoinColumn(name = "confirm_staff_id", nullable = true)
 	private User user;
 	
-	@Column(name = "confirm_time", columnDefinition = "VARCHAR(50)")
-	private String time;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "confirm_time", nullable = false)
+	private Date confirmTime;
 
 	public Long getId() {
 		return id;
@@ -59,11 +64,11 @@ public class ConfirmedRequest {
 		this.user = user;
 	}
 
-	public String getTime() {
-		return time;
+	public Date getConfirmTime() {
+		return confirmTime;
 	}
 
-	public void setTime(String time) {
-		this.time = time;
+	public void setConfirmTime(Date confirmTime) {
+		this.confirmTime = confirmTime;
 	}
 }

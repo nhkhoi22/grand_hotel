@@ -1,18 +1,19 @@
 package com.ptit.suppiler;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import lombok.Data;
 
@@ -22,10 +23,6 @@ import lombok.Data;
 public class Contract {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "contract_id", columnDefinition = "INT")
-	private int id;
-	
 	@Column(name = "contract_code", columnDefinition = "VARCHAR(50)")
 	private String code;
 	
@@ -33,15 +30,58 @@ public class Contract {
 	@JoinColumn(name = "supplier_id", columnDefinition = "INT")
 	private Supplier supplier;
 	
-	@Column(name = "start_date", columnDefinition = "VARCHAR(20)")
-	private String startDate;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "start_date", nullable = false)
+	private Date startDate;
 	
-	@Column(name = "end_date", columnDefinition = "VARCHAR(20)")
-	private String endDate;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "end_date", nullable = false)
+	private Date endDate;
 	
 	@OneToMany(
 			cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "contract")
 	private List<ContractSupplyDetail> contractDetails;
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public Supplier getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public List<ContractSupplyDetail> getContractDetails() {
+		return contractDetails;
+	}
+
+	public void setContractDetails(List<ContractSupplyDetail> contractDetails) {
+		this.contractDetails = contractDetails;
+	}
+	
 }

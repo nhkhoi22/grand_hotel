@@ -34,6 +34,13 @@ public class ProductType {
     )
 	private List<Service> services;
 	
+	@OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "productType"
+    )
+	private List<InProduct> products;
+	
 	public int getId() {
 		return id;
 	}
@@ -56,5 +63,13 @@ public class ProductType {
 
 	public void setServices(List<Service> services) {
 		this.services = services;
+	}
+
+	public List<InProduct> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<InProduct> products) {
+		this.products = products;
 	}
 }

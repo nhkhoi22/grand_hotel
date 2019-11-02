@@ -1,5 +1,7 @@
 package com.ptit.customer;
 
+
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,8 +14,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ptit.staff.User;
@@ -30,15 +33,21 @@ public class Bill {
 	@Column(name = "bill_id", columnDefinition = "INT")
 	private int id;
 	
-	@Column(name = "payment_time", columnDefinition = "VARCHAR(50)")
-	private String time;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "payment_time", nullable = true)
+	private Date paymentTime;
 	
 	@ManyToOne
 	@JoinColumn(name = "staff_id", nullable = true)
 	private User user;
 	
-	@Column(name = "price", columnDefinition = "BIGINT")
-	private Long price;
+	@ManyToOne
+	@JoinColumn(name = "reservation_id", nullable = true)
+	private RoomReservation reservation;
+	
+	@ManyToOne
+	@JoinColumn(name = "customer_id", columnDefinition = "INT")
+	private Customer customer;
 	
 	@OneToMany(
             cascade = CascadeType.ALL,
@@ -48,14 +57,6 @@ public class Bill {
     @JsonIgnore
     private List<BillDetail> billDetails;//1 hóa đơn có nhiều chi tiết hóa đơn
 	
-	@OneToOne(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
-            mappedBy = "bill"
-    )
-    @JsonIgnore
-    private RoomReservation roomReservation;
-	
 	public int getId() {
 		return id;
 	}
@@ -64,32 +65,8 @@ public class Bill {
 		this.id = id;
 	}
 
-	public String getTime() {
-		return time;
-	}
-
-	public void setTime(String time) {
-		this.time = time;
-	}
-
 	public User getUser() {
 		return user;
-	}
-
-	public Long getPrice() {
-		return price;
-	}
-
-	public void setPrice(Long price) {
-		this.price = price;
-	}
-
-	public RoomReservation getRoomReservation() {
-		return roomReservation;
-	}
-
-	public void setRoomReservation(RoomReservation roomReservation) {
-		this.roomReservation = roomReservation;
 	}
 
 	public void setUser(User user) {
@@ -103,4 +80,29 @@ public class Bill {
 	public void setBillDetails(List<BillDetail> billDetails) {
 		this.billDetails = billDetails;
 	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public Date getPaymentTime() {
+		return paymentTime;
+	}
+
+	public void setPaymentTime(Date paymentTime) {
+		this.paymentTime = paymentTime;
+	}
+
+	public RoomReservation getReservation() {
+		return reservation;
+	}
+
+	public void setReservation(RoomReservation reservation) {
+		this.reservation = reservation;
+	}
+	
 }

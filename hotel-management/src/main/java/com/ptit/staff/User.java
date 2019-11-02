@@ -1,5 +1,6 @@
 package com.ptit.staff;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -112,8 +115,9 @@ public class User {
 	@Column(name = "contract_salary", columnDefinition = "BIGINT")
 	private Long contractSalary;
 	
-	@Column(name = "last_time_login", columnDefinition = "VARCHAR(50)")
-	private String lastlogin;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_login", nullable = true)
+	private Date lastlogin;
 
 	public int getId() {
 		return id;
@@ -194,15 +198,15 @@ public class User {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-
-	public String getLastlogin() {
+	
+	public Date getLastlogin() {
 		return lastlogin;
 	}
 
-	public void setLastlogin(String lastlogin) {
-		this.lastlogin = lastlogin;
+	public void setLastLogin(java.util.Date date) {
+		this.lastlogin = (Date) date;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}

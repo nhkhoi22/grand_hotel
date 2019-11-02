@@ -1,5 +1,6 @@
 package com.ptit.outcome;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,6 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.ptit.product.Service;
 import com.ptit.staff.User;
@@ -46,8 +49,9 @@ public class SpendingRequest {
     )
     private List<RequestDetail> requestDetails;
 	
-	@Column(name = "request_time", columnDefinition = "VARCHAR(50)")
-	private String time;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "request_time", nullable = false)
+	private Date requestTime;
 	
 	@Column(name = "content", columnDefinition = "LONGBLOB")
 	private String content;
@@ -75,13 +79,15 @@ public class SpendingRequest {
 	public void setServices(List<Service> services) {
 		Services = services;
 	}
+	
+	
 
-	public String getTime() {
-		return time;
+	public Date getRequestTime() {
+		return requestTime;
 	}
 
-	public void setTime(String time) {
-		this.time = time;
+	public void setRequestTime(Date requestTime) {
+		this.requestTime = requestTime;
 	}
 
 	public String getContent() {

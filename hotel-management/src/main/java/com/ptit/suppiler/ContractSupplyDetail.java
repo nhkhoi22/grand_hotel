@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.ptit.product.Service;
+import com.ptit.product.InProduct;
 
 import lombok.Data;
 
@@ -23,19 +23,16 @@ public class ContractSupplyDetail {
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "contract_id", columnDefinition = "INT")
+	@JoinColumn(name = "contract_code", columnDefinition = "VARCHAR(50)")
 	private Contract contract;
 	
 	@ManyToOne
-	@JoinColumn(name = "product_service_id", columnDefinition = "INT")
-	private Service service;
+	@JoinColumn(name = "in_product_id", columnDefinition = "INT")
+	private InProduct inProduct;
 	
 	@Column(name = "outcome_price", columnDefinition = "DOUBLE")
 	private Double outcomePrice;
 	
-	@Column(name = "currently_active", columnDefinition = "INT")
-	private boolean currentlyActive;
-
 	public Long getId() {
 		return id;
 	}
@@ -52,14 +49,6 @@ public class ContractSupplyDetail {
 		this.contract = contract;
 	}
 
-	public Service getService() {
-		return service;
-	}
-
-	public void setService(Service service) {
-		this.service = service;
-	}
-
 	public Double getOutcomePrice() {
 		return outcomePrice;
 	}
@@ -68,11 +57,12 @@ public class ContractSupplyDetail {
 		this.outcomePrice = outcomePrice;
 	}
 
-	public boolean isCurrentActive() {
-		return currentlyActive;
+	public InProduct getInProduct() {
+		return inProduct;
 	}
 
-	public void setCurrentActive(boolean currentlyActive) {
-		this.currentlyActive = currentlyActive;
+	public void setInProduct(InProduct inProduct) {
+		this.inProduct = inProduct;
 	}
+
 }

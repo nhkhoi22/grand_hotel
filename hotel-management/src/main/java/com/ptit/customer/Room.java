@@ -27,9 +27,6 @@ public class Room {
 	@Column(name = "room_id", columnDefinition = "INT")
 	private int id;
 	
-	@Column(name = "room_name", columnDefinition = "VARCHAR(50)")
-	private String name;
-	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_type", nullable = true)
     @JsonIgnore
@@ -50,14 +47,6 @@ public class Room {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public RoomType getRoomType() {
