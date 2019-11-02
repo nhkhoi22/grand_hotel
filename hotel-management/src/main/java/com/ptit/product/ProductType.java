@@ -16,15 +16,15 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "service_product_type")
+@Table(name = "product_service_type")
 public class ProductType {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "service_product_type_id", columnDefinition = "INT")
+	@Column(name = "product_service_type_id", columnDefinition = "INT")
 	private int id;
 	
-	@Column(name = "service_product_type_name", columnDefinition = "VARCHAR(100)")
+	@Column(name = "product_service_type_name", columnDefinition = "VARCHAR(100)")
 	private String name;
 	
 	@OneToMany(
