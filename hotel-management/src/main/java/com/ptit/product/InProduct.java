@@ -45,7 +45,7 @@ public class InProduct {
 	@OneToMany(
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
-            mappedBy = "service"
+            mappedBy = "inProduct"
     )
     private List<RequestDetail> requestDetails;
 	
