@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -24,6 +25,7 @@ public class PriceHistory implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@Id
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "out_product_id", columnDefinition = "INT")
 	private OutProduct service;
