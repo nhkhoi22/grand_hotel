@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.ptit.product.Service;
+import com.ptit.product.OutProduct;
 
-public interface ProductDAO extends JpaRepository<Service, Long>{
+public interface ProductDAO extends JpaRepository<OutProduct, Long>{
 	
-	List<Service> findAll();
+	List<OutProduct> findAll();
 	
 }

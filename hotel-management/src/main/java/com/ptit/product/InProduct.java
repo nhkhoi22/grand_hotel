@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.ptit.outcome.RequestDetail;
 import com.ptit.suppiler.ContractSupplyDetail;
 
 import lombok.Data;
@@ -40,6 +41,14 @@ public class InProduct {
             fetch = FetchType.LAZY,
             mappedBy = "inProduct")
 	private List<ContractSupplyDetail> details;
+	
+	@OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "service"
+    )
+    private List<RequestDetail> requestDetails;
+	
 
 	public Long getId() {
 		return id;

@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.ptit.product.Service;
+import com.ptit.product.OutProduct;
 
 import lombok.Data;
 
@@ -29,7 +29,7 @@ public class RequestDetail {
 	
 	@ManyToOne
 	@JoinColumn(name = "product_service_id", nullable = true)
-	private Service service;
+	private OutProduct service;
 	
 	@Column(name = "quantity", columnDefinition = "INT")
 	private int quantity;
@@ -50,11 +50,11 @@ public class RequestDetail {
 		this.request = request;
 	}
 
-	public Service getService() {
+	public OutProduct getService() {
 		return service;
 	}
 
-	public void setService(Service service) {
+	public void setService(OutProduct service) {
 		this.service = service;
 	}
 

@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ptit.product.Service;
+import com.ptit.product.OutProduct;
 
 import lombok.Data;
 
@@ -27,7 +27,7 @@ public class BillDetail {
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "service_id", nullable = false)
     @JsonIgnore
-	private Service service; //1 service có thể xuất hiện trong nhiều bill_detail
+	private OutProduct service; //1 service có thể xuất hiện trong nhiều bill_detail
     
 	@Column(name = "quantity", columnDefinition = "BIGINT")
 	private int quantity;
@@ -44,11 +44,11 @@ public class BillDetail {
 		this.id = id;
 	}
 
-	public Service getService() {
+	public OutProduct getService() {
 		return service;
 	}
 
-	public void setService(Service service) {
+	public void setService(OutProduct service) {
 		this.service = service;
 	}
 

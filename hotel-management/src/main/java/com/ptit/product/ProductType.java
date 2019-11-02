@@ -32,7 +32,7 @@ public class ProductType {
             fetch = FetchType.LAZY,
             mappedBy = "productType"
     )
-	private List<Service> services;
+	private List<OutProduct> services;
 	
 	@OneToMany(
             cascade = CascadeType.ALL,
@@ -57,11 +57,11 @@ public class ProductType {
 		this.name = name;
 	}
 
-	public List<Service> getServices() {
+	public List<OutProduct> getServices() {
 		return services;
 	}
 
-	public void setServices(List<Service> services) {
+	public void setServices(List<OutProduct> services) {
 		this.services = services;
 	}
 

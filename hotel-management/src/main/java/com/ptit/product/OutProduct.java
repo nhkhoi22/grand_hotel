@@ -15,25 +15,21 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.ptit.customer.BillDetail;
-import com.ptit.outcome.RequestDetail;
 
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "product_service")
-public class Service {
+@Table(name = "out_product")
+public class OutProduct {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "product_service_id", columnDefinition = "INT")
+	@Column(name = "out_product_id", columnDefinition = "INT")
 	private int id;
 	
-	@Column(name = "product_service_name", columnDefinition = "VARCHAR(50)")
+	@Column(name = "out_product_name", columnDefinition = "VARCHAR(50)")
 	private String name;
-	
-	@Column(name = "income_price", columnDefinition = "DOUBLE")
-	private Double incomePrice;
 	
 	@OneToMany(
             cascade = CascadeType.ALL,
@@ -41,13 +37,6 @@ public class Service {
             mappedBy = "service"
     )
     private List<BillDetail> details;//1 dịch vụ có thể xuất hiện nhiều lần trong bảng chi tiết hóa đơn
-	
-	@OneToMany(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
-            mappedBy = "service"
-    )
-    private List<RequestDetail> requestDetails;
 	
 	@ManyToOne
 	@JoinColumn(name = "product_service_type_id", nullable = true)
@@ -76,29 +65,13 @@ public class Service {
 	public void setDetails(List<BillDetail> details) {
 		this.details = details;
 	}
-
-	public List<RequestDetail> getRequestDetails() {
-		return requestDetails;
-	}
-
-	public void setRequestDetails(List<RequestDetail> requestDetails) {
-		this.requestDetails = requestDetails;
-	}
-
+	
 	public ProductType getProductType() {
 		return productType;
 	}
 
 	public void setProductType(ProductType productType) {
 		this.productType = productType;
-	}
-
-	public Double getIncomePrice() {
-		return incomePrice;
-	}
-
-	public void setIncomePrice(Double incomePrice) {
-		this.incomePrice = incomePrice;
 	}
 	
 }

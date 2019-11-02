@@ -14,7 +14,7 @@ public class ProductService {
 	private ProductDAO productDAO;
 	
 	
-	public List<com.ptit.product.Service> findAllService() {
+	public List<com.ptit.product.OutProduct> findAllService() {
 		return productDAO.findAll();
 	}
 

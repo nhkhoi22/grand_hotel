@@ -19,7 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.ptit.product.Service;
+import com.ptit.product.OutProduct;
 import com.ptit.staff.User;
 
 import lombok.Data;
@@ -36,7 +36,7 @@ public class SpendingRequest {
 	
 	@ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "request_details", joinColumns = @JoinColumn(name = "request_id"), inverseJoinColumns = @JoinColumn(name = "product_service_id"))
-	private List<Service> Services;
+	private List<OutProduct> Services;
 	
 	@ManyToOne
 	@JoinColumn(name = "request_staff_id", nullable = true)
@@ -72,11 +72,11 @@ public class SpendingRequest {
 		this.user = user;
 	}
 	
-	public List<Service> getServices() {
+	public List<OutProduct> getServices() {
 		return Services;
 	}
 
-	public void setServices(List<Service> services) {
+	public void setServices(List<OutProduct> services) {
 		Services = services;
 	}
 	

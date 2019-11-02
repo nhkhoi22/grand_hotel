@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ptit.customer.Customer;
 import com.ptit.customer.RoomType;
 import com.ptit.outcome.SpendingRequest;
-import com.ptit.product.Service;
+import com.ptit.product.OutProduct;
 import com.ptit.service.ProductService;
 import com.ptit.service.RoomService;
 import com.ptit.service.UserService;
@@ -102,7 +102,7 @@ public class UserController {
 	public ModelAndView requestForm() {
 		ModelAndView modelAndView = new ModelAndView();
 		addUserInModel(modelAndView);
-		List<Service> product = service.findAllService();
+		List<OutProduct> product = service.findAllService();
 		modelAndView.addObject("products", product);
 		modelAndView.setViewName("user/common/request_form");
 		return modelAndView;
