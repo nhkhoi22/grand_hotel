@@ -1,6 +1,9 @@
 package com.ptit.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -8,13 +11,15 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ptit.customer.Customer;
 import com.ptit.customer.RoomType;
+import com.ptit.dao.SqlDAO;
 import com.ptit.outcome.SpendingRequest;
-import com.ptit.product.OutProduct;
+import com.ptit.product.InProduct;
 import com.ptit.service.ProductService;
 import com.ptit.service.RoomService;
 import com.ptit.service.UserService;
@@ -31,6 +36,9 @@ public class UserController {
 	
 	@Autowired
 	private ProductService service;
+	
+	@Autowired
+	private SqlDAO sqlDao;
 	
 	private void addUserInModel(ModelAndView mav) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -92,8 +100,6 @@ public class UserController {
 	public ModelAndView requestHandle() {
 		ModelAndView modelAndView = new ModelAndView();
 		addUserInModel(modelAndView);
-		SpendingRequest request = new SpendingRequest();
-		modelAndView.addObject("request", request);
 		modelAndView.setViewName("user/financial_and_accounting/request_handle");
 		return modelAndView;
 	}
@@ -102,9 +108,35 @@ public class UserController {
 	public ModelAndView requestForm() {
 		ModelAndView modelAndView = new ModelAndView();
 		addUserInModel(modelAndView);
-		List<OutProduct> product = service.findAllService();
-		modelAndView.addObject("products", product);
+		List<InProduct> products = service.findAllInProduct();
+		SpendingRequest request = new SpendingRequest();
+		modelAndView.addObject("request", request);
+		modelAndView.addObject("products", products);
 		modelAndView.setViewName("user/common/request_form");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/user/common/request_form", method = RequestMethod.POST)
+	public ModelAndView sendRequestForm(@RequestParam Map<String, String> reqPar) {
+		ModelAndView modelAndView = new ModelAndView();
+		addUserInModel(modelAndView);
+		modelAndView.setViewName("user/common/request_form");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/user/sale_and_marketing/out_product", method = RequestMethod.GET)
+	public ModelAndView outProducts() {
+		String sqlEditor = "select op.out_product_name as 'Product Name', ph.price as 'price', ph.start_date as 'Start date' from out_product op\r\n" + 
+				"inner join product_price_history ph on (ph.out_product_id = op.out_product_id)\r\n" + 
+				"where (ph.start_date <= now() and (ph.end_date <= now()))";
+		ModelAndView modelAndView = new ModelAndView();
+		addUserInModel(modelAndView);
+		List<Map<String, Object>> results = new ArrayList<Map<String,Object>>();
+		results = sqlDao.queryForList(sqlEditor);
+		Set<String> keys = results.get(0).keySet();
+		modelAndView.addObject("keys", keys);
+		modelAndView.addObject("products", results);
+		modelAndView.setViewName("user/sale_and_marketing/out_product");
 		return modelAndView;
 	}
 }
