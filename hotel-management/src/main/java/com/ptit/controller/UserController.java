@@ -23,6 +23,8 @@ import com.ptit.product.InProduct;
 import com.ptit.service.ProductService;
 import com.ptit.service.RoomService;
 import com.ptit.service.UserService;
+import com.ptit.staff.Department;
+import com.ptit.staff.Position;
 import com.ptit.staff.User;
 
 @RestController
@@ -137,6 +139,24 @@ public class UserController {
 		modelAndView.addObject("keys", keys);
 		modelAndView.addObject("products", results);
 		modelAndView.setViewName("user/sale_and_marketing/out_product");
+		return modelAndView;
+	}
+	@RequestMapping(value = "/user/financial_and_accounting/financial_statement", method = RequestMethod.GET)
+	public ModelAndView staffSalary() {
+		String sqlEditor = "select u.staff_id as 'ID', u.full_name as 'Full Name',pos.position_name as 'Position', u.days_in_work as 'Days in Work', u.days_in_work * u.contract_salary * pos.salary_level as 'Salary' from user u \r\n" + 
+				"inner join position pos on (u.position_id = pos.position_id);";
+		ModelAndView modelAndView = new ModelAndView();
+		addUserInModel(modelAndView);
+		List<Map<String, Object>> results = new ArrayList<Map<String,Object>>();
+		results = sqlDao.queryForList(sqlEditor);
+		Set<String> keys = results.get(0).keySet();
+		modelAndView.addObject("keys", keys);
+		modelAndView.addObject("products", results);
+		List<Position> positions = userService.findAllPosition();
+		modelAndView.addObject("positions", positions);
+		List<Department> departments = userService.findAllDepartment();
+		modelAndView.addObject("departments", departments);
+		modelAndView.setViewName("user/financial_and_accounting/financial_statement");
 		return modelAndView;
 	}
 }
