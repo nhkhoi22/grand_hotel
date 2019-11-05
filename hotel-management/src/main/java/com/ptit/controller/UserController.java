@@ -167,22 +167,6 @@ public class UserController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/user/sale_and_marketing/out_product", method = RequestMethod.GET)
-	public ModelAndView outProduct() {
-		String sqlEditor = "select op.out_product_name as 'Product Name', ph.price as 'price', ph.start_date as 'Start date' from out_product op\r\n" + 
-				"inner join product_price_history ph on (ph.out_product_id = op.out_product_id)\r\n" + 
-				"where (ph.start_date <= now() and (ph.end_date >= now() or ph.end_date = null))";
-		ModelAndView modelAndView = new ModelAndView();
-		addUserInModel(modelAndView);
-		List<Map<String, Object>> results = new ArrayList<Map<String,Object>>();
-		results = sqlDao.queryForList(sqlEditor);
-		Set<String> keys = results.get(0).keySet();
-		modelAndView.addObject("keys", keys);
-		modelAndView.addObject("products", results);
-		modelAndView.setViewName("user/sale_and_marketing/out_product");
-		return modelAndView;
-	}
-	
 	@RequestMapping(value = {"/user/sale_and_marketing/product_price/{id}", "/user/sale_and_marketing/product_price"}, method = RequestMethod.GET)
 	public ModelAndView outProductDetail(@PathVariable("id") Integer id) {
 		String sqlEditor = "select op.out_product_name as 'Product Name', ph.start_date as 'Start Date', ph.end_date as 'End Date', ph.price as 'Price' from product_price_history ph " 
