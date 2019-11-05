@@ -1,0 +1,75 @@
+function searchUser() {
+    // Declare variables
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("SearchInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("SalaryTable");
+    tr = table.getElementsByTagName("tr");
+
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                td = tr[i].getElementsByTagName("td")[2];
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+}
+
+function filterDepartment() {
+    var input;
+    input = document.getElementById("DepartmentSearch");
+    var value = input.options[input.selectedIndex].id;
+    var pos = document.getElementById("PositionSearch");
+
+    //Filter Position base on Department
+    for (i = 2; i < pos.options.length; i++) {
+        if (pos.options[i].id.toUpperCase().localeCompare(value.toUpperCase()) == 0) {
+            pos.options[i].style.display = "";
+        }
+        else {
+            pos.options[i].style.display = "none";
+        }
+    }
+}
+
+function filterPosition() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("PositionSearch");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("SalaryTable");
+    tr = table.getElementsByTagName("tr");
+
+    //Display all
+    if (filter.localeCompare("ALL") == 0) {
+        for (i = 0; i < tr.length; i++) {
+            tr[i].style.display = "";
+        }
+        FilterDepartment();
+    }
+    else {
+        //Filter by Position
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[2];
+
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+}
