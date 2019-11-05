@@ -5,7 +5,7 @@
 <head>
 <link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
 <div th:insert="~{/common/head :: top}"></div>
-<title>Current Price</title>
+<title>Price History</title>
 <style>
 select:invalid {
 	color: gray;
@@ -23,11 +23,12 @@ select:invalid {
 				<div class="container-fluid">
 					<div class="row mb-2">
 						<div class="col-sm-6">
-							<h1>Current Price</h1>
+							<h1>Service / Product Price Management</h1>
 						</div>
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right">
-								<li class="breadcrumb-item"><a th:href="@{/admin/home}">Home</a></li>
+								<li class="breadcrumb-item"><a
+									th:href="@{/user/sale_and_marketing/out_product}">Home</a></li>
 								<li class="breadcrumb-item active">Current Price Of
 									Products</li>
 							</ol>
@@ -45,33 +46,59 @@ select:invalid {
 							<div class="card-header">
 								<div class="row">
 									<div class="col-sm-3">
-										<div class="md-form">
-											<input class="form-control" type="text" placeholder="Search"
-												id="SearchInput" onkeyup="searchProduct()">
-										</div>
+										<form
+											th:action="@{/user/sale_and_marketing/product_price/{id}(id = ${productId})}"
+											th:method="post">
+											<input name="price" type="text" placeholder="Price">
+											<button type="submit" class="btn btn-info">Apply</button>
+										</form>
 									</div>
 								</div>
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body">
+								<div class="col-sm-6">
+									<h5>Current Price</h5>
+								</div>
 								<table class="table table-bordered table-striped table-hover"
 									id="ProductTable">
 									<thead>
 										<tr>
-											<th th:each="key : ${keys}" th:if="${key != 'password'}"
+											<th th:each="key : ${keys}" th:if="${key != 'End Date'}"
 												th:text="${key}"></th>
 										</tr>
 									</thead>
 									<tbody>
 										<!-- /.User list start here-->
 										<!-- /.Can you make this function?-->
-										<tr th:each="product : ${product}">
-										<tr th:each="product : ${products}">
-											<td th:each="key : ${keys}" th:if="${key != 'password'}"
-												th:text="${product.get(key)}"></td>
-										</tr>
+										<tr th:each="price : ${currentPrice}">
+											<td th:each="key : ${keys}" th:if="${key != 'End Date'}"
+												th:text="${price.get(key)}"></td>
 									</tbody>
 								</table>
+							</div>
+							<div class="container-fluid">
+								<div class="col-sm-6">
+									<h5>Price Records</h5>
+								</div>
+								<div class="card-body">
+									<table class="table table-bordered table-striped table-hover"
+										id="ProductTable">
+										<thead>
+											<tr>
+												<th th:each="key : ${keys}" th:if="${key != 'password'}"
+													th:text="${key}"></th>
+											</tr>
+										</thead>
+										<tbody>
+											<!-- /.User list start here-->
+											<!-- /.Can you make this function?-->
+											<tr th:each="price : ${records}">
+												<td th:each="key : ${keys}" th:if="${price.get('End Date') != null}"
+													th:text="${price.get(key)}"></td>
+										</tbody>
+									</table>
+								</div>
 							</div>
 							<!-- /.card-body -->
 						</div>

@@ -20,8 +20,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "product_price_history")
-public class PriceHistory implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class PriceHistory {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,6 +38,47 @@ public class PriceHistory implements Serializable {
 	private Date startDate;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "end_date", nullable = false)
+	@Column(name = "end_date", nullable = true)
 	private Date endDate;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public OutProduct getService() {
+		return service;
+	}
+
+	public void setService(OutProduct service) {
+		this.service = service;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+	
 }

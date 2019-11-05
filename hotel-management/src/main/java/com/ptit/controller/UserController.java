@@ -1,6 +1,7 @@
 package com.ptit.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,9 +19,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ptit.customer.Customer;
 import com.ptit.customer.RoomType;
+import com.ptit.dao.PriceRecordDAO;
 import com.ptit.dao.SqlDAO;
 import com.ptit.outcome.SpendingRequest;
 import com.ptit.product.InProduct;
+import com.ptit.product.PriceHistory;
 import com.ptit.service.ProductService;
 import com.ptit.service.RoomService;
 import com.ptit.service.UserService;
@@ -27,7 +31,7 @@ import com.ptit.staff.User;
 
 @RestController
 public class UserController {
-
+	
 	@Autowired
 	private UserService userService;
 	
@@ -39,6 +43,9 @@ public class UserController {
 	
 	@Autowired
 	private SqlDAO sqlDao;
+	
+	@Autowired
+	private PriceRecordDAO recordDao;
 	
 	private void addUserInModel(ModelAndView mav) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -128,7 +135,7 @@ public class UserController {
 	public ModelAndView outProducts() {
 		String sqlEditor = "select op.out_product_name as 'Product Name', ph.price as 'price', ph.start_date as 'Start date' from out_product op\r\n" + 
 				"inner join product_price_history ph on (ph.out_product_id = op.out_product_id)\r\n" + 
-				"where (ph.start_date <= now() and (ph.end_date <= now()))";
+				"where (ph.start_date <= now() and (ph.end_date >= now() or ph.end_date = null))";
 		ModelAndView modelAndView = new ModelAndView();
 		addUserInModel(modelAndView);
 		List<Map<String, Object>> results = new ArrayList<Map<String,Object>>();
@@ -137,6 +144,51 @@ public class UserController {
 		modelAndView.addObject("keys", keys);
 		modelAndView.addObject("products", results);
 		modelAndView.setViewName("user/sale_and_marketing/out_product");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = {"/user/sale_and_marketing/product_price/{id}", "/user/sale_and_marketing/product_price"}, method = RequestMethod.GET)
+	public ModelAndView outProductDetail(@PathVariable("id") Integer id) {
+		String sqlEditor = "select op.out_product_name as 'Product Name', ph.start_date as 'Start Date', ph.end_date as 'End Date', ph.price as 'Price' from product_price_history ph " 
+				+ "inner join out_product op on (op.out_product_id = ph.out_product_id)"		
+				+ "where ph.out_product_id = " + id;	
+		String sql = "select op.out_product_name as 'Product Name', ph.start_date as 'Start Date', ph.end_date as 'End Date', ph.price as 'Price' from product_price_history ph " 
+				+ "inner join out_product op on (op.out_product_id = ph.out_product_id)"		
+				+ "where ph.out_product_id = " + id + " and (start_date <= now() and (end_date >= now() or end_date is null))";
+		ModelAndView modelAndView = new ModelAndView();
+		addUserInModel(modelAndView);
+		List<Map<String, Object>> results = new ArrayList<Map<String,Object>>();
+		List<Map<String, Object>> currentPrice = new ArrayList<Map<String,Object>>();
+		results = sqlDao.queryForList(sqlEditor);
+		currentPrice = sqlDao.queryForList(sql);
+		Set<String> keys = results.get(0).keySet();
+		modelAndView.addObject("keys", keys);
+		modelAndView.addObject("records", results);
+		modelAndView.addObject("productId", id);
+		modelAndView.addObject("currentPrice", currentPrice);
+		modelAndView.setViewName("user/sale_and_marketing/product_price");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/user/sale_and_marketing/product_price/{id}", method = RequestMethod.POST)
+	public ModelAndView newHistory(@RequestParam(name = "price") String price, @PathVariable("id") Integer id) {
+		ModelAndView modelAndView = new ModelAndView();
+		addUserInModel(modelAndView);
+		String sqlEditor = "update product_price_history set end_date = now() where out_product_id = " 
+						+ id + " and start_date <= now() and (end_date >= now() or end_date is NULL)";
+		if(sqlDao.insert(sqlEditor)) {
+			modelAndView.addObject("isValid", 1);
+		} else {
+			modelAndView.addObject("isValid", 0);
+		}
+		PriceHistory history = new PriceHistory();
+		history.setPrice(Double.parseDouble(price));
+		history.setStartDate(new Date());
+		if(service.findOutProductById(id) != null) {
+			history.setService(service.findOutProductById(id));
+		}
+		recordDao.save(history);
+		modelAndView.setViewName("user/sale_and_marketing/product_price");
 		return modelAndView;
 	}
 }
