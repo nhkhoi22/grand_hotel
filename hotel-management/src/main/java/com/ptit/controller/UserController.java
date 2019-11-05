@@ -27,6 +27,8 @@ import com.ptit.product.PriceHistory;
 import com.ptit.service.ProductService;
 import com.ptit.service.RoomService;
 import com.ptit.service.UserService;
+import com.ptit.staff.Department;
+import com.ptit.staff.Position;
 import com.ptit.staff.User;
 
 @RestController
@@ -166,7 +168,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/user/sale_and_marketing/out_product", method = RequestMethod.GET)
-	public ModelAndView outProducts() {
+	public ModelAndView outProduct() {
 		String sqlEditor = "select op.out_product_name as 'Product Name', ph.price as 'price', ph.start_date as 'Start date' from out_product op\r\n" + 
 				"inner join product_price_history ph on (ph.out_product_id = op.out_product_id)\r\n" + 
 				"where (ph.start_date <= now() and (ph.end_date >= now() or ph.end_date = null))";
