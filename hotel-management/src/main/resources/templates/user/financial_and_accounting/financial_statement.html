@@ -10,6 +10,8 @@
 			color: gray;
 		}
 	</style>
+	<!-- table2CSV -->
+	<script type="text/javascript" th:src="@{/js/excellentexport-1.4/excellentexport.min.js}"></script>
 </head>
 <div th:replace="~{/admin/menu}"></div>
 
@@ -71,6 +73,14 @@
 												</option>
 											</select>
 										</div>
+									</div>
+									<div class="col-sm-1">
+
+									</div>
+									<div class="col-sm-2">
+										<a class="btn btn-block btn-info" download="Salary.xls" href="#"
+											onclick="return ExcellentExport.excel(this, 'SalaryTable', 'Salary');">Export
+											to Excel</a>
 									</div>
 								</div>
 							</div>

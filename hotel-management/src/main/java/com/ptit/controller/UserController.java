@@ -143,8 +143,8 @@ public class UserController {
 	}
 	@RequestMapping(value = "/user/financial_and_accounting/financial_statement", method = RequestMethod.GET)
 	public ModelAndView staffSalary() {
-		String sqlEditor = "select u.staff_id as 'ID', u.full_name as 'Full Name',pos.position_name as 'Position', u.days_in_work as 'Days in Work', u.days_in_work * u.contract_salary * pos.salary_level as 'Salary' from user u \r\n" + 
-				"inner join position pos on (u.position_id = pos.position_id);";
+		String sqlEditor = "select u.staff_id as 'ID', u.full_name as 'Full Name', d.department_name as 'Department', pos.position_name as 'Position', u.days_in_work as 'Days in Work', u.days_in_work * u.contract_salary * pos.salary_level as 'Salary (đ)' from user u \r\n" + 
+				"inner join position pos on (u.position_id = pos.position_id) inner join department d on (pos.department_id = d.department_id) ORDER BY u.staff_id;";
 		ModelAndView modelAndView = new ModelAndView();
 		addUserInModel(modelAndView);
 		List<Map<String, Object>> results = new ArrayList<Map<String,Object>>();

@@ -19,7 +19,13 @@ function searchUser() {
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
                     tr[i].style.display = "";
                 } else {
-                    tr[i].style.display = "none";
+                    td = tr[i].getElementsByTagName("td")[3];
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
                 }
             }
         }
@@ -27,18 +33,45 @@ function searchUser() {
 }
 
 function filterDepartment() {
-    var input;
+    var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("DepartmentSearch");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("SalaryTable");
+    tr = table.getElementsByTagName("tr");
     var value = input.options[input.selectedIndex].id;
     var pos = document.getElementById("PositionSearch");
 
-    //Filter Position base on Department
-    for (i = 2; i < pos.options.length; i++) {
-        if (pos.options[i].id.toUpperCase().localeCompare(value.toUpperCase()) == 0) {
+    //Display all
+    if (filter.localeCompare("ALL") == 0) {
+        for (i = 0; i < tr.length; i++) {
+            tr[i].style.display = "";
+        }
+        for (i = 1; i < pos.options.length; i++) {
             pos.options[i].style.display = "";
         }
-        else {
-            pos.options[i].style.display = "none";
+    }
+    else {
+        //Filter by Department
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[2];
+
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+        //Filter Position base on Department
+        for (i = 2; i < pos.options.length; i++) {
+            if (pos.options[i].id.toUpperCase().localeCompare(value.toUpperCase()) == 0) {
+                pos.options[i].style.display = "";
+            }
+            else {
+                pos.options[i].style.display = "none";
+            }
         }
     }
 }
@@ -60,7 +93,7 @@ function filterPosition() {
     else {
         //Filter by Position
         for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[2];
+            td = tr[i].getElementsByTagName("td")[3];
 
             if (td) {
                 txtValue = td.textContent || td.innerText;
