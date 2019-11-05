@@ -135,6 +135,40 @@ public class UserController {
 	public ModelAndView outProducts() {
 		String sqlEditor = "select op.out_product_name as 'Product Name', ph.price as 'price', ph.start_date as 'Start date' from out_product op\r\n" + 
 				"inner join product_price_history ph on (ph.out_product_id = op.out_product_id)\r\n" + 
+				"where (ph.start_date <= now() and (ph.end_date <= now()))";
+		ModelAndView modelAndView = new ModelAndView();
+		addUserInModel(modelAndView);
+		List<Map<String, Object>> results = new ArrayList<Map<String,Object>>();
+		results = sqlDao.queryForList(sqlEditor);
+		Set<String> keys = results.get(0).keySet();
+		modelAndView.addObject("keys", keys);
+		modelAndView.addObject("products", results);
+		modelAndView.setViewName("user/sale_and_marketing/out_product");
+		return modelAndView;
+	}
+	@RequestMapping(value = "/user/financial_and_accounting/financial_statement", method = RequestMethod.GET)
+	public ModelAndView staffSalary() {
+		String sqlEditor = "select u.staff_id as 'ID', u.full_name as 'Full Name', d.department_name as 'Department', pos.position_name as 'Position', u.days_in_work as 'Days in Work', u.days_in_work * u.contract_salary * pos.salary_level as 'Salary (đ)' from user u \r\n" + 
+				"inner join position pos on (u.position_id = pos.position_id) inner join department d on (pos.department_id = d.department_id) ORDER BY u.staff_id;";
+		ModelAndView modelAndView = new ModelAndView();
+		addUserInModel(modelAndView);
+		List<Map<String, Object>> results = new ArrayList<Map<String,Object>>();
+		results = sqlDao.queryForList(sqlEditor);
+		Set<String> keys = results.get(0).keySet();
+		modelAndView.addObject("keys", keys);
+		modelAndView.addObject("products", results);
+		List<Position> positions = userService.findAllPosition();
+		modelAndView.addObject("positions", positions);
+		List<Department> departments = userService.findAllDepartment();
+		modelAndView.addObject("departments", departments);
+		modelAndView.setViewName("user/financial_and_accounting/financial_statement");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/user/sale_and_marketing/out_product", method = RequestMethod.GET)
+	public ModelAndView outProducts() {
+		String sqlEditor = "select op.out_product_name as 'Product Name', ph.price as 'price', ph.start_date as 'Start date' from out_product op\r\n" + 
+				"inner join product_price_history ph on (ph.out_product_id = op.out_product_id)\r\n" + 
 				"where (ph.start_date <= now() and (ph.end_date >= now() or ph.end_date = null))";
 		ModelAndView modelAndView = new ModelAndView();
 		addUserInModel(modelAndView);

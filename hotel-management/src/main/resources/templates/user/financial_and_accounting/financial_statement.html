@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
+	<div th:insert="~{/common/head :: top}"></div>
+	<title>User List</title>
+	<style>
+		select:invalid {
+			color: gray;
+		}
+	</style>
+	<!-- table2CSV -->
+	<script type="text/javascript" th:src="@{/js/excellentexport-1.4/excellentexport.min.js}"></script>
+</head>
+<div th:replace="~{/admin/menu}"></div>
+
+<body class="hold-transition sidebar-mini">
+	<div class="wrapper">
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1>Staffs Salary</h1>
+						</div>
+						<div class="col-sm-6">
+							<ol class="breadcrumb float-sm-right">
+								<li class="breadcrumb-item"><a th:href="@{/admin/home}">Home</a></li>
+								<li class="breadcrumb-item active">Staff Salary</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+				<!-- /.container-fluid -->
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-header">
+								<div class="row">
+									<div class="col-sm-3">
+										<div class="md-form">
+											<input class="form-control" type="text" placeholder="Search"
+												id="SearchInput" onkeyup="searchUser()">
+										</div>
+									</div>
+									<div class="col-sm-3">
+										<div class="input-group">
+											<select name="dName" class="custom-select" required id="DepartmentSearch"
+												onchange="filterDepartment()">
+												<option value="" disabled selected hidden>Department</option>
+												<option value="all">All</option>
+												<option th:each="department : ${departments}" th:id="${department.id}"
+													th:value="${department.name}" th:text="${department.name}">
+												</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-sm-3">
+										<div class="input-group">
+											<select name="dName" class="custom-select" required id="PositionSearch"
+												onchange="filterPosition()">
+												<option value="" disabled selected hidden>Position</option>
+												<option value="all">All</option>
+												<option th:each="position : ${positions}" th:value="${position.name}"
+													th:text="${position.name}" th:id="${position.department.id}">
+												</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-sm-1">
+
+									</div>
+									<div class="col-sm-2">
+										<a class="btn btn-block btn-info" download="Salary.xls" href="#"
+											onclick="return ExcellentExport.excel(this, 'SalaryTable', 'Salary');">Export
+											to Excel</a>
+									</div>
+								</div>
+							</div>
+							<!-- /.card-header -->
+							<div class="card-body">
+								<table class="table table-bordered table-striped table-hover" id="SalaryTable">
+									<thead>
+										<tr>
+											<th th:each="key : ${keys}" th:if="${key != 'password'}" th:text="${key}">
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="product : ${product}">
+										<tr th:each="product : ${products}">
+											<td th:each="key : ${keys}" th:if="${key != 'password'}"
+												th:text="${product.get(key)}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+		<!-- Control Sidebar -->
+		<aside class="control-sidebar control-sidebar-dark">
+			<!-- Control sidebar content goes here -->
+		</aside>
+		<!-- /.control-sidebar -->
+	</div>
+	<!-- ./wrapper -->
+	<div th:replace="~{/common/footer :: footer}"></div>
+	<!-- DataTables -->
+	<!-- <script type="text/javascript" th:src="@{/js/jquery.dataTables.js}"></script>
+	<script type="text/javascript" th:src="@{/js/datatables-bs4/dataTables.bootstrap4.js}"></script> -->
+	<!-- Search -->
+	<script type="text/javascript" th:src="@{/js/financial-and-accounting/financial-statement.js}"></script>
+</body>
+
+</html>

@@ -13,7 +13,7 @@
     <div th:replace="~{/admin/menu :: header}"></div>
 
     <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4" th:fragment="main">
+    <aside class="main-sidebar sidebar-dark-primary elevation-4" th:fragment="main" style="overflow-x: hidden;">
       <!-- Brand Logo -->
       <a th:href="@{/admin/home}" class="brand-link">
         <div class="row">
@@ -25,7 +25,7 @@
         </div>
       </a>
       <!-- Sidebar -->
-      <div class="sidebar">
+      <div class="sidebar" style="position: absolute;">
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
@@ -33,7 +33,7 @@
             <li class="nav-header" th:fragment="menu">SALE AND MARKETING</li>
             <!-- Xem gia moi thu, thay doi gia -->
             <li class="nav-item" th:fragment="menu">
-              <a th:href="@{/teehee}" class="nav-link">
+              <a th:href="@{/user/sale_and_marketing/out_product}" class="nav-link">
                 <i class="nav-icon fas fa-hand-holding-usd"></i>
                 <p>
                   Facilities Price Record
