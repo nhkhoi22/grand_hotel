@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
-	<div th:insert="~{/common/head :: top}"></div>
-	<title>User List</title>
-	<style>
-		select:invalid {
-			color: gray;
-		}
-	</style>
+<link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
+<div th:insert="~{/common/head :: top}"></div>
+<title>Price History</title>
+<style>
+select:invalid {
+	color: gray;
+}
+</style>
 </head>
 <div th:replace="~{/admin/menu}"></div>
 
@@ -22,12 +23,13 @@
 				<div class="container-fluid">
 					<div class="row mb-2">
 						<div class="col-sm-6">
-							<h1>Guests Record</h1>
+							<h1>Reservation</h1>
 						</div>
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right">
-								<li class="breadcrumb-item"><a th:href="@{/admin/home}">Home</a></li>
-								<li class="breadcrumb-item active">GuestsRecord</li>
+								<li class="breadcrumb-item"><a
+									th:href="@{/user/sale_and_marketing/out_product}">Home</a></li>
+								<li class="breadcrumb-item active">Check Out Handle</li>
 							</ol>
 						</div>
 					</div>
@@ -41,11 +43,61 @@
 					<div class="col-12">
 						<div class="card">
 							<div class="card-header">
-								
+								<div class="row">
+									<div class="col-sm-3">
+										<form
+											th:action="@{/user/room_division/checkout_handle}"
+											th:method="post">
+											<input name="roomNum" type="text" placeholder="Price">
+											<button type="submit" class="btn btn-info">Get Most Recent Records</button>
+										</form>
+									</div>
+								</div>
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body">
-								
+								<div class="col-sm-6">
+									<h5>Reservation Information</h5>
+								</div>
+								<table class="table table-bordered table-striped table-hover"
+									id="ReservationTable">
+									<thead>
+										<tr>
+											<th th:each="key : ${rikeys}" th:if="${key != 'End Date'}"
+												th:text="${key}"></th>
+										</tr>
+									</thead>
+									<tbody>
+										<!-- /.User list start here-->
+										<!-- /.Can you make this function?-->
+										<tr th:each="ri : ${reservationId}">
+											<td th:each="key : ${rikeys}" th:if="${key != 'End Date'}"
+												th:text="${ri.get(key)}"></td>
+									</tbody>
+								</table>
+							</div>
+							<div class="container-fluid">
+								<div class="col-sm-6">
+									<h5>Bills Related Information</h5>
+								</div>
+								<div class="card-body">
+									<table class="table table-bordered table-striped table-hover"
+										id="ProductTable">
+										<thead>
+											<tr>
+												<th th:each="key : ${keys}" th:if="${key != 'password'}"
+													th:text="${key}"></th>
+											</tr>
+										</thead>
+										<tbody>
+											<!-- /.User list start here-->
+											<!-- /.Can you make this function?-->
+											<tr th:each="bill : ${bills}">
+												<td th:each="key : ${keys}" th:if="${bill.get('End Date') != null}"
+													th:text="${bill.get(key)}"></td>
+										</tbody>
+									</table>
+								</div>
 							</div>
 							<!-- /.card-body -->
 						</div>
@@ -69,6 +121,9 @@
 	<!-- DataTables -->
 	<!-- <script type="text/javascript" th:src="@{/js/jquery.dataTables.js}"></script>
 	<script type="text/javascript" th:src="@{/js/datatables-bs4/dataTables.bootstrap4.js}"></script> -->
+	<!-- Search -->
+	<script type="text/javascript"
+		th:src="@{/js/human-resources/Users-record.js}"></script>
 </body>
 
 </html>

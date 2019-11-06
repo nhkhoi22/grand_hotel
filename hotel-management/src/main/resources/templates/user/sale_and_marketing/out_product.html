@@ -23,11 +23,11 @@ select:invalid {
 				<div class="container-fluid">
 					<div class="row mb-2">
 						<div class="col-sm-6">
-<<<<<<< HEAD
+							<<<<<<< HEAD
 							<h1>Current Price</h1>
-=======
+							=======
 							<h1>Out Product</h1>
->>>>>>> 83c156923461b24da5fdd244bf24d78d3b487956
+							>>>>>>> 83c156923461b24da5fdd244bf24d78d3b487956
 						</div>
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right">
@@ -62,8 +62,9 @@ select:invalid {
 									id="ProductTable">
 									<thead>
 										<tr>
-											<th th:each="key : ${keys}" th:if="${key != 'password'}"
-												th:text="${key}"></th>
+											<th th:each="key : ${keys}"
+												th:if="${key != 'out_product_id'}" th:text="${key}"></th>
+											<th>Records</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -71,8 +72,17 @@ select:invalid {
 										<!-- /.Can you make this function?-->
 										<tr th:each="product : ${product}">
 										<tr th:each="product : ${products}">
-											<td th:each="key : ${keys}" th:if="${key != 'password'}"
+											<td th:each="key : ${keys}"
+												th:if="${key != 'out_product_id'}"
 												th:text="${product.get(key)}"></td>
+											<td>
+												<div class="row">
+													<div class="col-sm-6">
+														<a class="fas fa-book "
+															th:href="@{/user/sale_and_marketing/product_price/{id}(id = ${product.get('out_product_id')})}"></a>
+													</div>
+												</div>
+											</td>
 										</tr>
 									</tbody>
 								</table>
