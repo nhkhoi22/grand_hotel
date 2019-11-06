@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
-<div th:insert="~{/common/head :: top}"></div>
-<title>Price History</title>
-<style>
-select:invalid {
-	color: gray;
-}
-</style>
+	<link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
+	<div th:insert="~{/common/head :: top}"></div>
+	<title>Price History</title>
+	<style>
+		select:invalid {
+			color: gray;
+		}
+	</style>
 </head>
 <div th:replace="~{/admin/menu}"></div>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini" onload="checkTable()">
 	<div class="wrapper">
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
@@ -28,7 +27,7 @@ select:invalid {
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right">
 								<li class="breadcrumb-item"><a
-									th:href="@{/user/sale_and_marketing/out_product}">Home</a></li>
+										th:href="@{/user/sale_and_marketing/out_product}">Home</a></li>
 								<li class="breadcrumb-item active">Check Out Handle</li>
 							</ol>
 						</div>
@@ -43,29 +42,31 @@ select:invalid {
 					<div class="col-12">
 						<div class="card">
 							<div class="card-header">
-								<div class="row">
-									<div class="col-sm-3">
-										<form
-											th:action="@{/user/room_division/checkout_handle}"
-											th:method="post">
-											<input name="roomNum" type="text" placeholder="Room Number" id="roomid">
-											<button type="submit" class="btn btn-info" onclick="warn()">Check Out</button>
-										</form>
-										<button class="btn btn-info" onclick="getLastRecord()">Check Latest Record</button>
+								<form th:action="@{/user/room_division/checkout_handle}" th:method="post">
+									<div class="row">
+										<div class="col-sm-3">
+											<input class="form-control" name="roomNum" type="text" placeholder="Room Number" id="roomid">
+										</div>
+										<div class="col-sm-3">
+											<button type="submit" class="btn btn-info btn-block" onclick="warn()">Check
+												Out</button>
+										</div>
+										<div class="col-sm-3">
+											<button class="btn btn-info btn-block" onclick="getLastRecord()">Check
+												Latest
+												Record</button>
+										</div>
 									</div>
-								</div>
+								</form>
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body">
-								<div class="col-sm-6">
-									<h5>Reservation Information</h5>
-								</div>
-								<table class="table table-bordered table-striped table-hover"
-									id="ReservationTable">
+								<h5 class="px-3" id="header0">Reservation Information</h5>
+								<table class="table table-bordered table-striped table-hover" id="ReservationTable">
 									<thead>
 										<tr>
-											<th th:each="key : ${rikeys}" th:if="${key != 'End Date'}"
-												th:text="${key}"></th>
+											<th th:each="key : ${rikeys}" th:if="${key != 'End Date'}" th:text="${key}">
+											</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -73,82 +74,61 @@ select:invalid {
 										<!-- /.Can you make this function?-->
 										<tr th:each="ri : ${reservationId}">
 											<td th:each="key : ${rikeys}" th:if="${key != 'End Date'}"
-												th:text="${ri.get(key)}"></td></tr>
+												th:text="${ri.get(key)}"></td>
+										</tr>
 									</tbody>
 								</table>
-							</div>
-							<div class="container-fluid">
-								<div class="col-sm-6">
-									<h5>Bills Related Information</h5>
-								</div>
-								<div class="card-body">
-									<table class="table table-bordered table-striped table-hover"
-										id="BillTable">
-										<thead>
-											<tr>
-												<th th:each="key : ${billkeys}" th:if="${key != 'password'}"
-													th:text="${key}"></th>
-											</tr>
-										</thead>
-										<tbody>
-											<!-- /.User list start here-->
-											<!-- /.Can you make this function?-->
-											<tr th:each="bill : ${bills}">
-												<td th:each="key : ${billkeys}"
-													th:text="${bill.get(key)}"></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-							<div class="container-fluid">
-								<div class="col-sm-6">
-									<h5>Bill Details</h5>
-								</div>
-								<div class="card-body">
-									<table class="table table-bordered table-striped table-hover"
-										id="BillDetailTable">
-										<thead>
-											<tr>
-												<th th:each="key : ${detailKeys}" th:if="${key != 'password'}"
-													th:text="${key}"></th>
-											</tr>
-										</thead>
-										<tbody>
-											<!-- /.User list start here-->
-											<!-- /.Can you make this function?-->
-											<tr th:each="info : ${billdetails}">
-												<td th:each="key : ${detailKeys}" th:if="${key != 'Room Price'}"
-													th:text="${info.get(key)}"></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-							<div class="container-fluid">
-								<div class="col-sm-6">
-									<h5>Room Fee</h5>
-								</div>
-								<div class="card-body">
-									<table class="table table-bordered table-striped table-hover"
-										id="BillTable">
-										<thead>
-											<tr>
-												<th th:each="key : ${roomkeys}" th:if="${key != 'password'}"
-													th:text="${key}"></th>
-											</tr>
-										</thead>
-										<tbody>
-											<!-- /.User list start here-->
-											<!-- /.Can you make this function?-->
-											<tr th:each="info : ${roomPrice}">
-												<td th:each="key : ${roomkeys}" th:if="${key != 'Room Price'}"
-													th:text="${info.get(key)}"></td>
-												<td th:each="getPrice : ${price}" th:text="${getPrice}"></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
+								<h5 class="px-3" id="header1">Bills Related Information</h5>
+								<table class="table table-bordered table-striped table-hover" id="BillTable">
+									<thead>
+										<tr>
+											<th th:each="key : ${billkeys}" th:if="${key != 'password'}"
+												th:text="${key}"></th>
+										</tr>
+									</thead>
+									<tbody>
+										<!-- /.User list start here-->
+										<!-- /.Can you make this function?-->
+										<tr th:each="bill : ${bills}">
+											<td th:each="key : ${billkeys}" th:text="${bill.get(key)}"></td>
+										</tr>
+									</tbody>
+								</table>
+								<h5 class="px-3" id="header2">Bill Details</h5>
+								<table class="table table-bordered table-striped table-hover" id="BillDetailTable">
+									<thead>
+										<tr>
+											<th th:each="key : ${detailKeys}" th:if="${key != 'password'}"
+												th:text="${key}"></th>
+										</tr>
+									</thead>
+									<tbody>
+										<!-- /.User list start here-->
+										<!-- /.Can you make this function?-->
+										<tr th:each="info : ${billdetails}">
+											<td th:each="key : ${detailKeys}" th:if="${key != 'Room Price'}"
+												th:text="${info.get(key)}"></td>
+										</tr>
+									</tbody>
+								</table>
+								<h5 class="px-3" id="header3">Room Fee</h5>
+								<table class="table table-bordered table-striped table-hover" id="RoomTable">
+									<thead>
+										<tr>
+											<th th:each="key : ${roomkeys}" th:if="${key != 'password'}"
+												th:text="${key}"></th>
+										</tr>
+									</thead>
+									<tbody>
+										<!-- /.User list start here-->
+										<!-- /.Can you make this function?-->
+										<tr th:each="info : ${roomPrice}">
+											<td th:each="key : ${roomkeys}" th:if="${key != 'Room Price'}"
+												th:text="${info.get(key)}"></td>
+											<td th:each="getPrice : ${price}" th:text="${getPrice}"></td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 							<!-- /.card-body -->
 						</div>
@@ -173,8 +153,7 @@ select:invalid {
 	<!-- <script type="text/javascript" th:src="@{/js/jquery.dataTables.js}"></script>
 	<script type="text/javascript" th:src="@{/js/datatables-bs4/dataTables.bootstrap4.js}"></script> -->
 	<!-- Search -->
-	<script type="text/javascript"
-		th:src="@{/js/human-resources/Users-record.js}"></script>
+	<script type="text/javascript" th:src="@{/js/room-management/checkout-handle.js}"></script>
 </body>
 
 </html>
