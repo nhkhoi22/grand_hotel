@@ -48,8 +48,8 @@ select:invalid {
 										<form
 											th:action="@{/user/room_division/checkout_handle}"
 											th:method="post">
-											<input name="roomNum" type="text" placeholder="Price">
-											<button type="submit" class="btn btn-info">Get Most Recent Records</button>
+											<input name="roomNum" type="text" placeholder="Room Number">
+											<button type="submit" class="btn btn-info">Check Out</button>
 										</form>
 									</div>
 								</div>
@@ -72,7 +72,7 @@ select:invalid {
 										<!-- /.Can you make this function?-->
 										<tr th:each="ri : ${reservationId}">
 											<td th:each="key : ${rikeys}" th:if="${key != 'End Date'}"
-												th:text="${ri.get(key)}"></td>
+												th:text="${ri.get(key)}"></td></tr>
 									</tbody>
 								</table>
 							</div>
@@ -82,10 +82,10 @@ select:invalid {
 								</div>
 								<div class="card-body">
 									<table class="table table-bordered table-striped table-hover"
-										id="ProductTable">
+										id="BillTable">
 										<thead>
 											<tr>
-												<th th:each="key : ${keys}" th:if="${key != 'password'}"
+												<th th:each="key : ${billkeys}" th:if="${key != 'password'}"
 													th:text="${key}"></th>
 											</tr>
 										</thead>
@@ -93,8 +93,58 @@ select:invalid {
 											<!-- /.User list start here-->
 											<!-- /.Can you make this function?-->
 											<tr th:each="bill : ${bills}">
-												<td th:each="key : ${keys}" th:if="${bill.get('End Date') != null}"
+												<td th:each="key : ${billkeys}"
 													th:text="${bill.get(key)}"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="container-fluid">
+								<div class="col-sm-6">
+									<h5>Bill Details</h5>
+								</div>
+								<div class="card-body">
+									<table class="table table-bordered table-striped table-hover"
+										id="BillDetailTable">
+										<thead>
+											<tr>
+												<th th:each="key : ${detailKeys}" th:if="${key != 'password'}"
+													th:text="${key}"></th>
+											</tr>
+										</thead>
+										<tbody>
+											<!-- /.User list start here-->
+											<!-- /.Can you make this function?-->
+											<tr th:each="info : ${billdetails}">
+												<td th:each="key : ${detailKeys}" th:if="${key != 'Room Price'}"
+													th:text="${info.get(key)}"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="container-fluid">
+								<div class="col-sm-6">
+									<h5>Room Fee</h5>
+								</div>
+								<div class="card-body">
+									<table class="table table-bordered table-striped table-hover"
+										id="BillTable">
+										<thead>
+											<tr>
+												<th th:each="key : ${roomkeys}" th:if="${key != 'password'}"
+													th:text="${key}"></th>
+											</tr>
+										</thead>
+										<tbody>
+											<!-- /.User list start here-->
+											<!-- /.Can you make this function?-->
+											<tr th:each="info : ${roomPrice}">
+												<td th:each="key : ${roomkeys}" th:if="${key != 'Room Price'}"
+													th:text="${info.get(key)}"></td>
+												<td th:each="getPrice : ${price}" th:text="${getPrice}"></td>
+											</tr>
 										</tbody>
 									</table>
 								</div>
