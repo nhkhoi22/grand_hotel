@@ -238,7 +238,8 @@ public class UserController {
 				+ "inner join room r on (r.room_id = rr.room_id)\r\n"
 				+ "inner join bill b on (b.reservation_id = rr.reservation_id)\r\n"
 				+ "inner join customer c on (c.customer_id = b.bill_id)\r\n"
-				+ "where rr.check_in_date <= now() and rr.check_out_date >= now() and r.room_id = " + roomNum;
+				+ "where rr.check_in_date <= now() and r.room_id = " + roomNum 
+				+ " order by rr.check_out_date desc limit 1";
 		reservation = sqlDao.queryForList(roomCheckOut);
 		String getEachBillTotalFee = "";
 		String updateCheckOutTime = "";
