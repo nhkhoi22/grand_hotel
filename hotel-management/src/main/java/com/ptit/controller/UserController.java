@@ -328,4 +328,99 @@ public class UserController {
 		modelAndView.addObject("billdetails", billDetails);
 		return modelAndView;
 	}
+	
+	@GetMapping("/user/room_division/checkout_handle/{roomNum}")
+	public ModelAndView checkLastestRecord(@PathVariable String roomNum) {
+		ModelAndView modelAndView = new ModelAndView("user/room_division/checkout_handle");
+		addUserInModel(modelAndView);
+		List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
+		List<Map<String, Object>> reservation = new ArrayList<Map<String, Object>>();
+		List<Map<String, Object>> billTotal = new ArrayList<Map<String, Object>>();
+		List<Map<String, Object>> roomPrice = new ArrayList<Map<String, Object>>();
+		List<Map<String, Object>> billDetails = new ArrayList<Map<String, Object>>();
+		String roomCheckOut = "select rr.reservation_id, c.full_name, c.phone_number from room_reservation rr\r\n"
+				+ "inner join room r on (r.room_id = rr.room_id)\r\n"
+				+ "inner join bill b on (b.reservation_id = rr.reservation_id)\r\n"
+				+ "inner join customer c on (c.customer_id = b.bill_id)\r\n"
+				+ "where rr.check_in_date <= now() and r.room_id = " + roomNum 
+				+ " order by rr.check_out_date desc limit 1";
+		reservation = sqlDao.queryForList(roomCheckOut);
+		String getEachBillTotalFee = "";
+		String rPrice = "";
+		String getBillDetails = "";
+		if(!reservation.isEmpty()) {
+			getEachBillTotalFee = "select b.bill_id as 'bill identifier', sum(ph.price * bd.quantity) as 'Price' from bill b \r\n" + 
+					"inner join room_reservation rr on (rr.reservation_id = b.reservation_id)\r\n" + 
+					"inner join bill_detail bd on (b.bill_id = bd.bill_id)\r\n" + 
+					"inner join product_price_history ph on ((ph.start_date < now())and (ph.end_date is null or ph.end_date > now()) and ph.out_product_id = bd.service_id)\r\n" + 
+					"where rr.reservation_id =" + reservation.get(0).get("reservation_id") + "\r\n" + 
+					"group by b.bill_id";
+			rPrice = "select rr.reservation_id as 'Reservation ID', c.full_name as 'Full Name', r.room_id as 'Room ID', rr.check_in_date as 'Check-in Time',"
+					+ " rr.check_out_date as 'Check-out Time', rt.price * datediff(rr.check_out_date, rr.check_in_date) as 'Room Price' from room_type rt \r\n" + 
+					"inner join room r on (rt.room_type_id = r.room_type)\r\n" + 
+					"inner join room_reservation rr on (rr.room_id = r.room_id)\r\n" + 
+					"inner join bill b on (b.reservation_id = rr.reservation_id)\r\n" + 
+					"inner join customer c on (c.customer_id = b.bill_id)\r\n" + 
+					"where rr.check_in_date <= now() and rr.reservation_id =" + reservation.get(0).get("reservation_id")
+					+ " order by rr.check_out_date desc limit 1";
+			getBillDetails = "select op.out_product_name, bd.quantity as 'Quantity', sum(ph.price * bd.quantity) as 'Total', b.bill_id as 'bill identifier'from bill b \r\n" + 
+					"inner join room_reservation rr on (rr.reservation_id = b.reservation_id)\r\n" + 
+					"inner join bill_detail bd on (b.bill_id = bd.bill_id)\r\n" + 
+					"inner join out_product op on (op.out_product_id = bd.service_id) "+
+					"inner join product_price_history ph on ((ph.start_date < now())and (ph.end_date is null or ph.end_date > now()) and ph.out_product_id = bd.service_id)\r\n" + 
+					"where b.reservation_id = " + reservation.get(0).get("reservation_id");
+		}
+		String getTotalBill = "select sum(bill_total.price) as 'total fee' from (\r\n"
+				+ "select rr.reservation_id as reservation_id, b.bill_id as 'bill identifier', sum(ph.price * bd.quantity) as price from bill b inner join bill_detail bd on (b.bill_id = bd.bill_id)\r\n"
+				+ "inner join room_reservation rr on (rr.reservation_id = b.reservation_id)\r\n"
+				+ "inner join out_product op on (bd.service_id = op.out_product_id) inner join product_price_history ph on ((ph.start_date <= b.payment_time) and (ph.end_date >= b.payment_time) and (ph.out_product_id = bd.service_id))\r\n"
+				+ "group by bd.bill_id	) as bill_total where bill_total.reservation_id = " + roomNum
+				+ " group by bill_total.reservation_id";
+		if(getEachBillTotalFee != "" ) {
+			results = sqlDao.queryForList(getEachBillTotalFee);
+		}
+		if(rPrice != "") {
+			roomPrice = sqlDao.queryForList(rPrice);
+		}
+		if(getBillDetails != "") {
+			billDetails = sqlDao.queryForList(getBillDetails);
+		}
+		billTotal = sqlDao.queryForList(getTotalBill);
+		Set<String> keys = null;
+		Set<String> ri = null;
+		Set<String> billKeys = null;
+		Set<String> roomKeys = null;
+		Set<String> detailKeys = null;
+		price = new HashSet<>();
+		if (!billTotal.isEmpty()) {
+			keys = reservation.get(0).keySet();
+		}
+		if (!reservation.isEmpty()) {
+			ri = reservation.get(0).keySet();
+		}
+		if (!results.isEmpty()) {
+			billKeys = results.get(0).keySet();
+		}
+		if (!roomPrice.isEmpty()) {
+			roomKeys = roomPrice.get(0).keySet();
+			for(Map<String, Object> rp : roomPrice) {
+				price.add(new BigDecimal((Double)rp.get("Room Price")));
+			}
+		}
+		if(!billDetails.isEmpty()) {
+			detailKeys = billDetails.get(0).keySet();
+		}
+		modelAndView.addObject("reservationId", reservation);
+		modelAndView.addObject("bills", results);
+		modelAndView.addObject("totalFee", billTotal);
+		modelAndView.addObject("keys", keys);
+		modelAndView.addObject("billkeys", billKeys);
+		modelAndView.addObject("rikeys", ri);
+		modelAndView.addObject("roomkeys", roomKeys);
+		modelAndView.addObject("roomPrice", roomPrice);
+		modelAndView.addObject("price", price);
+		modelAndView.addObject("detailKeys", detailKeys);
+		modelAndView.addObject("billdetails", billDetails);
+		return modelAndView;
+	}
 }

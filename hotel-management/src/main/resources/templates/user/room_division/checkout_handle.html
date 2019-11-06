@@ -48,9 +48,10 @@ select:invalid {
 										<form
 											th:action="@{/user/room_division/checkout_handle}"
 											th:method="post">
-											<input name="roomNum" type="text" placeholder="Room Number">
-											<button type="submit" class="btn btn-info">Check Out</button>
+											<input name="roomNum" type="text" placeholder="Room Number" id="roomid">
+											<button type="submit" class="btn btn-info" onclick="warn()">Check Out</button>
 										</form>
+										<button class="btn btn-info" onclick="getLastRecord()">Check Latest Record</button>
 									</div>
 								</div>
 							</div>
