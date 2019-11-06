@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ptit.customer.Customer;
+import com.ptit.customer.Room;
 import com.ptit.customer.RoomType;
 import com.ptit.dao.PriceRecordDAO;
 import com.ptit.dao.SqlDAO;
@@ -421,6 +422,8 @@ public class UserController {
 		modelAndView.addObject("price", price);
 		modelAndView.addObject("detailKeys", detailKeys);
 		modelAndView.addObject("billdetails", billDetails);
+		List<Room> room = roomService.findAllRoom();
+		modelAndView.addObject("rooms", room);
 		return modelAndView;
 	}
 }
