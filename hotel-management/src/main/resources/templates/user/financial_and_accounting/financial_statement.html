@@ -15,7 +15,7 @@
 </head>
 <div th:replace="~{/admin/menu}"></div>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini" onload="setFileName()">
 	<div class="wrapper">
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
@@ -54,7 +54,7 @@
 										<div class="input-group">
 											<select name="dName" class="custom-select" required id="DepartmentSearch"
 												onchange="filterDepartment()">
-												<option value="" disabled selected hidden>Department</option>
+												<option value="All" disabled selected hidden>Department</option>
 												<option value="all">All</option>
 												<option th:each="department : ${departments}" th:id="${department.id}"
 													th:value="${department.name}" th:text="${department.name}">
@@ -78,8 +78,8 @@
 
 									</div>
 									<div class="col-sm-2">
-										<a class="btn btn-block btn-info" th:download="Salary.xls" href="#"
-											onclick="return ExcellentExport.excel(this, 'SalaryTable', 'Salary');">Export
+										<a class="btn btn-block btn-info" download="Salary.xls" href="#"
+											onclick="return ExcellentExport.excel(this, 'SalaryTable', 'Salary');" id="ExportButton">Export
 											to Excel</a>
 									</div>
 								</div>
