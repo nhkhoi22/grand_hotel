@@ -21,8 +21,12 @@ function AddToTable() {
         cell1.innerHTML = product;
         cell2.innerHTML = quanity;
         cell3.innerHTML = '<input class="btn btn-block btn-danger" type="button" value="Delete" onclick="deleteRow(this)"/>';
-        for (let i = 0; i < rows.length; i++) {
-            row.name = i;
+        for (let i = 0; i < table.rows.length; i++) {
+            table.rows[i].name = i;
+            for(let j = 0; j < table.rows[i].cells.length; j++)
+            {
+                table.rows[i].cells[j].name = i.toString() + j.toString();
+            }
         }
     }
 }
