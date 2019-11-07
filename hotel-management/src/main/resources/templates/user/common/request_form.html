@@ -5,6 +5,8 @@
     <title>Room Reservation</title>
     <link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
     <div th:insert="~{/common/head :: top}"></div>
+    <!-- bootstrap-select -->
+	<link rel="stylesheet" type="text/css" th:href="@{/js/bootstrap-select/dist/css/bootstrap-select.min.css}">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -40,8 +42,8 @@
                                 <div class="col-1"></div>
                                 <div class="col-4">
                                     <div class="input-group pb-3">
-                                        <select name="dName" class="custom-select" required id="product"
-                                            onchange="FilterPosition()">
+                                        <select name="dName" class="selectpicker form-control border" required id="product"
+                                            onchange="FilterPosition()" data-live-search="true" data-style="btn-outline-light">
                                             <option value="" disabled selected hidden>Product Name</option>
                                             <option th:each="product : ${products}" th:value="${product.name}"
                                                 th:text="${product.name}" th:id="${product.id}">
@@ -106,6 +108,8 @@
     <div th:insert="~{/common/head :: bottom}"></div>
     <!-- Request JS -->
     <script type="text/javascript" th:src="@{/js/user-common/request-form.js}"></script>
+    <!-- bootstrap-select -->
+    <script type="text/javascript" th:src="@{/js/bootstrap-select/dist/js/bootstrap-select.min.js}"></script>
 </body>
 
 </html>
