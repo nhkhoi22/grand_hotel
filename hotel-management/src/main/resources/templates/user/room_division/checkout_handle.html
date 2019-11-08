@@ -47,13 +47,15 @@
 								<form th:action="@{/user/room_division/checkout_handle}" th:method="post">
 									<div class="row">
 										<div class="col-sm-3">
-											<select class="selectpicker form-control" required id="roomid"
+											<!-- <select class="selectpicker form-control" required id="roomid"
 												name="roomNum" data-live-search="true">
 												<option value="" disabled selected hidden>Room Number</option>
 												<option th:each="room : ${rooms}" th:value="${room.room_id}"
 													th:text="${room.room_id}">
 												</option>
-											</select>
+											</select> -->
+											<input type="text"  placeholder="Room Number"
+												class="form-control" required id="roomid" name="roomNum"/>
 										</div>
 										<div class="col-sm-3">
 											<button type="submit" class="btn btn-info btn-block" onclick="warn()">Check
