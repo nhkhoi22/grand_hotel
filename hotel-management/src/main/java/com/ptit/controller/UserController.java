@@ -426,4 +426,12 @@ public class UserController {
 		modelAndView.addObject("rooms", room);
 		return modelAndView;
 	}
+	
+	@RequestMapping(value = "/user/room_division/guest_registration", method = RequestMethod.GET)
+	public ModelAndView guestRegistration() {
+		ModelAndView modelAndView = new ModelAndView();
+		addUserInModel(modelAndView);
+		modelAndView.setViewName("user/room_division/guest_registration");
+		return modelAndView;
+	}
 }
