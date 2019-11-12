@@ -1,6 +1,5 @@
 function getLastRecord() {
-	var rid = document.getElementById("roomid").value;
-	window.location = "/user/room_division/checkout_handle/" + rid;
+	$.post("/user/room_division/checkout_handle");
 }
 
 function checkTable() {
@@ -23,7 +22,7 @@ function checkTable() {
 
 function warn() {
 	if(confirm('If proceed, the time of latest check-out will change to now. Do you want to proceed?')) {
-		$.post('/user/room_division/checkout_handle', function(response) {
+		$.post('/user/room_division/checkout_handle/' + document.getElementById("roomid"), function(response) {
 			// Log the response to the console
 			console.log("Response: " + response);
 		});

@@ -1,6 +1,8 @@
 package com.ptit.controller;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -222,14 +224,29 @@ public class UserController {
 	@GetMapping("/user/room_division/checkout_handle")
 	public ModelAndView checkout() {
 		ModelAndView modelAndView = new ModelAndView("user/room_division/checkout_handle");
+		List<Room> rooms = roomService.findAllRoom();
+		modelAndView.addObject("rooms", rooms);
 		addUserInModel(modelAndView);
 		return modelAndView;
 	}
-
+	
 	@PostMapping("/user/room_division/checkout_handle")
-	public ModelAndView getAllBill(@RequestParam(name = "roomNum") String roomNum) {
+	public ModelAndView checkout(@RequestParam String roomNum) {
+		return checkLastestRecord(roomNum).addObject("roomNum", roomNum);
+	}
+
+	@PostMapping("/user/room_division/checkout_handle/{roomNum}")
+	public ModelAndView getAllBill(@PathVariable(name = "roomNum") String roomNum, @RequestParam Map<String, String> reqPar) {
 		ModelAndView modelAndView = new ModelAndView("user/room_division/checkout_handle");
+		if(roomNum != reqPar.get("roomNum")) {
+			roomNum = reqPar.get("roomNum");
+			return checkLastestRecord(roomNum);
+		}
+		modelAndView.addObject("roomNum", roomNum);
 		addUserInModel(modelAndView);
+		Date checkOutDate = new Date();
+		Date now = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
 		List<Map<String, Object>> reservation = new ArrayList<Map<String, Object>>();
 		List<Map<String, Object>> billTotal = new ArrayList<Map<String, Object>>();
@@ -245,6 +262,7 @@ public class UserController {
 		String getEachBillTotalFee = "";
 		String updateCheckOutTime = "";
 		String rPrice = "";
+		List<Room> rooms = roomService.findAllRoom();
 		String updateBillTime = "";
 		String getBillDetails = "";
 		if(!reservation.isEmpty()) {
@@ -309,6 +327,19 @@ public class UserController {
 		}
 		if (!roomPrice.isEmpty()) {
 			roomKeys = roomPrice.get(0).keySet();
+			try {
+				checkOutDate = dateFormat.parse(roomPrice.get(0).get("Check-out Time").toString());
+				if(now.after(checkOutDate)) {
+					modelAndView.addObject("isValid", 0);
+					modelAndView.addObject("roomNum", null);
+					return checkLastestRecord(roomNum);
+				} else {
+					modelAndView.addObject("isValid", 1);
+				}
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			for(Map<String, Object> rp : roomPrice) {
 				price.add(new BigDecimal((Double)rp.get("Room Price")));
 			}
@@ -327,13 +358,19 @@ public class UserController {
 		modelAndView.addObject("price", price);
 		modelAndView.addObject("detailKeys", detailKeys);
 		modelAndView.addObject("billdetails", billDetails);
+		modelAndView.addObject("roomNum", null);
+		modelAndView.addObject("rooms", rooms);
 		return modelAndView;
 	}
 	
 	@GetMapping("/user/room_division/checkout_handle/{roomNum}")
 	public ModelAndView checkLastestRecord(@PathVariable String roomNum) {
 		ModelAndView modelAndView = new ModelAndView("user/room_division/checkout_handle");
+		modelAndView.addObject("roomNum", roomNum);
 		addUserInModel(modelAndView);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		Date checkOutDate = new Date();
+		Date now = new Date();
 		List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
 		List<Map<String, Object>> reservation = new ArrayList<Map<String, Object>>();
 		List<Map<String, Object>> billTotal = new ArrayList<Map<String, Object>>();
@@ -404,6 +441,17 @@ public class UserController {
 		}
 		if (!roomPrice.isEmpty()) {
 			roomKeys = roomPrice.get(0).keySet();
+			try {
+				checkOutDate = dateFormat.parse(roomPrice.get(0).get("Check-out Time").toString());
+				if(now.after(checkOutDate)) {
+					modelAndView.addObject("isValid", 0);
+				} else {
+					modelAndView.addObject("isValid", 1);
+				}
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			for(Map<String, Object> rp : roomPrice) {
 				price.add(new BigDecimal((Double)rp.get("Room Price")));
 			}
