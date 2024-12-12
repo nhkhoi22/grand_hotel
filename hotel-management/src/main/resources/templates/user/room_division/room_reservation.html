@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Room Reservation</title>
+    <link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
+    <div th:insert="~{/common/head :: top}"></div>
+    <!-- daterange picker -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/daterangepicker/daterangepicker.css}">
+    <!-- Jquerry UI -->
+    <link rel="stylesheet" type="text/css" th:href="@{/js/jquery-ui/jquery-ui.min.css}">
+    <!-- fullCalendar -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/fullcalendar/main.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/fullcalendar-daygrid/main.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/fullcalendar-timegrid/main.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/fullcalendar-bootstrap/main.min.css}">
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed" onload="Calendar()">
+    <div class="wrapper">
+        <div th:insert="~{/admin/menu :: core}"></div>
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Room Reservation</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a th:href="@{/admin/home}">Home</a></li>
+                                <li class="breadcrumb-item active">Room Reservation</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-1">
+
+                        </div>
+                        <div class="col-md-10">
+                            <div class="card card-info">
+                                <div class="card-header">
+                                    <h3 class="card-title">Booking Handler</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <div class="dropdown">
+                                                <a class="nav-link" data-toggle="dropdown">
+                                                    <div class="form-group">
+                                                        <label>Customer</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">
+                                                                    <i class="fas fa-male"></i>
+                                                                </span>
+                                                            </div>
+                                                            <div class="form-control float-right">
+                                                                <i class="fas fa-angle-down float-right mt-1"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /Form Group -->
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-center ml-3">
+                                                    <form class="px-4 py-4">
+                                                        <div class="form-group">
+                                                            <label for="guestname">Fullname</label>
+                                                            <input type="text" class="form-control" id="guestname"
+                                                                placeholder="Fullname">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="guestphone">Phone number</label>
+                                                            <input type="text" class="form-control" id="guestphone"
+                                                                placeholder="Phone number">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="guestaddress">Address</label>
+                                                            <input type="text" class="form-control" id="guestaddress"
+                                                                placeholder="Address">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="guestaddress">Passport Number/<p>Security
+                                                                Number</p></label>
+                                                            <input type="text" class="form-control" id="guestsecurity">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="guestaddress">Email</label>
+                                                            <input type="text" class="form-control" id="guestemail"
+                                                                placeholder="Email">
+                                                        </div>
+                                                        <button type="submit" class="btn btn-info mb-2">Check</button>
+                                                        <div class="dropdown-divider"></div>
+                                                    </form>
+                                                </div>
+                                                <!-- /Dropdown menu -->
+                                            </div>
+                                            <!-- /Dropdown -->
+                                        </div>
+                                        <!-- /Col -->
+                                        <div class="col-3 mt-2">
+                                            <!-- Date range -->
+                                            <div class="form-group">
+                                                <label>Check-in — Check-out</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i class="far fa-calendar-alt"></i>
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" class="form-control float-right"
+                                                        th:id="reservation">
+                                                </div>
+                                                <!-- /.input group -->
+                                            </div>
+                                            <!-- /.form group -->
+                                        </div>
+                                        <div class="col-3  mt-2">
+                                            <div class="form-group">
+                                                <label>Room Type</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-key"></span>
+                                                        </div>
+                                                    </div>
+                                                    <select required class="custom-select" name="roomType"
+                                                        id="roomtype">
+                                                        <option th:each="roomType : ${roomTypes}"
+                                                            th:value="${roomType.id}" th:text="${roomType.name}">
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-2 mt-2">
+                                            <div class="form-group">
+                                                <label>Number of People</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i class="fas fa-user-friends"></i>
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" class="form-control float-right">
+                                                </div>
+                                                <!-- /.input group -->
+                                            </div>
+                                        </div>
+                                        <div class="col-1 mt-2">
+                                            <div class="form-group mt-2">
+                                                <label></label>
+                                                <div class="input-group">
+                                                    <button type="submit"
+                                                        class="btn btn-info mb-2 btn-block">Check-in</button>
+                                                </div>
+                                                <!-- /.input group -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-2">
+                            <div class="mb-3">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Room Type</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <!-- the events -->
+                                        <div id="external-events">
+                                            <div class="external-event bg-success">Normal Room</div>
+                                            <div class="external-event bg-danger">VIP</div>
+                                            <div class="external-event bg-warning">Queen</div>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-md-8">
+                            <div class="card card-primary">
+                                <div class="card-body p-0">
+                                    <!-- THE CALENDAR -->
+                                    <div id="calendar"></div>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+    </div>
+    <!-- /.wrapper -->
+    <div th:replace="~{/common/footer :: footer}"></div>
+
+    <div th:insert="~{/common/head :: bottom}"></div>
+    <script type="text/javascript" th:src="@{/js/daterangepicker/moment.min.js}"></script>
+    <!-- date-range-picker -->
+    <script type="text/javascript" th:src="@{/js/daterangepicker/daterangepicker.js}"></script>
+    <!-- jQuery UI -->
+    <script type="text/javascript" th:src="@{/js/jquery-ui/jquery-ui.js}"></script>
+    <!-- fullCalendar 2.2.5 -->
+    <script type="text/javascript" th:src="@{/js/moment/moment.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/fullcalendar/main.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/fullcalendar-daygrid/main.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/fullcalendar-timegrid/main.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/fullcalendar-interaction/main.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/fullcalendar-bootstrap/main.min.js}"></script>
+    <!-- Room Reservation -->
+    <script type="text/javascript" th:src="@{/js/room-management/room-reservation.js}"></script>
+    <script>
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Room Reservation</title>
+    <link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
+    <div th:insert="~{/common/head :: top}"></div>
+    <!-- bootstrap-select -->
+	<link rel="stylesheet" type="text/css" th:href="@{/js/bootstrap-select/dist/css/bootstrap-select.min.css}">
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+        <div th:insert="~{/admin/menu :: core}"></div>
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Request Form</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a th:href="@{/admin/home}">Home</a></li>
+                                <li class="breadcrumb-item active">Request Form</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="card bg-light mx-5 card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Request</h3>
+                        </div>
+                        <div class="card-body pt-6 mt-3">
+                            <div class="row">
+                                <div class="col-1"></div>
+                                <div class="col-4">
+                                    <div class="input-group pb-3">
+                                        <select name="dName" class="selectpicker form-control border" required id="product"
+                                            onchange="FilterPosition()" data-live-search="true" data-style="btn-outline-light">
+                                            <option value="" disabled selected hidden>Product Name</option>
+                                            <option th:each="product : ${products}" th:value="${product.name}"
+                                                th:text="${product.name}" th:id="${product.id}">
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <input type="text" class="form-control pb-3" id="quanity" placeholder="Quanity">
+                                </div>
+                                <div class="col-2">
+                                    <button class="btn btn-info btn-block" type="button"
+                                        onclick="AddToTable()">Add</button>
+                                </div>
+                                <div class="col-1"></div>
+                            </div>
+                            <div class="row pt-6">
+                                <div class="col-1"></div>
+                                <div class="col-10">
+                                    <table class="table table-hover table-fixed">
+                                        <thead>
+                                            <tr class="row">
+                                                <th class="col-sm-5">Product Name</th>
+                                                <th class="col-sm-5">Quantity</th>
+                                                <th class="col-sm-2">Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="requestTable">
+                                            <!-- /.User list start here-->
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-1"></div>
+                            </div>
+                            <div class="row pt-6">
+                                <div class="col-1"></div>
+                                <div class="col-10">
+                                    <label for="content">Content</label>
+                                    <textarea class="form-control" rows="5" id="content"></textarea>
+                                </div>
+                                <div class="col-1"></div>
+                            </div>
+                            <div class="row pt-3">
+                                <div class="col-md-9"></div>
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-success btn-block">Send</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-wrapper -->
+    </div>
+    <!-- /.wrapper -->
+    <div th:replace="~{/common/footer :: footer}"></div>
+    <div th:insert="~{/common/head :: bottom}"></div>
+    <!-- Request JS -->
+    <script type="text/javascript" th:src="@{/js/user-common/request-form.js}"></script>
+    <!-- bootstrap-select -->
+    <script type="text/javascript" th:src="@{/js/bootstrap-select/dist/js/bootstrap-select.min.js}"></script>
+</body>
+
+</html>

@@ -13,4 +13,6 @@ public interface DepartmentDAO extends JpaRepository<Department, Long>{
 	Department findByName(String name);
 	
 	List<Department> findAll();
+	
+	Department findDepartmentById(Long id);
 }

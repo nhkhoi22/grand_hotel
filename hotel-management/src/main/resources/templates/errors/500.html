@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
+  <title>500 Somthing went wrong</title>
+  <div th:insert="~{/common/head :: top}"></div>
+</head>
+
+<body class="hold-transition layout-fixed">
+  <!-- Main content -->
+  <div class="wrapper inline-flex">
+    <section class="container">
+      <div class="row">
+        <div class="col-sm-5">
+          <img class="mx-auto" th:src="@{/images/tee_hee.png}" alt="tee hee" style="float: right;">
+        </div>
+        <div class="col pt-5 mt-1">
+          <h2 class="headline text-info"> 500</h2>
+          <h3><i class="fas fa-exclamation-triangle text-info"></i>Oops! Somthing went wrong.</h3>
+          <p>
+            We will work on fixing that right away. Tee hee....
+          </p>
+          <p>
+            Meanwhile, you may <a th:href="@{/login}">return to login page</a>
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- Control Sidebar -->
+  <div th:insert="~{/common/head :: bottom}"></div>
+
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+supplier_id,begin_contract_date,end_contract_date,supplier_name
+1,20/4/1999,30/5/2012,Fluidra Engineering Serrvices SLU
+2,7/4/2013,7/4/2023,PKF Hotelexperts GmbH
+3,28/9/2004,28/9/2019,Dobra Forma SP. z o.o.
+4,8/4/2000,4/8/2020,Volglauer Hotel Concept
+5,30/9/2008,30/9/2018, Indel B
+6,13/2/2014,29/8/2024,Gerloff & Sohne GmbH & Co.KG
+7,14/9/1999,17/3/2019,ROOM2FIT - HOSPITALITY INTERIOS LDA
+8,23/10/2019,23/10/2029,LASVIT
+9,26/7/2018,27/10/2038,Schenker
+10,24/8/1999,24/8/2009,PLAB
+11,24/8/1999,31/12/2019,HEPP
+12,31/8/2003,31/12/2019,VESCOM B.V
+13,1/1/2015,10/10/2025,Laufen
+14,5/3/2019,3/5/2039,LIFE FITNESS
+15,6/3/2014,6/3/2024,Fabrica Mexicana de Torres S.A de C.V
+16,7/3/2000,7/3/2030,"Custom Comfort Mattress Company,Inc."
+17,10/3/2014,10/3/2034,CANE-LINE A/S
+18,5/2/2015,5/2/2035,Spradling
+19,6/3/2000,6/3/2020,Jaiene Group Inc
+20,15/9/2010,15/9/2030,Brankhaus GmbH
+21,29/10/2011,29/10/2021,KFP Five Star Conference Service
+22,30/3/2002,30/3/2032,TASCAN Systems GmbH
+23,3/8/1999,3/8/2019,CBRE Hotels Ltd
+24,8/2/2000,8/2/2020,Fluent2 Projects Ltd.
+25,6/6/2011,6/6/2021,TOTO LTD.
+26,12/9/2011,12/9/2021,VIBIA
+27,8/6/2016,8/6/2036,"Aero Light Co., Limited"
+28,23/6/2011,23/6/2021,2F LIGHTING / 2F LEUCHTEN GES.M.B.H
+29,24/6/2011,24/6/2031,hagenauer GmbH
+30,9/5/2009,9/5/2029,GLATZ AG
+31,11/9/2009,11/9/2039,J. T. Ronnefeldt KG
+32,23/1/2001,23/1/2011,YABO Hotel Furniture
+33,17/9/2001,17/9/2031,MDT-Tex
+34,8/4/2019,8/4/2049,Advanced Equipment Corporation
+35,27/10/2003,27/10/2013,ASSA ABLOY Global Solutions
+36,26/3/2019,26/3/2029,Kohler Co.
+37,4/5/2003,4/5/2013,"Guangzhou Shinelong Kitchen Equipment Co.,LTD"
+38,17/12/2002,17/12/2032,Electrolux Professional SpA
+39,12/7/2014,12/7/2024,KGW Contract Inc.
+40,31/8/2004,31/8/2014,MUZEO SAS
+41,26/7/2007,26/7/2027,Geesa BV
+42,25/10/2019,25/10/2039,Nokia - Ale International SAS
+43,13/1/2007,13/1/2017,Zieher KG
+44,28/9/2004,28/9/2034,Gravity Flooring (UK) Ltd
+45,23/4/2013,23/4/2033,KAMPER HANDWERK + BAU GMBH
+46,23/7/2018,23/7/2028,DOMETIC CORPORATION
+47,7/6/2011,7/6/2021,GO IN
+48,8/4/2012,8/4/2022,Gessi S.p.A.
+49,31/3/2007,31/3/2037,STANDARD TEXTILE BVBA
+50,28/2/2014,28/2/2034,LEDVANCE GmbH
+51,22/4/2005,22/4/2015,PTY Lighting LLC
+52,23/6/2000,23/6/2020,Avico Electronics Pty Ltd
+53,24/10/2013,24/10/2023,IDA14
+54,14/7/2007,14/7/2027,Hoist AB
+55,29/6/2010,29/6/2020,Walter Greif GmbH & Co KG
+56,22/5/2018,22/5/2038,Kuehne + Nagel Management AG
+57,22/5/2010,22/5/2040,Hiemac Ind Pty Ltd
+58,6/4/2002,6/4/2012,ISO GmbH
+59,6/3/2006,6/3/2026,Christofle Silver Inc.
+60,2/5/2008,2/5/2028,"Moquetas Rols, S.A."
+61,2/2/2003,2/2/2023,Ethimo
+62,10/1/2000,10/1/2010,VDA GROUP S.P.A.
+63,10/4/2004,10/4/2024,TUUCI Global Headquarters
+64,31/12/2014,31/12/2034,Tribù
+65,30/11/2014,30/11/2034,Exterity Ltd
+66,20/10/2013,20/10/2023,USG Boral Building Products Pte Limited
+67,7/4/2011,7/4/2021,Ascot Signs Ltd.
+68,9/3/2013,9/3/2023,"Cameril, S.L."
+69,2/5/2000,2/5/2020,Hoshizaki Europe B.V.
+70,9/4/2015,9/4/2020,Scottish Enterprise
+71,9/4/2004,9/4/2024,ROMA Publications Ltd
+72,3/3/2002,3/3/2012,sense:ability communications GmbH
+73,4/2/2011,4/2/2031,The Limes
+74,5/1/2010,5/1/2030,AxPro Carpets SP. ZO.O.
+75,2/2/2011,2/2/2021,Klafs
+76,16/5/2000,16/5/2000,Q Industries International PTE LTD
+77,10/6/2003,10/6/2033,Stockinger Safety First Class GmbH
+78,7/4/2001,7/4/2021,AMERSPORTS DEUTSCHLAND GMBH
+79,7/4/2012,7/4/2042,ALBRECHT JUNG GMBH & CO KG
+80,16/3/2015,16/3/2015,PM Steele
+81,10/5/2017,10/5/2027,Ven Global
+82,9/2/2013,9/2/2028,Acqua di Parma S.r.l.
+83,3/4/2017,3/4/2027,Mitsubishi Electric Europe B.V.
+84,3/4/2011,3/4/2031,HPG International Middle East & Africa
+85,3/4/2001,3/4/2021,Trevira GmbH
+86,8/8/1999,8/8/2029,Avenir Maison Pte Ltd
+87,26/4/2016,26/4/2020,Corian® Design
+88,30/3/2013,30/3/2019,Wewood
+89,5/5/2003,5/5/2023,SuitePad GmbH
+90,25/12/2017,25/12/2027,GEZE GMBH
+91,24/1/2000,24/1/2020,Matfer Bourgeat
+92,21/1/2008,21/1/2018,Floover Flooring
+93,17/5/2011,17/5/2021,RUBELLI
+94,2/11/2000,2/11/2030,Bang & Olufsen a/s
+95,10/7/2000,10/7/2020,FEBC International
+96,11/5/2009,11/5/2019,OW Hospitality Ltd
+97,24/3/2002,24/3/2012,Baierl & Demmelhuber Innenausbau GmbH
+98,8/7/2016,8/7/2026,SKY Deutschland Fernsehen GmbH & Co.KG
+99,6/6/2006,6/6/2016,VILLEROY & BOCH
+100,7/7/2007,7/7/2017,Viessmann Heizsysteme GmbH

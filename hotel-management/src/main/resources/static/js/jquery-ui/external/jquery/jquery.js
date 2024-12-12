@@ -899,7 +899,7 @@ function Sizzle( selector, context, results, seed ) {
 		}
 	}
 
-	// All others
+	// All common
 	return select( selector.replace( rtrim, "$1" ), context, results, seed );
 }
 
@@ -1994,7 +1994,7 @@ Expr = Sizzle.selectors = {
 		"empty": function( elem ) {
 			// http://www.w3.org/TR/selectors/#empty-pseudo
 			// :empty is negated by element (1) or content nodes (text: 3; cdata: 4; entity ref: 5),
-			//   but not by others (comment: 8; processing instruction: 7; etc.)
+			//   but not by common (comment: 8; processing instruction: 7; etc.)
 			// nodeType < 6 works because attributes (2) do not appear as children
 			for ( elem = elem.firstChild; elem; elem = elem.nextSibling ) {
 				if ( elem.nodeType < 6 ) {
@@ -3506,7 +3506,7 @@ jQuery.extend( {
 
 			progressValues, progressContexts, resolveContexts;
 
-		// add listeners to Deferred subordinates; treat others as resolved
+		// add listeners to Deferred subordinates; treat common as resolved
 		if ( length > 1 ) {
 			progressValues = new Array( length );
 			progressContexts = new Array( length );

@@ -27,13 +27,10 @@ public class Room {
 	@Column(name = "room_id", columnDefinition = "INT")
 	private int id;
 	
-	@Column(name = "room_name", columnDefinition = "VARCHAR(50)")
-	private String name;
-	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_type", nullable = true)
     @JsonIgnore
-    private RoomType roomType;
+    private RoomType roomType; //Nhiều phòng cùng 1 loại phòng
 	
 	@OneToMany(
             cascade = CascadeType.ALL,
@@ -41,7 +38,8 @@ public class Room {
             mappedBy = "room"
     )
     @JsonIgnore
-    private List<Customer> customers;
+    List<RoomReservation> reservations; //1 phòng có thể xuất hiện trong nhiều đơn đặt phòng
+	
 
 	public int getId() {
 		return id;
@@ -49,14 +47,6 @@ public class Room {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public RoomType getRoomType() {
@@ -67,12 +57,12 @@ public class Room {
 		this.roomType = roomType;
 	}
 
-	public List<Customer> getCustomers() {
-		return customers;
+	public List<RoomReservation> getReservations() {
+		return reservations;
 	}
 
-	public void setCustomers(List<Customer> customers) {
-		this.customers = customers;
+	public void setReservations(List<RoomReservation> reservations) {
+		this.reservations = reservations;
 	}
-	
+
 }

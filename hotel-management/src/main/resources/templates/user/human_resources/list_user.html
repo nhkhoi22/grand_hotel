@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
+	<div th:insert="~{/common/head :: top}"></div>
+	<title>User List</title>
+	<style>
+		select:invalid {
+			color: gray;
+		}
+	</style>
+</head>
+<div th:replace="~{/admin/menu}"></div>
+
+<body class="hold-transition sidebar-mini">
+	<div class="wrapper">
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1>Staffs Record</h1>
+						</div>
+						<div class="col-sm-6">
+							<ol class="breadcrumb float-sm-right">
+								<li class="breadcrumb-item"><a th:href="@{/admin/home}">Home</a></li>
+								<li class="breadcrumb-item active">Users Record</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+				<!-- /.container-fluid -->
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-header">
+								<div class="row">
+									<div class="col-sm-3">
+										<div class="md-form">
+											<input class="form-control" type="text" placeholder="Search"
+												id="SearchInput" onkeyup="SearchUser()">
+										</div>
+									</div>
+									<div class="col-sm-3">
+										<div class="input-group">
+											<select name="dName" class="custom-select" required id="DepartmentSearch"
+												onchange="FilterDepartment()">
+												<option value="" disabled selected hidden>Department</option>
+												<option value="all">All</option>
+												<option th:each="department : ${departments}" th:id="${department.id}"
+													th:value="${department.name}" th:text="${department.name}">
+												</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-sm-3">
+										<div class="input-group">
+											<select name="dName" class="custom-select" required id="PositionSearch"
+												onchange="FilterPosition()">
+												<option value="" disabled selected hidden>Position</option>
+												<option value="all">All</option>
+												<option th:each="position : ${positions}" th:value="${position.name}"
+													th:text="${position.name}" th:id="${position.department.id}">
+												</option>
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /.card-header -->
+							<div class="card-body">
+								<table class="table table-bordered table-striped table-hover" id="UserTable">
+									<thead>
+										<tr>
+											<th>Staff Code</th>
+											<th>Full Name</th>
+											<th>Position</th>
+											<th>Department</th>
+											<th>Role</th>
+											<th>Edit</th>
+											<th>Lock</th>
+										</tr>
+									</thead>
+									<tbody>
+										<!-- /.User list start here-->
+										<!-- /.Can you make this function?-->
+										<tr th:each="user : ${users}">
+											<td th:text="${user.staffCode}"></td>
+											<td th:text="${user.name}"></td>
+											<td th:text="${user.position.name}"></td>
+											<td th:text="${user.position.department.name}"></td>
+											<td th:text="${user.role.name}"></td>
+											<td>
+												<div class="row">
+													<div class="col-sm-6">
+														<a class="fas fa-cog " th:href="@{/user/human_resources/update/{staffCode}(staffCode = ${user.staffCode})}"></a>
+													</div>
+												</div>
+											</td>
+											<td>
+												<div class="row">
+													<div class="col-sm-6">
+														<a th:onclick="lockUser(/*[[${user.staffCode}]]*/)"
+															href="./list_user">
+															<i th:if="${user.active == 1}" class="fas fa-lock"></i>
+															<i th:if="${user.active == 0}" class="fas fa-unlock"></i>
+														</a>
+													</div>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+		<!-- Control Sidebar -->
+		<aside class="control-sidebar control-sidebar-dark">
+			<!-- Control sidebar content goes here -->
+		</aside>
+		<!-- /.control-sidebar -->
+	</div>
+	<!-- ./wrapper -->
+	<div th:replace="~{/common/footer :: footer}"></div>
+	<!-- DataTables -->
+	<!-- <script type="text/javascript" th:src="@{/js/jquery.dataTables.js}"></script>
+	<script type="text/javascript" th:src="@{/js/datatables-bs4/dataTables.bootstrap4.js}"></script> -->
+	<!-- Search -->
+	<script type="text/javascript" th:src="@{/js/human-resources/Users-record.js}"></script>
+</body>
+
+</html>

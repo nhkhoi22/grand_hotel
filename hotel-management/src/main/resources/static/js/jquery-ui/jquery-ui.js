@@ -1535,7 +1535,7 @@ function stringParse( string ) {
 	if ( rgba.length ) {
 
 		// If this came from a parsed string, force "transparent" when alpha is 0
-		// chrome, (and maybe others) return "transparent" as rgba(0,0,0,0)
+		// chrome, (and maybe common) return "transparent" as rgba(0,0,0,0)
 		if ( rgba.join() === "0,0,0,0" ) {
 			jQuery.extend( rgba, colors.transparent );
 		}
@@ -9612,7 +9612,7 @@ $.widget( "ui.draggable", $.ui.mouse, {
 	_mouseCapture: function( event ) {
 		var o = this.options;
 
-		// Among others, prevent a drag on a resizable-handle
+		// Among common, prevent a drag on a resizable-handle
 		if ( this.helper || o.disabled ||
 				$( event.target ).closest( ".ui-resizable-handle" ).length > 0 ) {
 			return false;

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
+<div th:insert="~{/common/head :: top}"></div>
+<title>Price History</title>
+<style>
+select:invalid {
+	color: gray;
+}
+</style>
+</head>
+<div th:replace="~{/admin/menu}"></div>
+
+<body class="hold-transition sidebar-mini">
+	<div class="wrapper">
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1>Service / Product Price Management</h1>
+						</div>
+						<div class="col-sm-6">
+							<ol class="breadcrumb float-sm-right">
+								<li class="breadcrumb-item"><a
+									th:href="@{/user/sale_and_marketing/out_product}">Home</a></li>
+								<li class="breadcrumb-item active">Current Price Of
+									Products</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+				<!-- /.container-fluid -->
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-header">
+								<div class="row">
+									<div class="col-sm-3">
+										<form
+											th:action="@{/user/sale_and_marketing/product_price/{id}(id = ${productId})}"
+											th:method="post">
+											<input name="price" type="text" placeholder="Price">
+											<button type="submit" class="btn btn-info">Apply</button>
+										</form>
+									</div>
+								</div>
+							</div>
+							<!-- /.card-header -->
+							<div class="card-body">
+								<div class="col-sm-6">
+									<h5>Current Price</h5>
+								</div>
+								<table class="table table-bordered table-striped table-hover"
+									id="ProductTable">
+									<thead>
+										<tr>
+											<th th:each="key : ${keys}" th:if="${key != 'End Date'}"
+												th:text="${key}"></th>
+										</tr>
+									</thead>
+									<tbody>
+										<!-- /.User list start here-->
+										<!-- /.Can you make this function?-->
+										<tr th:each="price : ${currentPrice}">
+											<td th:each="key : ${keys}" th:if="${key != 'End Date'}"
+												th:text="${price.get(key)}"></td>
+									</tbody>
+								</table>
+							</div>
+							<div class="container-fluid">
+								<div class="col-sm-6">
+									<h5>Price Records</h5>
+								</div>
+								<div class="card-body">
+									<table class="table table-bordered table-striped table-hover"
+										id="ProductTable">
+										<thead>
+											<tr>
+												<th th:each="key : ${keys}" th:if="${key != 'password'}"
+													th:text="${key}"></th>
+											</tr>
+										</thead>
+										<tbody>
+											<!-- /.User list start here-->
+											<!-- /.Can you make this function?-->
+											<tr th:each="price : ${records}">
+												<td th:each="key : ${keys}" th:if="${price.get('End Date') != null}"
+													th:text="${price.get(key)}"></td>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+		<!-- Control Sidebar -->
+		<aside class="control-sidebar control-sidebar-dark">
+			<!-- Control sidebar content goes here -->
+		</aside>
+		<!-- /.control-sidebar -->
+	</div>
+	<!-- ./wrapper -->
+	<div th:replace="~{/common/footer :: footer}"></div>
+	<!-- DataTables -->
+	<!-- <script type="text/javascript" th:src="@{/js/jquery.dataTables.js}"></script>
+	<script type="text/javascript" th:src="@{/js/datatables-bs4/dataTables.bootstrap4.js}"></script> -->
+	<!-- Search -->
+	<script type="text/javascript"
+		th:src="@{/js/human-resources/Users-record.js}"></script>
+</body>
+
+</html>

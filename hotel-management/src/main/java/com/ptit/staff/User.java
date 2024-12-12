@@ -1,17 +1,25 @@
 package com.ptit.staff;
 
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ptit.customer.Bill;
+import com.ptit.outcome.ConfirmedRequest;
+import com.ptit.outcome.SpendingRequest;
 
 import lombok.Data;
 
@@ -21,7 +29,6 @@ import lombok.Data;
 public class User {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "staff_id", columnDefinition = "INT")
 	private int id;
 	
@@ -29,16 +36,20 @@ public class User {
 	@NotEmpty(message = "*Please provide staff code")
 	private String staffCode;
 	
+	@Column(name = "gender", columnDefinition = "VARCHAR(50)")
+	private String gender;
+	
 	@Column(name = "full_name", columnDefinition = "VARCHAR(50)")
-	@NotEmpty(message = "*Please provide staff name")
 	private String name;
 	
 	@Column(name = "password", columnDefinition = "VARCHAR(255)")
-	@NotEmpty(message = "*Please provide password")
 	private String password;
 	
 	@Column(name = "active", columnDefinition = "INT")
     private int active;
+	
+	@Column(name = "email", columnDefinition = "VARCHAR(50)")
+    private String email;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "position_id", nullable = false)
@@ -50,11 +61,63 @@ public class User {
     @JsonIgnore
 	private Role role;
 	
+	@OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "user"
+    )
+    @JsonIgnore
+    private List<Bill> bills;
+	
+	@OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "user"
+    )
+    @JsonIgnore
+    private List<SpendingRequest> requests;
+	
+	@OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "user"
+    )
+    @JsonIgnore
+    private List<ConfirmedRequest> responses;
+	
+	public List<Bill> getBills() {
+		return bills;
+	}
+
+	public void setBills(List<Bill> bills) {
+		this.bills = bills;
+	}
+
+	public List<SpendingRequest> getRequests() {
+		return requests;
+	}
+
+	public void setRequests(List<SpendingRequest> requests) {
+		this.requests = requests;
+	}
+
+	public List<ConfirmedRequest> getResponses() {
+		return responses;
+	}
+
+	public void setResponses(List<ConfirmedRequest> responses) {
+		this.responses = responses;
+	}
+
 	@Column(name = "days_in_work", columnDefinition = "INT")
 	private int daysInWork;
 	
 	@Column(name = "contract_salary", columnDefinition = "BIGINT")
 	private Long contractSalary;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_login", nullable = true)
+	private Date lastlogin;
 
 	public int getId() {
 		return id;
@@ -127,5 +190,30 @@ public class User {
 	public void setContractSalary(Long contractSalary) {
 		this.contractSalary = contractSalary;
 	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	
+	public Date getLastlogin() {
+		return lastlogin;
+	}
+
+	public void setLastLogin(java.util.Date date) {
+		this.lastlogin = (Date) date;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	
 }

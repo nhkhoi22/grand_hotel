@@ -35,5 +35,41 @@ public class RoomType {
             mappedBy = "roomType"
     )
     @JsonIgnore
-    private List<Room> rooms;
+    private List<Room> rooms; //1 loại phòng có thể có nhiều phòng
+	
+	@Column(name = "price", columnDefinition = "DOUBLE")
+	private Double price;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<Room> getRooms() {
+		return rooms;
+	}
+
+	public void setRooms(List<Room> rooms) {
+		this.rooms = rooms;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	
 }

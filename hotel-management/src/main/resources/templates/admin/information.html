@@ -1,38 +1,136 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<title>Admin Information Page</title>
-<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
+    <title>Information</title>
+    <div th:insert="~{/common/head :: top}"></div>
 </head>
 
-<body>
-	<form th:action="@{/admin/home}" method="get">
-		<button class="btn btn-md btn-warning btn-block" type="Submit">Go
-			To Admin Home Page</button>
-	</form>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+        <div th:insert="~{/admin/menu :: core}"></div>
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Information</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a th:href="@{/admin/home}">Home</a></li>
+                                <li class="breadcrumb-item active">Information</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
 
-	<div class="panel-group" style="margin-top: 40px">
-		<div class="panel panel-primary">
-			<div class="row">
-				<p class="col-sm-4">User name:</p>
-				<p class="col-sm-4" th:utext="${user}"></p>
-			</div>
-			<div class="row">
-				<p class="col-sm-4">Email:</p>
-				<p class="col-sm-4" th:utext="${email}"></p>
-			</div>
-			<div class="row">
-				<p class="col-sm-4">Role ID:</p>
-				<p class="col-sm-4" th:utext="${role}"></p>
-			</div>
-		</div>
-	</div>
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <div class="card card-widget widget-user">
+                                <!-- Add the bg color to the header using any of the bg-* classes -->
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="login-box-msg" th:text="${user.name}"></h3>
+                                        <div class="widget-user-image">
+                                            <img class="img-circle" th:src="@{/images/hot_man.png}" alt="User Avatar">
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+
+                                    </div>
+                                    <!-- /card body -->
+                                    <div class="card-footer">
+                                        <div class="input-group row mb-3">
+                                            <label for="StaticUsername" class="col-sm-3 col-form-label"
+                                                style="text-align: center;">Full Name</label>
+                                            <div class="col-sm-9">
+                                                <input readonly class="form-control effect-underline"
+                                                    id="StaticUsername" th:value="${user.name}"
+                                                    style="cursor: default;">
+                                            </div>
+                                        </div>
+                                        <div class="input-group row mb-3">
+                                            <label for="StaticStaffCode" class="col-sm-3 col-form-label"
+                                                style="text-align: center;">Staff Code</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" readonly class="form-control effect-underline"
+                                                    id="StaticStaffCode" th:value="${user.staffCode}"
+                                                    style="cursor: default;">
+                                            </div>
+                                        </div>
+                                        <div class="input-group row mb-3">
+                                            <label for="StaticRole" class="col-sm-3 col-form-label"
+                                                style="text-align: center;">Role</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" readonly class="form-control effect-underline"
+                                                    id="StaticRole" th:value="${user.role.name}"
+                                                    style="cursor: default;">
+                                            </div>
+                                        </div>
+                                        <div class="input-group row mb-3">
+                                            <label for="StaticDepartment" class="col-sm-3 col-form-label"
+                                                style="text-align: center;">Department</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" readonly class="form-control effect-underline"
+                                                    id="StaticDepartment" th:value="${user.position.department.name}"
+                                                    style="cursor: default;">
+                                            </div>
+                                        </div>
+                                        <div class="input-group row mb-3">
+                                            <label for="StaticPosition" class="col-sm-3 col-form-label"
+                                                style="text-align: center;">Position</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" readonly class="form-control effect-underline"
+                                                    id="StaticPosition" th:value="${user.position.name}"
+                                                    style="cursor: default;">
+                                            </div>
+                                        </div>
+                                        <div class="input-group row mb-3">
+                                            <label for="StaticDIW" class="col-sm-3 col-form-label"
+                                                style="text-align: center;">Work days</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" readonly class="form-control effect-underline"
+                                                    id="StaticDIW" th:value="${user.daysInWork}"
+                                                    style="cursor: default;">
+                                            </div>
+                                        </div>
+                                        <div class="input-group row mb-3">
+                                            <label for="StaticLastLogin" class="col-sm-3 col-form-label"
+                                                style="text-align: center;">Last Login</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" readonly class="form-control effect-underline"
+                                                    id="StaticLastLogin" th:value="${user.lastlogin}"
+                                                    style="cursor: default;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- /.card -->
+                            </div>
+                            <!-- /.widget-user -->
+                        </div>
+                        <!-- /.col (LEFT) -->
+                        <div class="col-md-3">
+                        </div>
+                        <!-- /.col (RIGHT) -->
+                    </div>
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+    </div>
+    <!-- /.wrapper -->
+    <div th:replace="~{/common/footer :: footer}"></div>
+    <div th:insert="~{/common/head :: bottom}"></div>
 </body>
+
+</html>

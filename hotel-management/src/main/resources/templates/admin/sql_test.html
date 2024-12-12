@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
+	<title>SQL Query</title>
+	<div th:insert="~{/common/head :: top}"></div>
+	<!--Code mirror-->
+	<link rel="stylesheet" type="text/css" th:href="@{/codemirror/lib/codemirror.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/codemirror/theme/bespin.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/codemirror/theme/eclipse.css}">
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+	<div class="wrapper">
+		<div th:insert="~{/admin/menu :: core}"></div>
+
+		<body class="hold-transition register-page">
+			<!-- Content Wrapper. Contains page content -->
+			<div class="content-wrapper">
+				<!-- Content Header (Page header) -->
+				<div class="content-header">
+					<div class="container-fluid">
+						<div class="row mb-2">
+							<div class="col-sm-6"></div>
+							<!-- /.col -->
+							<div class="col-sm-6">
+								<ol class="breadcrumb float-sm-right">
+									<li class="breadcrumb-item"><a th:href="@{/admin/home}">Home</a></li>
+									<li class="breadcrumb-item active">Sql Editor</li>
+								</ol>
+							</div>
+							<!-- /.col -->
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /.container-fluid -->
+				</div>
+				<!-- /.content-header -->
+				<!-- Main content -->
+				<section class="content">
+					<div class="container-fluid">
+						<form autocomplete="off" action="#" th:action="@{/admin/sql_test}" method="post" role="form">
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-9">
+										<label for="comment">Sql Query: </label>
+									</div>
+									<div class="col-md-3">
+										<select class="custom-select" id="ThemeOption" onchange="ThemeChange()">
+											<option value="" disabled selected hidden>Theme</option>
+											<option value="bespin">Dark</option>
+											<option value="eclipse">Light</option>
+										</select>
+									</div>
+								</div>
+								<textarea class="form-control" rows="15" id="SqlEditor" name="sqlEditor"></textarea>
+								<div class="row">
+									<div class="col-md-6">
+										<div th:if="${isValid == 1}" class="valid-feedback">Success</div>
+										<div th:if="${isValid == 1}" class="valid-feedback">Failure</div>
+									</div>
+									<div class="col-md-6">
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-md-8">
+
+									</div>
+									<!-- /.col -->
+									<div class="col-md-2">
+										<button type="submit" class="btn btn-default btn-block btn-flat">Apply</button>
+									</div>
+									<!-- /.col -->
+									<div class="col-md-2">
+										<a th:href="@{/admin/sql_test}"
+											class="btn btn-default btn-block btn-flat">Back</a>
+									</div>
+									<!-- /.col -->
+								</div>
+								<!-- /.row -->
+							</div>
+						</form>
+						<div class="card-body table-responsive">
+							<table class="table table-bordered table-striped" id="UserTable">
+								<thead>
+									<tr>
+										<th th:each="key : ${keys}" th:if="${key != 'password'}" th:text="${key}"></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="result : ${results}">
+										<td th:each="key : ${keys}" th:if="${key != 'password'}"
+											th:text="${result.get(key)}"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.container-fluid -->
+				</section>
+				<!-- /.content -->
+			</div>
+			<!-- /.content-wrapper -->
+			<div th:replace="~{/common/footer :: footer}"></div>
+			<div th:insert="~{/common/head :: bottom}"></div>
+			<!--Code mirror-->
+			<script type="text/javascript" th:src="@{/codemirror/lib/codemirror.js}"></script>
+			<script type="text/javascript" th:src="@{/codemirror/mode/sql/sql.js}"></script>
+			<script>
+				var myTextarea = document.getElementById("SqlEditor");
+				var editor = CodeMirror.fromTextArea(myTextarea, {
+					lineNumbers: true,
+					mode: "sql",
+					theme: "eclipse",
+				});
+				function ThemeChange() {
+					var theme = document.getElementById("ThemeOption");
+					var value = theme.value.toLowerCase();
+					if (value.localeCompare("bespin") == 0) {
+						editor.setOption("theme", "bespin");
+					}
+					else {
+						editor.setOption("theme", "eclipse");
+					}
+				}
+			</script>
+		</body>
+
+</html>

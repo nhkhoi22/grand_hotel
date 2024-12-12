@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <link rel="shortcut icon" th:href="@{/images/Hotel.png}" />
+  <title>Admin</title>
+  <div th:insert="~{/common/head :: head}"></div>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+  <div class="wrapper" th:fragment="core">
+    <!-- Navbar -->
+    <div th:replace="~{/admin/menu :: header}"></div>
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4" th:fragment="main" style="overflow-x: hidden;">
+      <!-- Brand Logo -->
+      <a th:href="@{/admin/home}" class="brand-link">
+        <div class="row">
+          <div class="col-sm-4">
+            <img th:src="@{/images/Hotel.png}" alt="Hotel Logo" class="brand-image img-circle elevation-3"
+              style="opacity: .8;">
+          </div>
+          <span class="brand-text font-weight-medium">Grand Hotel</span>
+        </div>
+      </a>
+      <!-- Sidebar -->
+      <div class="sidebar" style="position: absolute;">
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+            <li class="nav-header" th:fragment="menu">HUMAN RESOURCES</li>
+            <li class="nav-item" th:fragment="menu">
+              <a th:href="@{/user/human_resources/registration}" class="nav-link">
+                <i class="nav-icon fas fa-user-plus"></i>
+                <p>
+                  Add New User
+                </p>
+              </a>
+            </li>
+            <li class="nav-item" th:fragment="menu">
+              <a th:href="@{/user/human_resources/list_user}" class="nav-link">
+                <i class="fas fa-clipboard-list nav-icon"></i>
+                <p>
+                  Users Record
+                </p>
+              </a>
+            </li>
+            <li class="nav-item border-bottom border-light">
+              <a th:href="@{/user/common/request_form}" class="nav-link">
+                <i class="nav-icon fas fa-file-code"></i>
+                <p>
+                  Request Form
+                </p>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>
+  <!-- ./wrapper -->
+  <div th:insert="~{/common/head :: bottom}"></div>
+</body>
+
+</html>
